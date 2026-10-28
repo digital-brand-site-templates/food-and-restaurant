@@ -2,10 +2,10 @@
   "category": "food-and-restaurant",
   "templates": [
     {
-      "name": "Citreat",
-      "folder": "citreat",
+      "name": "Ci-treat",
+      "folder": "ci-treat",
       "version": "2.0.0",
-      "description": "Citreat \u2013 static HTML/Bootstrap Food & Restaurant website template.",
+      "description": "Ci-treat \u2013 static HTML/Bootstrap Food & Restaurant website template.",
       "idealFor": [
         "restaurants",
         "cafes and bistros",
@@ -17,7 +17,7 @@
         "logoUrl",
         "reservationEmail"
       ],
-      "preview": "citreat/preview.png",
+      "preview": "ci-treat/preview.png",
       "orderNumber": "TVORD33831600",
       "license": {
         "templateOrderAmount": 0.0,

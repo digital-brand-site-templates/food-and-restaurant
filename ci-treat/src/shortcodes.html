@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<!--
+Template Name: citreat
+File Name: shortcodes.html
+Author Name: ThemeVault
+Author URI: https://www.themevault.net/
+License URI: https://www.themevault.net/license/
+Version: 2.0
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ci-treat</title>
+    <meta name="description" content="Design elements and components used throughout the Ci-treat template.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/fontawesome.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.css">
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/bs3-compat.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/_modern.css">
+</head>
+<body>
+
+    <!-- Navbar — edit ONCE here, _build.mjs stamps it into every page. Structure
+         matches v1's own home.html nav exactly (a BS3 .row > .col-md-4/.col-md-8
+         layout, not .navbar-header/.navbar-collapse siblings) — bs3-compat.css's
+         ":has(.row)" rule un-flexes the container so the grid columns keep their
+         real widths. -->
+    <nav class="navbar navbar-default navbar-fixed-top fixed-top tv-navbar-custom navbar-expand-lg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-12 col-12">
+                    <div class="navbar-header text-center">
+                        <a href="index.html" class="navbar-brand tv-citreat-logo">Ci-treat</a>
+                        <button type="button" class="navbar-toggler navbar-toggle" data-bs-toggle="collapse" data-bs-target="#tv-navbar" aria-controls="tv-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-12 col-12">
+                    <div class="collapse navbar-collapse" id="tv-navbar">
+                        <ul class="nav navbar-nav text-center tv-small-bg tv-active-menu">
+                            <li class="tv-drop-menu nav-item dropdown">
+                                <a href="#" class="tv-menu nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Home</a>
+                                <ul class="dropdown-menu tv-sub-menu">
+                                    <li><a href="onepage.html" class="dropdown-item">Ci-treat One Page</a></li>
+                                </ul>
+                            </li>
+                            <li class="tv-drop-menu nav-item dropdown">
+                                <a href="#" class="tv-menu nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+                                <ul class="dropdown-menu tv-sub-menu">
+                                    <li><a href="aboutus.html" class="dropdown-item">About Us</a></li>
+                                    <li><a href="ourteam.html" class="dropdown-item">Chef Team</a></li>
+                                    <li><a href="promotions.html" class="dropdown-item">Promotions</a></li>
+                                </ul>
+                            </li>
+                            <li class="tv-drop-menu nav-item dropdown">
+                                <a href="#" class="tv-menu nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
+                                <ul class="dropdown-menu tv-sub-menu">
+                                    <li><a href="services.html" class="dropdown-item">All Services</a></li>
+                                    <li><a href="gallery.html" class="dropdown-item">Gallery</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item"><a href="menucard.html" class="tv-menu nav-link">Menu Card</a></li>
+                            <li class="nav-item"><a href="contactus.html" class="tv-menu nav-link">Contact Us</a></li>
+                            <li class="nav-item"><a href="shortcodes.html" class="tv-menu nav-link" aria-current="page">ShortCodes</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+            <!--Banner Section-->
+            <div class="tv-inner-banner-image tv-bg-banner">
+                <div class="tv-opacity-medium tv-bg-black"></div>
+                <div class="tv-banner-title">
+                    <h1>Shortcodes</h1>
+                    <p>The design elements used throughout Ci-treat — accordions, buttons, quotes and message boxes.</p>
+                </div>
+            </div>
+            <!--End Banner Section-->
+
+            <!--Shortcodes Section-->
+            <section class="tv-section-padding" id="tabservices">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-12">
+                            <div class="tv-tabservice-block">
+                                <h4>Shorcodes</h4>
+                                <ul class="nav service-tab nav-tabs" role="tablist">
+                                    <li class="nav-item" role="presentation"><a class="nav-link active" data-bs-toggle="tab" href="#accordian" role="tab" aria-selected="true">Accordian</a></li>
+                                    <li class="nav-item" role="presentation"><a class="nav-link" data-bs-toggle="tab" href="#block" role="tab" aria-selected="false">Block Quote</a></li>
+                                    <li class="nav-item" role="presentation"><a class="nav-link" data-bs-toggle="tab" href="#button" role="tab" aria-selected="false">Button</a></li>
+                                    <li class="nav-item" role="presentation"><a class="nav-link" data-bs-toggle="tab" href="#dropcap" role="tab" aria-selected="false">Dropcap</a></li>
+                                    <li class="nav-item" role="presentation"><a class="nav-link" data-bs-toggle="tab" href="#message" role="tab" aria-selected="false">Message Boxes</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-12">
+                            <div class="tab-content">
+                                <div id="accordian" class="tab-pane fade show active">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <div class="half">
+                                                <div class="tv-box-inner-head">
+                                                    <h3>Accordions Multiple</h3>
+                                                    <hr class="hr-service">
+                                                </div>
+                                                <div class="tab">
+                                                    <input id="tab-one" type="checkbox" name="tabs">
+                                                    <label for="tab-one">Sed lobortis</label>
+                                                    <div class="tab-content">
+                                                        <p>Sed lobortis finibus dignissim. Donec aliquam mi ac finibus rhoncus. Quisque vestibulum erat in enim fringilla viverra. Maecenas rhoncus, ante et consequat ullamcorper, tortor augue venenatis elit, non porttitor odio turpis vel nulla.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="tab">
+                                                    <input id="tab-two" type="checkbox" name="tabs">
+                                                    <label for="tab-two">Sed lobortis</label>
+                                                    <div class="tab-content">
+                                                        <p>Sed lobortis finibus dignissim. Donec aliquam mi ac finibus rhoncus. Quisque vestibulum erat in enim fringilla viverra. Maecenas rhoncus, ante et consequat ullamcorper, tortor augue venenatis elit, non porttitor odio turpis vel nulla.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="tab">
+                                                    <input id="tab-three" type="checkbox" name="tabs">
+                                                    <label for="tab-three">Sed lobortis</label>
+                                                    <div class="tab-content">
+                                                        <p>Sed lobortis finibus dignissim. Donec aliquam mi ac finibus rhoncus. Quisque vestibulum erat in enim fringilla viverra. Maecenas rhoncus, ante et consequat ullamcorper, tortor augue venenatis elit, non porttitor odio turpis vel nulla.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <div class="half">
+                                                <div class="tv-box-inner-head">
+                                                    <h3>Accordions Open One</h3>
+                                                    <hr class="hr-service">
+                                                </div>
+                                                <div class="tab blue">
+                                                    <input id="tab-four" type="radio" name="tabs2">
+                                                    <label for="tab-four">Sed lobortis</label>
+                                                    <div class="tab-content">
+                                                        <p>Sed lobortis finibus dignissim. Donec aliquam mi ac finibus rhoncus. Quisque vestibulum erat in enim fringilla viverra. Maecenas rhoncus, ante et consequat ullamcorper, tortor augue venenatis elit, non porttitor odio turpis vel nulla.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="tab blue">
+                                                    <input id="tab-five" type="radio" name="tabs2">
+                                                    <label for="tab-five">Sed lobortis</label>
+                                                    <div class="tab-content">
+                                                        <p>Sed lobortis finibus dignissim. Donec aliquam mi ac finibus rhoncus. Quisque vestibulum erat in enim fringilla viverra. Maecenas rhoncus, ante et consequat ullamcorper, tortor augue venenatis elit, non porttitor odio turpis vel nulla.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="tab blue">
+                                                    <input id="tab-six" type="radio" name="tabs2">
+                                                    <label for="tab-six">Sed lobortis</label>
+                                                    <div class="tab-content">
+                                                        <p>Sed lobortis finibus dignissim. Donec aliquam mi ac finibus rhoncus. Quisque vestibulum erat in enim fringilla viverra. Maecenas rhoncus, ante et consequat ullamcorper, tortor augue venenatis elit, non porttitor odio turpis vel nulla.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="block" class="tab-pane fade">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-12">
+                                            <div class="tv-box-inner-head">
+                                                <h3>Block Quote</h3>
+                                                <hr class="hr-service">
+                                            </div>
+                                            <div class="tv-shortcodes-quote">
+                                                <p>Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Maecenas sed diam eget risus varius blandit sit amet non magna. Donec id elit non mi porta gravida at eget metus.Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                                <blockquote>
+                                                    <p class="tv-about-content-style">
+                                                        Sed eleifend, lacus nec bibendum pulvinar, nibh mauris vehicula augue, sit amet mattis ligula lorem eu nisl. Integer a egestas mauris. Nam id diam blandit, condimentum.
+                                                    </p>
+                                                </blockquote>
+                                                <p>Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Maecenas sed diam eget risus varius blandit sit amet non magna. Donec id elit non mi porta gravida at eget metus.Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="button" class="tab-pane fade">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-12">
+                                            <div class="tv-box-inner-head">
+                                                <h3>Buttons</h3>
+                                                <hr class="hr-service">
+                                            </div>
+                                            <div class="tv-shortcodes-button">
+                                                <div class="cbutton"><a href="#" class="tv-cbutton1">Ci-treat Button</a></div>
+                                                <div class="cbutton cbutton2"><a href="#" class="tv-cbutton1">Ci-treat Button</a></div>
+                                                <div class="cbutton3"><a href="#" class="tv-cbutton1">Ci-treat Button</a></div>
+                                                <div class="cbutton4"><a href="#" class="tv-cbutton1">Ci-treat Button</a></div>
+                                                <div class="cbutton5"><a href="#" class="tv-cbutton1">Ci-treat Button</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="dropcap" class="tab-pane fade">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-12">
+                                            <div class="tv-box-inner-head">
+                                                <h3>Dropcap</h3>
+                                                <hr class="hr-service">
+                                            </div>
+                                            <div class="tv-dropcap">
+                                                <div class="tv-offspace-20">
+                                                    <div class="tv-shortcode-dropcap" style="color:#ff3300; font-weight: 700; background-color:#ffffff;">
+                                                        C
+                                                    </div>
+                                                    <p>ed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Curabitur blandit tempus porttitor.</p>
+                                                </div>
+
+                                                <div class="tv-offspace-20">
+                                                    <div class="tv-shortcode-dropcap circle" style="color:#ffffff;font-weight: 700; background-color:#ff3300;">C</div>
+                                                    <p>ed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Curabitur blandit tempus porttitor.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="message" class="tab-pane fade">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-12">
+                                            <div class="tv-box-inner-head">
+                                                <h3>Message Boxes</h3>
+                                                <hr class="hr-service">
+                                            </div>
+                                            <div class="tv-shortcodemessage">
+                                                <div class="message-box-wrapper red"><div class="message-box-title">Fusce Justo Nullam</div><div class="message-box-content">Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras mattis consectetur purus sit amet fermentum. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</div></div>
+                                                <div class="message-box-wrapper blue"><div class="message-box-title">Fusce Justo Nullam</div><div class="message-box-content">Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras mattis consectetur purus sit amet fermentum. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</div></div>
+                                                <div class="message-box-wrapper yellow"><div class="message-box-title">Fusce Justo Nullam</div><div class="message-box-content">Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras mattis consectetur purus sit amet fermentum. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</div></div>
+                                                <div class="message-box-wrapper green"><div class="message-box-title">Fusce Justo Nullam</div><div class="message-box-content">Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras mattis consectetur purus sit amet fermentum. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--End Shortcodes Section-->
+
+    <!-- Footer — v1's own home.html footer, verbatim structure -->
+    <footer class="tv-section-padding">
+        <div class="tv-fixed-img tv-section-footer-padding tv-bg-footer">
+            <div class="tv-footer-bg tv-bg-citreat"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-12">
+                        <div class="tv-footer-title">
+                            <a href="index.html">Ci-treat</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-12">
+                        <div class="tv-footer-desc">
+                            <ul class="list-unstyled footer-menu">
+                                <li><a class="tv-menu" href="index.html">home</a></li>
+                                <li><a class="tv-menu" href="services.html">Services</a></li>
+                                <li><a class="tv-menu" href="menucard.html">Menu</a></li>
+                                <li><a class="tv-menu" href="index.html#well">Reservation</a></li>
+                                <li><a class="tv-menu" href="index.html#dishes">Dishes</a></li>
+                                <li><a class="tv-menu" href="gallery.html">Gallery</a></li>
+                                <li><a class="tv-menu" href="blog-post.html">Blog</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <div class="tv-footer-copyright text-center">
+                            <p>&copy; All right reserved.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button type="button" id="back-to-top" aria-label="Back to top"><i class="fas fa-angle-up" aria-hidden="true"></i></button>
+
+    <script src="js/bootstrap.bundle.min.js" defer></script>
+    <script src="js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+{
+  "name": "tpl-food-and-restaurant-ci-treat",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve src",
+    "build": "echo static site, no build step",
+    "verify": "echo static site, nothing to verify"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "agentMeta": {
+    "category": "food-and-restaurant",
+    "idealFor": [
+      "restaurants",
+      "cafes and bistros",
+      "catering businesses"
+    ],
+    "buildOutputDir": "src",
+    "customizationMap": {
+      "themeColors": "src/css/style.css",
+      "siteMetadata": "src/index.html (<head> title and meta tags)",
+      "navigation": "src/index.html (<header>/<nav> block, repeated in each page)",
+      "pagesDir": "src"
+    },
+    "requiredClientInputs": [
+      "restaurantName",
+      "primaryColorHex",
+      "logoUrl",
+      "reservationEmail"
+    ]
+  },
+  "source": {
+    "vendor": "ThemeVault",
+    "vendorUrl": "https://www.themevault.net",
+    "templateName": "Citreat",
+    "originalPackage": "food-and-restaurant-citreat.zip",
+    "originalSha256": "5e0baebeb364932c87e616867201a20f98ea2240e210fe8c8eaf292159537e37",
+    "downloadHistory": [
+      {
+        "date": "2026-10-27T19:08:06-04:00",
+        "orderNumber": "TVORD33831600",
+        "file": "food-and-restaurant-citreat.zip",
+        "retrievedFrom": "ThemeVault account download"
+      }
+    ],
+    "licenseHistory": [
+      {
+        "orderNumber": "TVORD33831600",
+        "purchaseDate": "2026-10-27T23:07:46Z",
+        "amount": 0.0,
+        "currency": "USD",
+        "receiptNumber": null,
+        "licenseType": "Template download (standard package)",
+        "creditRemovalPermitted": true,
+        "evidence": "Your ThemeVault order TVORD33831600 (email dated 2026-10-27T23:07:46Z)"
+      },
+      {
+        "orderNumber": "TVORD30331596",
+        "purchaseDate": "2026-10-27T18:24:00Z",
+        "orderCreated": "2026-10-27T18:20:00Z",
+        "amount": 129.0,
+        "currency": "USD",
+        "receiptNumber": null,
+        "paymentReferenceNumber": "69F57224VW8877631",
+        "paypalTransactionId": "2G4401177R3504237",
+        "paymentMethod": "PayPal",
+        "licenseType": "Pro \u2014 Lifetime",
+        "scope": "account-wide plan; the proof does not name specific templates",
+        "creditRemovalPermitted": null,
+        "evidence": "Email 'Fwd: Your ThemeVault order TVORD30331596' from danummer@gmail.com, received 2026-10-28T16:54Z (original 2026-10-27 2:24 PM EDT), with attachment 'ThemeVault License.pdf' (order page printout, 10/28/26)"
+      }
+    ],
+    "modifications": [
+      "Removed ThemeVault footer credit and backlink comment",
+      "Added preview.png, package.json, AGENTS.md"
+    ],
+    "missing": [
+      "receiptNumber (ThemeVault emails/PDF show no receipt number; see paymentReferenceNumber)"
+    ],
+    "originalTemplateName": "Citreat"
+  }
+}
