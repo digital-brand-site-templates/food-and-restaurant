@@ -1,0 +1,1712 @@
+/* ==========================================================================
+   Bootstrap 3 -> 5 compatibility layer — SHARED ACROSS THE CAMPAIGN.
+
+   Everything here replaces styling Bootstrap 3 supplied for free and
+   Bootstrap 5 does not. It is identical for every template, so it lives here
+   rather than being copied and re-edited 170 times. Per-template rules belong
+   in the template's own _bs5-shim.css, which loads AFTER this.
+
+   Assembled from what actually broke on AquaLand Casa, where seven bugs of
+   these shapes reached the owner across five review rounds. Each rule below
+   records the symptom, because the symptom is never "a rule is missing" — it
+   is a footer stacking into a narrow column, or a calendar icon on its own
+   line, or a slider with no arrows.
+
+   LOAD ORDER MATTERS, and it is now enforced by position rather than by care.
+   This file is linked BETWEEN bootstrap.min.css and the template's style.css.
+   Both halves of that sandwich are load-bearing: after Bootstrap, so these
+   rules win the ties that restore a BS3 default; before the template, so the
+   template wins every tie against them. Anything it wants for itself it gets,
+   at any specificity, without this file having to know.
+
+   It used to be appended to the END of style.css, which inverted the second
+   half — the layer then beat the template on every equal-specificity rule, and
+   the only guard was a note asking the next author not to restate a framework
+   default. That guard had already failed twice (a transparent field gained
+   Bootstrap's grey background; a black border became #ccc) and was about to
+   fail a third time on BetterBodiez's navbar padding below, which is correct
+   for templates that leaned on the framework and wrong for every template that
+   sets its own. From this position it is right for both.
+   ========================================================================== */
+
+/* --- Navbar geometry ----------------------------------------------------
+   Bootstrap 3 sized the menu bar through its nav links: 10px of vertical
+   padding on a 20px line, going to 15px once the navbar expanded. Bootstrap 5
+   replaced all of it with a flat `.nav-link { padding: .5rem 1rem }` — 8px.
+
+   Nothing in the markup breaks, which is why this hides so well. The menu
+   still works, the links still look right; the BAR is simply the wrong
+   height. On BetterBodiez v1's header measured 60px and v2's measured 92px at
+   every width, on all twelve pages, because the template set `line-height:
+   30px` on its links and left the padding to the framework. A fixed header
+   32px too tall pushes into the banner text underneath it on every page, and
+   no single page looks broken enough to notice — you have to compare.
+
+   Only the NAVBAR's links are restored. `.nav-link` is also the tab and pill
+   anchor, where BS3's own `.nav > li > a { padding: 10px 15px }` already
+   matches BS5 closely and changing it would move tab strips that are fine. */
+/* Through the VARIABLE, not the property. Written as
+   `.navbar-nav > li > .nav-link { padding-top: 10px }` this scored (0,2,0) and
+   beat CargoPush's own `nav.navbar-default ul li a { padding: 18px 15px }`
+   at (0,1,4) — the phone menu's links came out 40px tall instead of 56, and
+   the open menu 97px short. Bootstrap 5 reads the padding from
+   `--bs-nav-link-padding-y` in a (0,1,0) rule, so setting the variable here
+   restores Bootstrap 3's number and still loses to anything a template says
+   about the padding itself, however it spells the selector. */
+/* ON THE LINK, not on `.navbar-nav`. A custom property set on the element
+   itself beats one inherited from an ancestor, whatever the specificity, and
+   the tabs/pills block further down sets `--bs-nav-link-padding-y: 10px` on
+   `.nav-link` — so the 15px written here on the ancestor never reached a
+   navbar link at desktop width: a menu link that leaned on the framework got
+   10px of padding where Bootstrap 3 gave 15px, and the bar came out 10px
+   short. Foodaholic showed it (its menu has no padding rule of its own above
+   1200px, so the framework's number IS the design); the templates before it
+   all set their own. (0,2,0) beats the tabs rule and still loses to any
+   padding a template states directly. */
+.navbar-nav .nav-link { --bs-nav-link-padding-y: 10px; }
+@media (min-width: 768px) {
+    .navbar-nav .nav-link { --bs-nav-link-padding-y: 15px; }
+}
+:where(.navbar-nav .nav-link) { line-height: 20px; }
+/* A CENTRED menu. Bootstrap 3 templates centre a navbar's list with
+   `.navbar-nav.text-center` plus `> li { float: none; display: inline-block }`
+   — the items are inline boxes, so text-align lines them up. Bootstrap 5's
+   list is a flex container and text-align does nothing to flex items: the
+   menu sat hard left of its column (Foodaholic, 127px left of v1) while every
+   measured property of every link matched. Same for a right-aligned one.
+   flex-grow: the list is itself a flex ITEM of .navbar-collapse and shrinks
+   to its content, so centring inside it moves nothing until it fills the
+   column the way a Bootstrap 3 block did. */
+.navbar-nav.text-center { justify-content: center; flex-grow: 1; }
+.navbar-nav.text-end, .navbar-nav.text-right { justify-content: flex-end; flex-grow: 1; }
+/* Bootstrap 3's alignment utilities had NO !important; a template could
+   override them at a breakpoint (AppiRays: '#feature .media-body { text-align:
+   center }' below 992 over a desktop '.text-right'). Bootstrap 5's .text-end is
+   !important and cannot be overridden, so the porter keeps the BS3 class
+   names and these restore BS3's rules. */
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+/* Bootstrap 3 bled the collapsed menu to the screen edges: the collapse
+   carried 15px of padding and, inside a container, -15px margins to cancel
+   the container's own. Bootstrap 5 leaves it in the container's content box,
+   so a menu with a background (CargoPush's is black) shows a 15px white gutter
+   down each side on a phone. */
+@media (max-width: 767.98px) {
+    .navbar-collapse { padding-right: 15px; padding-left: 15px; }
+    .navbar > .container .navbar-collapse,
+    .navbar > .container-fluid .navbar-collapse { margin-right: -15px; margin-left: -15px; }
+}
+/* Horizontal padding has to go through the VARIABLE, not a rule. BS5 applies
+   it from `.navbar-expand-* .navbar-nav .nav-link`, specificity (0,3,0) —
+   higher than anything sane to write here, so a plain declaration loses and
+   the links stay 0.5rem apart where BS3 had 15px. Setting the variable on
+   `.navbar` wins on load order instead of on weight, and leaves a template
+   free to set the same variable for itself. */
+.navbar { --bs-navbar-nav-link-padding-x: 15px; --bs-navbar-padding-y: 0; --bs-navbar-padding-x: 0; }
+/* ...and the BAR itself had no padding in BS3 (it sized itself from the links
+   above). BS5 adds .5rem top and bottom, which only shows where a template
+   does not restate it — CargoPush sets padding on its navbar from 768 up and
+   the phone width picked up 16px of Bootstrap's. */
+
+/* Bootstrap 3's .navbar was a block with `min-height: 50px` and a 1px
+   transparent border — the border is why a BS3 bar measures 2px taller than
+   its padding and links add up to. Bootstrap 5 has neither. ResortIn's bar
+   came out 70px where v1 was 71. */
+:where(.navbar) { min-height: 50px; border: 1px solid transparent; }
+:where(.navbar-fixed-top) { border-width: 0 0 1px; }
+:where(.navbar-fixed-bottom) { border-width: 1px 0 0; }
+
+/* A BS3 navbar was free to hold a GRID: `navbar > .container > .row > .col-*`
+   is how ResortIn lays its brand and menu out. Bootstrap 5 makes `.navbar >
+   .container` a flex row, so the .row inside becomes a flex ITEM and shrinks
+   to its content — 799px in a 1170px container, with the menu column no
+   longer where the columns put it. When the container's child is a row, the
+   container is a block, as it was. */
+.navbar > .container:has(> .row), .navbar > .container-fluid:has(> .row) { display: block; }
+
+/* Bootstrap 3 had no caret of its own — the markup carried `<span class=
+   "caret">`, or the template supplied an icon font glyph. Bootstrap 5 draws
+   one from CSS on every `.dropdown-toggle`, so a template that ships its own
+   arrow now renders TWO: its glyph, then Bootstrap's triangle 8px further
+   right. It reads as a rendering artefact rather than a mistake, which is why
+   it survives review.
+
+   Matched on `i:last-child` rather than any child icon: a caret is the last
+   thing in the label, while a LEADING icon is decoration and says nothing
+   about whether Bootstrap's caret is wanted. */
+.dropdown-toggle:has(> i:last-child)::after,
+.dropdown-toggle:has(> .caret)::after { display: none; }
+
+/* BS3's dropdown inherited its text colour; BS5 pins `.dropdown-menu { color:
+   var(--bs-body-color) }` = #212529. On a dark submenu the template colours
+   the links and the pinned value never shows — until something inside the
+   menu is NOT a link (a header, a divider label, a price), which then renders
+   near-black on near-black. Inherit again, as v1 did. */
+.dropdown-menu {
+    color: inherit;
+    /* BS3 pinned the dropdown to 14px (its $font-size-base) regardless of what
+       the page's body size was; BS5 uses `--bs-dropdown-font-size: 1rem` = 16px.
+       Every submenu item therefore came out 2px larger than v1's, which on a
+       letter-spaced uppercase menu is enough to change where the panel wraps. */
+    --bs-dropdown-font-size: 14px;
+    /* BS3's dropdown panel: 5px 0 padding, 2px below the toggle, and a drop
+       shadow it drew by default. BS5 pads 8px, sits flush and has no shadow
+       (`--bs-dropdown-box-shadow` exists but is never applied) — PortrayStore's
+       mini-cart and currency menus lost their edge against the white page. */
+    --bs-dropdown-padding-y: 5px;
+    --bs-dropdown-spacer: 2px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+/* --- Breadcrumb separators ----------------------------------------------
+   Bootstrap 3 drew the separator from `.breadcrumb > li + li::before`, so the
+   markup is a plain `<li>` and needs no class. Bootstrap 5 moved the rule onto
+   `.breadcrumb-item`, which that markup does not carry — so every separator
+   disappears and the trail renders as one run-together word: "HomeF.A.Qs",
+   "HomeSingle-Product". It reads as a text bug rather than a missing rule,
+   which is why it survives a glance at the page.
+
+   BS3's exact declaration, including the non-breaking space it used to keep
+   the slash off the next word. */
+.breadcrumb > li + li::before {
+    content: "/\00a0";
+    padding: 0 5px;
+    color: inherit;
+}
+
+/* ...and the box itself. Bootstrap 5's breadcrumb is a padding-less flex
+   row; Bootstrap 3's was a block with 8px 15px of padding, a 20px bottom
+   margin and inline-block items. PortrayStore's trail sits in a white bar
+   with a drop shadow — the template's own rule — and Bootstrap 5 squeezed
+   that bar from 36px to 20px on every inner page. BS3's values at the same
+   (0,1,0) as Bootstrap 5's own, so order decides — and the template's
+   later colour and shadow rules still win. */
+.breadcrumb { display: block; padding: 8px 15px; margin-bottom: 20px; list-style: none; background-color: #f5f5f5; border-radius: 4px; }
+.breadcrumb > li { display: inline-block; }
+
+/* --- figure ------------------------------------------------------------
+   Bootstrap 3 normalised `figure` to `margin: 0` (normalize.css asks for
+   `1em 40px`; BS3's own reset immediately zeroes it). Bootstrap 5 reboots it
+   to `margin: 0 0 1rem` instead, so every <figure> gained 16px of bottom
+   margin in the port.
+
+   It reads as a design flaw rather than a framework default, because it only
+   shows where something sits directly beneath: on BetterBodiez's trainer
+   cards the photograph is a <figure> and the pink name panel butts against it
+   in v1, so the 16px opened a white band across the middle of all six cards.
+   The owner spotted it as "gap between image and content box". */
+figure { margin: 0; }
+
+/* --- Hamburger ----------------------------------------------------------
+   Bootstrap 5 ships a background-image SVG on .navbar-toggler-icon and has no
+   .icon-bar at all. v1's three navy bars are rebuilt here so the mobile menu
+   button looks the same as it did. */
+.navbar-toggler {
+    position: relative;
+    /* BS3's `.navbar-toggle` was `float: right`; BS5's toggler has no float and
+       relies on the navbar's own flex layout to place it. Inside a template's
+       `.navbar-header` — a plain block div, which is where these markups put it
+       — nothing pushes it anywhere, so it sat immediately after the logo
+       instead of at the right edge of the bar: 107px adrift on a 375px screen.
+       Float is ignored in a flex container, so this is inert wherever BS5's own
+       layout is doing the work. */
+    float: right;
+    padding: 9px 10px;
+    margin: 8px 15px 8px 0;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: none;
+}
+.navbar-toggler:focus { box-shadow: none; outline: 2px solid var(--tv-navy, var(--tv-ink, #333)); outline-offset: 2px; }
+.navbar-toggler:hover { background-color: transparent; }
+.navbar-toggler .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+    background-color: var(--tv-navy, var(--tv-ink, #333));
+}
+.navbar-toggler .icon-bar + .icon-bar { margin-top: 4px; }
+
+/* The porter renames .img-responsive to .img-fluid, and they are not the
+   same: Bootstrap 3 made the image a BLOCK, Bootstrap 5 leaves it inline. A
+   template that centres such an image with auto margins — CargoPush About
+   photograph on a tablet — gets nothing from them on an inline image, and the
+   truck sits against the left edge. Restore the block. */
+.img-fluid { display: block; max-width: 100%; height: auto; }
+
+/* Bootstrap 3 default navbar THEME, on the class the porter renames
+   .navbar-default to. Its toggle button had a #ddd border and #888 bars and
+   went #ddd on hover; the template restates the bars in gold and the hover in
+   white, and those rules win. Without this the button had no border at all. */
+.tv-navbar-default .navbar-toggler { border-color: #ddd; }
+.tv-navbar-default .navbar-toggler .icon-bar { background-color: #888; }
+.tv-navbar-default .navbar-toggler:hover,
+.tv-navbar-default .navbar-toggler:focus { background-color: #ddd; }
+/* ...and Bootstrap 3's INVERSE navbar (the chrome porter renames it
+   .tv-navbar-inverse): #333 border, WHITE bars, #333 on hover. PortrayStore
+   paints the button green and its hover navy; its bars came out navy too,
+   so on hover the button was a plain dark square. */
+.tv-navbar-inverse .navbar-toggler { border-color: #333; }
+.tv-navbar-inverse .navbar-toggler .icon-bar { background-color: #fff; }
+.tv-navbar-inverse .navbar-toggler:hover,
+.tv-navbar-inverse .navbar-toggler:focus { background-color: #333; }
+
+/* Below the navbar's expand breakpoint the menu stacks.
+   Written per EXPAND TIER rather than as one `max-width: 767.98px` block,
+   because the breakpoint is the template's choice, not this file's. Bootstrap 3
+   collapsed at 768 by default but templates move it: BetterBodiez keeps its
+   menu horizontal down to 992 and switches to the hamburger below that, so its
+   navbar is `navbar-expand-lg` and a rule hardcoded to `md` applied the
+   collapsed treatment 224px too late. */
+@media (max-width: 575.98px) {
+    .navbar-expand-sm .navbar-collapse .navbar-nav { flex-direction: column; }
+    .navbar-expand-sm .navbar-collapse .dropdown-menu { margin-top: 0; box-shadow: none; text-align: left; }
+}
+@media (max-width: 767.98px) {
+    .navbar-expand-md .navbar-collapse .navbar-nav { flex-direction: column; }
+    .navbar-expand-md .navbar-collapse .dropdown-menu { margin-top: 0; box-shadow: none; text-align: left; }
+}
+@media (max-width: 991.98px) {
+    .navbar-expand-lg .navbar-collapse .navbar-nav { flex-direction: column; }
+    .navbar-expand-lg .navbar-collapse .dropdown-menu { margin-top: 0; box-shadow: none; text-align: left; }
+}
+@media (max-width: 1199.98px) {
+    .navbar-expand-xl .navbar-collapse .navbar-nav { flex-direction: column; }
+    .navbar-expand-xl .navbar-collapse .dropdown-menu { margin-top: 0; box-shadow: none; text-align: left; }
+}
+
+
+/* --- Forms --------------------------------------------------------------
+   v1's four date fields were jQuery UI datepickers loaded from
+   code.jquery.com — a third-party runtime dependency inside a template a
+   buyer self-hosts, and one more thing to break when that CDN moves. v2 uses
+   native <input type="date">, which brings its own picker on every platform. */
+input[type="date"].form-control,
+input[type="time"].form-control { appearance: none; }
+
+/* Bootstrap 5's `.input-group` is `display: flex; flex-wrap: wrap`, and it
+   relies on `.form-control { flex: 1 1 auto; width: 1% }` to stop the field
+   claiming the whole row. The ported v1 CSS sets `.form-control { width: 100% }`
+   at equal specificity and later in the file, so the input took the full width
+   and pushed the calendar icon onto a SECOND LINE — a stray grey square under
+   every Check In / Check Out box on the reservation bar. */
+.input-group > .form-control,
+.input-group > .form-select {
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+}
+/* v1 rendered the group as a table, so the addon hugged the field's height. */
+.input-group .input-group-text {
+    display: flex;
+    align-items: center;
+}
+
+/* THE OTHER HALF OF A SKIPPED RENAME.
+   The porter deliberately does NOT rename `.input-group-addon` to Bootstrap
+   5's `.input-group-text`, because this template styles `.input-group-addon`
+   itself and renaming would orphan that rule (the same trap that cost the
+   contact form 20px of spacing via `.help-block`). But skipping the rename
+   leaves the other half undone: Bootstrap 3's BASE for the class is gone too,
+   and the template only ever *tweaked* that base. The result was a bare 11px
+   icon jammed against the field edge instead of v1's 38px bordered box —
+   at every width.
+
+   Rule of thumb for this whole shim: if a rename is skipped because the
+   template owns the class, the framework base for that class has to be
+   restored here — but ONLY the parts the template does not set itself.
+
+   This shim is the LAST stylesheet in the file, so every property declared
+   here beats the ported template rules regardless of specificity. Restating
+   Bootstrap 3's full base here overrode the template's own transparent
+   background and black border with Bootstrap's grey #eee and #ccc, turning a
+   deliberately minimal field into a default-looking one. The template sets
+   background, colour, font, padding, text-align, border-radius and
+   border-COLOUR; all that is genuinely missing is the border width/style and
+   the flex-item structure. */
+.input-group > .input-group-addon {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    border-width: 1px;
+    border-style: solid;
+}
+
+/* Bootstrap 5 DELETED `.form-group`. The class is still all over this markup
+   (every field on the reservation bar and the contact form is wrapped in one)
+   and now styles nothing, so v1's 15px of vertical rhythm vanished and the
+   fields welded into a solid block — most obvious on a phone, where the rows
+   stack and Check In / Check Out sat flush against No of Rooms / No of
+   Persons. Bootstrap 3's value, restored. */
+.form-group { margin-bottom: 15px; }
+
+/* --- THE ROOT FONT SIZE, AND WHY IT IS 16px ----------------------------
+   v1 set `html { font-size: 13px }`. Its own stylesheets contain ZERO rem
+   values — every dimension is px or em — so that declaration did nothing for
+   the design. It only ever defined the root.
+
+   Bootstrap 5, unlike Bootstrap 3, sizes almost everything in rem: button and
+   alert padding, border radii, the grid gutter, form controls, modals. At a
+   13px root every one of those renders at 81% of its intended size. That is
+   where the 6px button padding became 4.875px, the 15px alert padding became
+   13px, the 4px radius became 4.875px and the 30px grid gutter became 19.5px —
+   four separate "bugs" with one cause, found and patched one at a time before
+   the pattern was obvious.
+
+   So the root goes back to the browser default and the template's own type
+   sits on `body`, which is what v1 rendered anyway. Nothing in the ported CSS
+   depends on the root, because nothing in it uses rem; `em` values continue to
+   inherit from body and their parents exactly as before. */
+html { font-size: 16px; }
+
+/* --- THE GUTTER, IN REM ------------------------------------------------
+   The rem trap again, and this time it moves the whole grid.
+
+   Bootstrap 3's grid gutter was a fixed 30px: 15px of padding on each column,
+   15px of padding on the container, -15px margins on the row. Bootstrap 5
+   drives all three from `--bs-gutter-x: 1.5rem` — and `1.5rem` is relative to
+   the ROOT font size, which this template sets to 13px. So every gutter came
+   out 19.5px instead of 30px, every half-gutter 9.75px instead of 15px.
+
+   The effect is not a uniform shift you would spot as "everything moved". It
+   compounds differently at each nesting depth: a column sitting directly in a
+   row lost 10px of inset, one nested two levels deep lost 19px, and columns
+   inside a wrapper came out wider than v1's while starting further left.
+   Pinning the gutter to 30px restores Bootstrap 3's arithmetic everywhere at
+   once. */
+.container, .container-fluid,
+.container-sm, .container-md, .container-lg, .container-xl, .container-xxl,
+.row {
+    --bs-gutter-x: 30px;
+}
+
+/* The pin above is `.row { --bs-gutter-x: 30px }` — the same specificity as
+   Bootstrap's own `.g-0 { --bs-gutter-x: 0 }`, and it comes later in the file,
+   so it silently beat every gutter utility. The Instagram strip was marked
+   `row g-0` precisely to drop its negative margins and still hung 15px past
+   the right edge of all 27 pages. Re-declare the utilities after the pin so
+   they win again. */
+.g-0, .gx-0 { --bs-gutter-x: 0; }
+.g-1, .gx-1 { --bs-gutter-x: .25rem; }
+.g-2, .gx-2 { --bs-gutter-x: .5rem; }
+.g-3, .gx-3 { --bs-gutter-x: 1rem; }
+.g-4, .gx-4 { --bs-gutter-x: 1.5rem; }
+.g-5, .gx-5 { --bs-gutter-x: 3rem; }
+
+/* Bootstrap 3 put the gutter padding on the `.col-*` CLASS. Bootstrap 5 puts
+   it on `.row > *` — EVERY direct child of a row, column or not. So any
+   non-column that v1 dropped straight into a row (a `.carousel`, a section
+   wrapper, a bare div) silently gains 15px a side it never had, and everything
+   inside it shifts right and narrows to match: the testimonial carousel's
+   columns came out 380px at x=150 where v1 had 390px at x=135.
+   Restore Bootstrap 3's rule — padding belongs to columns only. */
+.row > :not([class*="col-"]):not(.col) {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+/* --- THE GRID WRAPPER BUG ----------------------------------------------
+   The single biggest structural difference between Bootstrap 3 and 5, and the
+   one that wrecked this port's home page.
+
+   Bootstrap 3 laid columns out with `float: left`. A float works under ANY
+   parent, so v1 could freely put a wrapper div between `.row` and its
+   `.col-*` children and the columns still sat side by side. Bootstrap 5
+   columns are FLEX ITEMS: under a `display: block` parent they are not flex
+   items at all, so they become block boxes that honour `width: 33.33%` and
+   stack vertically. That is how the footer, the gallery, the reservation bar,
+   the services list and the Instagram strip all rendered as a narrow
+   left-hand column.
+
+   EVERY RULE HERE IS CONDITIONAL ON `:has(> [class*="col-"])`, and that is not
+   a detail. An earlier version listed the wrapper class names literally, which
+   applied `display: flex` whether or not the element actually held columns —
+   and `.contact-form`, whose children are plain `.form-group` divs, became a
+   flex container whose fields shrank from 540px in one column to 190px in two.
+   A rule that fires on a class name cannot know what is inside; `:has()` can.
+
+   Bootstrap also puts the gutter PADDING on `.row > *`, not on the `.col-*`
+   class as Bootstrap 3 did, so a column parented by a wrapper gets none and
+   anything nested inside it computes from the wrong base. Hence the second
+   rule.
+
+   The selector must NOT touch `.carousel-item`. `:where()` zeroes only its own
+   argument — `:not()` and `:has()` still contribute the specificity of theirs
+   — so this is (0,2,0) and OUTRANKS Bootstrap's `.carousel-item{display:none}`
+   at (0,1,0). Every slide was forced visible, and because Bootstrap stacks
+   slides with `margin-right:-100%` two sat exactly on top of each other: the
+   testimonial text rendered doubled. The active slide gets its own rule below,
+   specific enough to win but narrow enough to leave the others hidden. */
+
+/* `ul` and `ol` are in the list because CargoPush lays its service grid out
+   as `<div class="row"><ul><li class="col-sm-4">` — the columns are list
+   items and the wrapper is the list. Without it the six cards stacked one per
+   line and the page came out 984px taller. */
+:where(div, section, article, aside, form, ul, ol):not(.row):not(.carousel-inner):not(.carousel-item):has(> [class*="col-"]) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+/* The gutter comes off the wrapper ONLY when the wrapper is not itself a
+   column. A bare div between .row and its columns had no padding in BS3 and
+   gets 15px a side from BS5's `.row > *`, so that is zeroed. But a COLUMN
+   holding columns directly — ResortIn's contact form is `.col-md-12 >
+   .contact-form > .col-md-6` — always had its 15px, and its children floated
+   inside the 940px that left: zeroing it here widened the form to 970 and
+   every field with it.
+   ...and it must NOT beat padding the TEMPLATE puts on that wrapper. Written
+   with four bare :not()s and a :has() this scored (0,5,0), and ToddleFun's
+   `.subscribe-box { padding: 40px }` — a wrapper between .row and two
+   columns, padded on purpose — lost its side padding to it: both columns
+   grew 34px and moved 40px left at every width. Only `.row > *` (0,1,0) has
+   to be outranked, and load order does that at EQUAL weight; the extra
+   classes are wrapped in :where() so the rule sits at exactly (0,1,0) —
+   above Bootstrap's by position, below anything the template says. */
+/* ...nor a CONTAINER holding columns directly: Beautilicious's contact page
+   is `.container > .col-md-6 + .col-md-6` with no .row, and Bootstrap 3 kept
+   the container's 15px (two 570px columns inside 1140). Zeroing it made them
+   585 each. */
+:where(div, section, article, aside, form, ul, ol):not(.row):where(:not(.container)):where(:not(.container-fluid)):where(:not(.carousel-inner)):where(:not(.carousel-item)):where(:not([class*="col-"])):where(:has(> [class*="col-"])) {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+/* The gutter rule is deliberately held at ONE class of specificity, so a
+   template that says `padding-0` on a column beats it. The display:flex rule
+   above must win — it restores framework behaviour the template cannot know
+   it needs. Padding is the opposite: a value templates set on purpose.
+
+   Written out, the prefix scored (0,4,0) — two :not()s and a :has() — against
+   `.padding-0`'s (0,1,0), so the layer re-added the 15px half-gutter that
+   BetterBodiez's home page explicitly removes. Its three service panels are
+   meant to run edge to edge inside their block; the middle photograph came
+   out 360px wide in a 390px cell, floating in white with 15px of daylight
+   down each side. Wrapping the prefix in :where() drops it to (0,1,0), where
+   load order settles it and the template wins. */
+:where(div, section, article, aside, form, ul, ol):where(:not(.row)):where(:not(.carousel-inner)):where(:has(> [class*="col-"])) > [class*="col-"] {
+    padding-right: calc(var(--bs-gutter-x, 30px) * .5);
+    padding-left: calc(var(--bs-gutter-x, 30px) * .5);
+}
+
+/* Whatever ELSE sits in that wrapper was a block in Bootstrap 3 — a heading
+   above two floated columns, say — and a block spans the row. As a flex item
+   it shrinks to its text and the first column climbs up beside it, pushing
+   the second one down a row: CargoPush styleguide Typography block went from
+   449px to 776px that way, its "Typography" h3 measuring 120px wide instead
+   of 1140. Give non-column children the full row, which is the width they had. */
+:where(div, section, article, aside, form, ul, ol):where(:not(.row)):where(:not(.carousel-inner)):where(:has(> [class*="col-"])) > :where(:not([class*="col-"]):not(.col):not(a):not(button):not(span):not(img):not(i):not(input):not(label):not(small):not(strong):not(em)) {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+/* ...but an INLINE child — a pill button between the paragraphs of
+   Spacelon's about block, which also holds four columns — was an
+   inline-block sized to its text in Bootstrap 3. Stretching it to the row
+   made a 1170px-wide button. It keeps its own width; where the template
+   centred it with text-align, its shim centres it with auto margins (a flex
+   item ignores the parent's text-align). */
+:where(div, section, article, aside, form, ul, ol):where(:not(.row)):where(:not(.carousel-inner)):where(:has(> [class*="col-"])) > :where(a, button, span, img, i, input, label, small, strong, em) {
+    flex: 0 0 auto;
+    max-width: 100%;
+}
+
+/* The active carousel slide is a column wrapper too. Scoped so the inactive
+   slides keep Bootstrap's `display: none` — but the slide that is SLIDING IN
+   is not active yet. Bootstrap 5 shows it with `.carousel-item-next` /
+   `.carousel-item-prev` (`display: block`) for the 600ms of the transition,
+   and a block holding columns stacks them: ResortIn's gallery slider showed
+   three photographs one under another — the first one filling the slot, the
+   rest below the fold, so it read as a white flash — until the slide arrived
+   and became active and flex. Both transition states get the same layout. */
+.carousel-item.active:has(> [class*="col-"]),
+.carousel-item-next:has(> [class*="col-"]),
+.carousel-item-prev:has(> [class*="col-"]) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+:where(.carousel-item.active:has(> [class*="col-"]), .carousel-item-next:has(> [class*="col-"]), .carousel-item-prev:has(> [class*="col-"])) > [class*="col-"] {
+    /* same reasoning as the wrapper gutter above: the template outranks it */
+    padding-right: calc(var(--bs-gutter-x, 30px) * .5);
+    padding-left: calc(var(--bs-gutter-x, 30px) * .5);
+}
+
+/* --- Buttons ------------------------------------------------------------
+   THE REM TRAP. Bootstrap 3 sized .btn padding in PIXELS (6px 12px).
+   Bootstrap 5 sizes it in REM (.375rem .75rem), which is root-relative — and
+   this template sets `html { font-size: 13px }`. So every Bootstrap button
+   silently shrank to 4.875px/9.75px of padding, about 19% smaller than v1,
+   on every page. Any template with a non-16px root hits this.
+
+   Set through Bootstrap 5's VARIABLES, not as literal padding. BS5 drives every
+   size modifier — `.btn-sm`, `.btn-lg`, and `.btn-group-sm > .btn` — by
+   reassigning `--bs-btn-padding-*`, so a literal `padding` here outranks all of
+   them and silently flattens the scale. Chic-n-Jewel's grid and list toggles
+   sit in a `.btn-group-sm` and came out at the full 6px/12px on a 4px radius
+   where v1 has 5px/10px on 3px: a button group one size too large, on the
+   control that switches the product layout. */
+.btn {
+    --bs-btn-padding-y: 6px;
+    --bs-btn-padding-x: 12px;
+    --bs-btn-font-size: 14px;
+    --bs-btn-line-height: 1.42857143;
+    --bs-btn-border-radius: 4px;
+    /* BS3's .btn was `white-space: nowrap`; BS5 lets button text wrap. The
+       header's "Book Now Hotel" broke onto two lines at tablet width and the
+       button grew from 39px tall to 55px. */
+    white-space: nowrap;
+}
+
+/* BS3 made every nav anchor a containing block: `.nav > li > a { position:
+   relative }`. BS5's `.nav-link` is static, so ANY absolutely positioned child
+   escapes to the nearest positioned ancestor — or to the page. This template
+   positions its tab icons that way (`#special span.image { position:absolute;
+   left:20px; top:27px }`), and without this they flew to the top-left corner
+   of the document and sat on top of the header's social links. */
+.nav-link, .nav > li > a { position: relative; }
+
+/* --- Columns are containing blocks again --------------------------------
+   The same omission as the rule above, one level up and far more damaging.
+
+   Bootstrap 3 declared `position: relative` on every column class. Bootstrap 5
+   dropped it: `.row > *` sets the gutter padding and nothing else. Columns
+   therefore became STATIC, and a static element paints below any positioned
+   sibling — so the overlay pattern these templates use everywhere inverts.
+
+   The shape is always the same: a section holds `<div class="tv-opacity-
+   medium">` for a colour wash, then the content in columns after it. Under
+   BS3 the relative columns painted above the absolute wash. Under BS5 the
+   wash paints above the columns and swallows every pointer event in the
+   section. On BetterBodiez's services page that is the entire BMI calculator
+   — four inputs and the Calculate button, all of them dead, with nothing to
+   see: the section looks completely normal, because the wash is exactly the
+   tint it is supposed to be. Only a click finds it.
+
+   Not scoped to `.row >`. Bootstrap 3 put this on the column CLASS, whatever
+   its parent, and templates rely on that: this very section nests its columns
+   inside a `<form>` inside the row, so a child-combinator version matched
+   nothing at all and the button stayed dead.
+
+   Matched on real column classes, not `[class*="col-"]`, which also matches
+   `color-box` and anything else beginning "col". `[class^="col-"]` cannot
+   match "color-" because the fourth character differs. */
+.col,
+[class^="col-"],
+[class*=" col-"] { position: relative; }
+
+/* --- Columns size to their content, as floats did -----------------------
+   Bootstrap 3's columns were floats: each was exactly as tall as its content
+   and neighbours in the same row had nothing to do with it. Bootstrap 5's row
+   is a flex container with the default `align-items: stretch`, so every column
+   now grows to match the TALLEST one in its row.
+
+   By itself that only makes the layout tidier. The damage is that it hands a
+   DEFINITE height to elements that had an indefinite one, and `height: 100%`
+   resolves against auto to `auto` — so any such rule was inert under BS3 and
+   silently comes alive under BS5. BetterBodiez's contact page has
+   `.ctc-box-img { background-image: url(Image50.png); height: 100% }`: 248px
+   tall in v1, the exact height of one tile, and 344px in v2 because its column
+   stretched to match a taller neighbour. The photograph tiled and repeated
+   down the middle of the page, which is how the owner found it.
+
+   This is the same shape as the dormant `margin-top: 15px` that closed
+   AquaLand's submenus: a rule that did nothing under BS3 doing something now.
+   Restoring BS3's sizing is what stops the whole family, not just this case.
+
+   Bootstrap's own align-items utilities are !important, so `align-items-center`
+   and friends still win wherever a page genuinely wants them. */
+.row { align-items: flex-start; }
+/* ...except the rows a template makes flex ITSELF. `tv-row-flex` is a
+   ThemeVault house pattern — Chic-n-Jewel and CargoPush both carry it, as
+   `.row.tv-row-flex { display: flex }` from a breakpoint up — and there the
+   stretch is the point: an image column beside a text column, or a coloured
+   panel with nothing in flow, takes its height from its neighbour. Under
+   flex-start CargoPush's About image column dropped from 810px to 455 at 992
+   and the section lost its shape. Stretch, as v1 rendered it. */
+.row.tv-row-flex, .tv-row-flex { align-items: stretch; }
+.btn-lg { padding: 10px 16px; font-size: 18px; border-radius: 6px; }
+.btn-sm { padding: 5px 10px; font-size: 12px; border-radius: 3px; }
+
+/* --- Bootstrap 3 component defaults ------------------------------------
+   With the root back at 16px, Bootstrap 5's rem sizing is now correct — but
+   "correct for Bootstrap 5" is not always the same number Bootstrap 3 used,
+   and the design was drawn against Bootstrap 3. These are the places where the
+   two frameworks simply chose different values, so they are pinned to v1's. */
+.alert {
+    padding: 15px;             /* BS5: 1rem  */
+    border-radius: 4px;        /* BS5: .375rem -> 6px */
+    margin-bottom: 20px;
+}
+/* The form field is the same rem trap as the heading scale, on the control
+   a buyer actually types into. Bootstrap 3: 14px text on a 1.42857 line in a
+   34px-tall box. Bootstrap 5: 1rem on 1.5, which is 16px/24px and 38px tall —
+   every input, select and textarea on the template a size larger and 4px
+   taller than it was drawn.
+
+   It compounds where fields stack. A three-field comment form grew 25px; a
+   checkout page with a dozen fields moves everything below it by a centimetre,
+   and a field sized to sit beside a fixed-width button no longer does. */
+.form-control, .form-select {
+    font-size: 14px;           /* BS5: 1rem -> 16px */
+    line-height: 1.42857143;   /* BS5: 1.5 */
+    border-radius: 4px;        /* BS5: 6px */
+    border-color: #cccccc;     /* BS5: #dee2e6 */
+}
+/* BS3 pinned the height so a text input matched a button beside it; a textarea
+   was the one exception and sized to its rows attribute. */
+.form-control { height: 34px; }
+textarea.form-control, select[multiple].form-control, select[size].form-control { height: auto; }
+.form-control-sm, .form-select-sm { font-size: 12px; border-radius: 3px; height: 30px; padding: 5px 10px; }
+/* BS3's `.control-label` — which the port renames to `.form-label` — sat 5px
+   above its field; BS5's `.form-label` sits 0.5rem, which is 8px. Three pixels
+   per field, and a form is nothing but fields: a three-field comment box gains
+   9px, a checkout page with a dozen gains 36. */
+label { margin-bottom: 5px; }
+.form-label { margin-bottom: 5px; }
+/* The porter maps .panel -> .card, so a card here IS a Bootstrap 3 panel and
+   gets the panel metrics: 20px below (a card has none — CargoPush pricing
+   boxes lost exactly 20px each), 15px body, 10px 15px header and footer
+   (BS5: 1rem / .5rem 1rem). Templates that restyle their panels still win. */
+.card { border-radius: 4px; margin-bottom: 20px; color: inherit; }
+/* ...and no colour of its own: BS5 paints every card in --bs-body-color
+   (#212529), where a BS3 panel inherited the page. Spacelon's pricing panels
+   are on a black page and their feature lists came out charcoal. */
+.card-body { padding: 15px; }
+.card-header, .card-footer { padding: 10px 15px; }
+/* ...except inside a panel-group, which the porter maps to .accordion: BS3
+   zeroed the margin there and separated panels by 5px instead. */
+.accordion { margin-bottom: 20px; }
+.accordion > .card { margin-bottom: 0; }
+.accordion > .card + .card { margin-top: 5px; }
+/* .panel-title -> .card-title: BS3 pinned it to 16px with no margin; BS5
+   card-title keeps the heading size and adds .5rem below. 12px per row. */
+.card-title { margin-top: 0; margin-bottom: 0; font-size: 16px; }
+/* BS3's badge was a grey pill out of the box; BS5's has no background until
+   a .bg-* utility is added, so a bare <span class="badge"> is white text on
+   white. BS3's default, at zero specificity so any template colour wins. */
+:where(.badge) { display: inline-block; min-width: 10px; padding: 3px 7px; font-size: 12px; font-weight: 700; line-height: 1; color: #fff; text-align: center; white-space: nowrap; vertical-align: middle; background-color: #777; border-radius: 10px; }
+.badge { border-radius: 10px; }
+
+/* BS3 also had a `.label` component (BS5 renamed it `.badge` and left nothing
+   under the old name), and templates reuse the class for their own chips:
+   Jerrick labels its banner share-strip "Social Link" with it, and the white
+   text went black on the navy strip. Wrapped in :where() so anything the
+   template says about `.label` still wins. */
+:where(.label) { display: inline; padding: .2em .6em .3em; font-size: 75%; font-weight: 700; line-height: 1; color: #fff; text-align: center; white-space: nowrap; vertical-align: baseline; border-radius: .25em; }
+/* `.well` — deleted in Bootstrap 4. The porter renames it to `.card
+   .card-body` UNLESS the template styles `.well` itself, in which case the
+   class stays in the markup and needs Bootstrap 3's box back: PortrayStore's
+   login page keeps `.well .heading-text i` and its two grey panels came out
+   as borderless white space. */
+.well { min-height: 20px; padding: 19px; margin-bottom: 20px; background-color: #f5f5f5; border: 1px solid #e3e3e3; border-radius: 4px; box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05); }
+.well-lg { padding: 24px; border-radius: 6px; }
+.well-sm { padding: 9px; border-radius: 3px; }
+.well blockquote { border-color: #ddd; border-color: rgba(0, 0, 0, .15); }
+/* Bootstrap 5's Reboot shrinks inline code to .875em; v1 rendered it at the
+   body size. The typography page is a wall of syntax-highlighted markup, so
+   this is the difference between the sample matching the rest of the page and
+   looking accidentally small. */
+pre, code, kbd, samp { font-size: 1em; }
+/* ...and the BOXES BS3 drew around them, which BS5 dropped entirely: a code
+   span had a pink tint and 2px 4px of padding; a pre block had a grey ground,
+   a #ccc border and 9.5px of padding. ResortIn's typography and component
+   pages are full of both, and without them every sample sat as bare text on
+   white — 106px shorter, and unrecognisable as code. Element selectors, NOT
+   :where(): ResortIn resets `* { margin: 0; padding: 0 }` in its own
+   stylesheet, which loads later and beat a zero-specificity rule — the pre
+   lost its padding again. BS3's own `pre` outranked that reset, and so does
+   this; a template that styles pre or code itself still wins on order. */
+code { padding: 2px 4px; color: #c7254e; background-color: #f9f2f4; border-radius: 4px; }
+pre {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+pre code { padding: 0; color: inherit; background-color: transparent; border-radius: 0; white-space: pre-wrap; word-break: inherit; }
+
+/* Heading line-height: Bootstrap 3 used 1.1, Bootstrap 5 uses 1.2. Six
+   percent sounds like nothing, but it is per-heading and it accumulates: the
+   header wordmark's 39px h1 grew from 66px to 72px, which pushed the whole
+   header 5px taller and shifted every page's hero, nav dropdown and carousel
+   controls down by the same 5px. It showed up as a constant offset in every
+   measurement taken on this template before it was traced. */
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 { line-height: 1.1; }
+
+/* A <small> inside a heading. Bootstrap 3 made it 65% (h1-h3) or 75% (h4-h6)
+   of the heading, weight 400, line-height 1 and GREY (#777) — which is how a
+   template shows a struck-out old price beside the new one. Bootstrap 5 has
+   no heading-small rule at all: the small inherits the heading's colour and
+   the crossed-out $30.99 came out the same sky blue as the $25.99 it sits
+   beside, on every product card of ToddleFun. :where() keeps it below any
+   rule the template writes for it. */
+:where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) :where(small, .small) { font-weight: 400; line-height: 1; color: #777; }
+:where(h1, h2, h3, .h1, .h2, .h3) :where(small, .small) { font-size: 65%; }
+:where(h4, h5, h6, .h4, .h5, .h6) :where(small, .small) { font-size: 75%; }
+
+/* --- THE TYPE SCALE ITSELF ----------------------------------------------
+   Bootstrap 3 sized headings in fixed px off a 14px base: 36 / 30 / 24 / 18 /
+   14 / 12. Bootstrap 5 sizes them in rem off a 16px root AND makes the top
+   three fluid — h2 is calc(1.325rem + 0.9vw), capped at 2rem. So on a desktop
+   every heading a template did not size itself lands bigger than it used to:
+   h2 30 -> 32, h3 24 -> 28, h4 18 -> 24, h5 14 -> 20, h6 12 -> 16.
+
+   h4 and h5 are the damaging ones, at +33% and +43%. They are the sizes
+   templates use for product names, card titles and sidebar headings — the text
+   that sits in a fixed-height box — so the overflow does not look like a font
+   change, it looks like a broken card.
+
+   Nothing about this is loud. Each heading is a little larger, each section a
+   little taller, and the page still reads as the same page; it reads as the
+   same page done slightly worse. It survived every gate on this template,
+   because a gate compares v2 against v2 and 32px is a perfectly good font
+   size. It was found by measuring v1 and v2 side by side and asking why an
+   "Exclusive Offer" 149px wide in v1 was 192px wide in v2.
+
+   Restored as fixed px, which also removes the fluid scaling: Bootstrap 3 had
+   none, so a ported page should not acquire it. These rules load BEFORE
+   style.css and carry the lowest specificity a heading rule can, so any
+   template that sizes its own headings still wins. */
+h1, .h1 { font-size: 36px; }
+h2, .h2 { font-size: 30px; }
+h3, .h3 { font-size: 24px; }
+h4, .h4 { font-size: 18px; }
+h5, .h5 { font-size: 14px; }
+h6, .h6 { font-size: 12px; }
+h1 small, .h1 small, h2 small, .h2 small, h3 small, .h3 small { font-size: 65%; }
+h4 small, .h4 small, h5 small, .h5 small, h6 small, .h6 small { font-size: 75%; }
+/* BS3 margins: 20px above the big three, 10px above the small three, 10px
+   below all six. BS5 collapses that to no top margin and 0.5rem below. */
+h1, .h1, h2, .h2, h3, .h3 { margin-top: 20px; margin-bottom: 10px; }
+h4, .h4, h5, .h5, h6, .h6 { margin-top: 10px; margin-bottom: 10px; }
+
+/* Body copy, same story one level down. BS3: 14px on a 1.428571429 line.
+   BS5: 1rem (16px) on 1.5. A paragraph gap of half a line (10px) against BS5's
+   1rem. Six pixels per paragraph is invisible on any one of them and adds a
+   centimetre to a blog post.
+
+   The SIZE is here too, and it was missing until CargoPush: Chic-n-Jewel's
+   own stylesheet said `body { font-size: 14px }`, so the gap never showed.
+   CargoPush's does not — it took the 14px from Bootstrap 3 like most of these
+   templates do — and every paragraph came out 16px/22.9 instead of 14px/20,
+   adding 40px to each section of the home page. A template that sets its own
+   body size still wins: this loads before style.css. */
+body { font-size: 14px; line-height: 1.42857143; }
+p { margin: 0 0 10px; }
+
+/* Links. BS3: `a { text-decoration: none }`, underlined on hover/focus only.
+   BS5 underlines every link at rest. Every earlier port got this from its
+   scaffolded base stylesheet; ResortIn's base was hand-written without it
+   and the whole footer menu came up underlined. It belongs to the layer, not
+   to each template's memory. */
+a { text-decoration: none; }
+/* ...and BS3's link COLOUR, #337ab7 (#23527c on hover), where BS5 has
+   #0d6efd. A link the template never coloured — Lawetique's practice-area
+   tiles are <a>s whose text sits in a coloured span, and the anchor itself
+   showed the framework blue in v1 — came out BS5 blue. Through the variables,
+   so a template's own `a { color }` still wins, and only the two the
+   framework set: the tabs block above keeps currentColor for nav links. */
+:root { --bs-link-color: #337ab7; --bs-link-hover-color: #23527c; --bs-link-color-rgb: 51, 122, 183; --bs-link-hover-color-rgb: 35, 82, 124; }
+a:hover, a:focus { text-decoration: underline; }
+
+/* Form-control resets Bootstrap 3 applied to bare inputs and BS5 does not:
+   a file input was a block on its own line (ResortIn's form-fields page had
+   its "Choose file" control jump up beside the caption, 18px shorter), and
+   range inputs were blocks too. Same values as BS3's forms.less. */
+input[type="file"] { display: block; }
+input[type="range"] { display: block; width: 100%; }
+select[multiple], select[size] { height: auto; }
+fieldset { min-width: 0; padding: 0; margin: 0; border: 0; }
+legend {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: inherit;
+    color: #333;
+    border: 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+small, .small { font-size: 85%; }
+
+/* --- .caret -------------------------------------------------------------
+   Bootstrap 3's dropdown arrow was an empty <span class="caret"> drawn as a
+   CSS triangle. Bootstrap 5 deleted the class outright in favour of a
+   ::after on .dropdown-toggle, so the span survives the port, matches nothing
+   and paints nothing: the control loses its arrow and reads as plain text that
+   happens to open a menu. Nothing errors and nothing moves, so it only shows
+   up by looking — the "Currency" control in this template's top bar had its
+   triangle in v1 and none in v2.
+
+   Bootstrap 3's rule, verbatim, minus its IE9 hack. Templates that replaced
+   the caret with an icon of their own still win: this sits before style.css. */
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+.dropup .caret, .navbar-fixed-bottom .dropdown .caret {
+    border-top: 0;
+    border-bottom: 4px dashed;
+}
+
+/* --- Nav links: tabs and pills -----------------------------------------
+   Bootstrap 3 had no `.nav-link` class at all. A tab was an <a> inside
+   `.nav > li`, so it took its padding from `.nav > li > a { padding: 10px 15px }`
+   and its COLOUR from whatever the template said about anchors — very often
+   `a { color: inherit }`, which is what this one says.
+
+   Bootstrap 5 gives that anchor a class, and the class sets both: 8px/16px of
+   padding and #0d6efd of colour. A class rule outranks an element rule, so a
+   template that black-ens its links through `a { }` gets a Bootstrap-blue tab
+   strip and cannot see why — its own `a` rule is right there and is simply
+   losing. The product page tab bar read "Description" in the template gold and
+   "Shipping Return" and "Reviews (0)" in Bootstrap blue, on a black-and-gold
+   site.
+
+   Set through the variables rather than the properties, so a template that
+   states its own padding or colour on a nav link still wins outright. The
+   navbar is unaffected: its rules further down set padding directly, at higher
+   specificity, exactly because Bootstrap 3 overrode the same base rule there. */
+.nav-link {
+    --bs-nav-link-padding-y: 10px;
+    --bs-nav-link-padding-x: 15px;
+    /* currentColor, not inherit. On a CUSTOM property `inherit` is the CSS-wide
+       keyword and means "take the parent element value of this variable" — and
+       the parent is `.nav`, which is where Bootstrap sets it to the link blue.
+       So it inherited the very value it was meant to replace, and the tabs
+       stayed blue while the padding beside it took effect, which made the rule
+       look like it was working. `color: currentColor` is defined to compute to
+       the inherited COLOUR, which is what Bootstrap 3 anchors did. */
+    --bs-nav-link-color: currentColor;
+    --bs-nav-link-hover-color: currentColor;
+}
+/* `.nav-stacked` — Bootstrap 3's vertical nav — is gone; Bootstrap 5 spells
+   it `flex-column`. Left unmapped the list lays out horizontally: CargoPush's
+   category tabs (a 263px column beside a slider) collapsed from 212px tall to
+   one 83px row and the slider beside them lost its alignment. */
+.nav-stacked { flex-direction: column; }
+.nav-stacked > li + li { margin-top: 2px; margin-left: 0; }
+
+/* Bootstrap 3 drew tab borders in #ddd/#eee; Bootstrap 5 uses #dee2e6. */
+.nav-tabs {
+    --bs-nav-tabs-border-color: #dddddd;
+    --bs-nav-tabs-border-radius: 4px;
+    --bs-nav-tabs-link-hover-border-color: #eeeeee #eeeeee #dddddd;
+    --bs-nav-tabs-link-active-color: #555555;
+    --bs-nav-tabs-link-active-bg: #ffffff;
+    --bs-nav-tabs-link-active-border-color: #dddddd #dddddd #ffffff;
+}
+/* BS3's tab items were FLOATS; BS5's are flex items. Same thing until a
+   template overrides `.nav` to inline-block (ResortIn's "minimal tabs", so
+   the strip can be centred as text): then BS5's items become in-flow blocks
+   and the strip's baseline is the last link's text baseline — it sits 4.5px
+   higher on the line than v1's, whose floated items left the strip with no
+   baseline of its own. Float them, as BS3 did; inside a flex .nav a float
+   is ignored, so nothing else moves. */
+:where(.nav-tabs > li, .nav-pills > li) { float: left; }
+
+/* --- Container ----------------------------------------------------------
+   Bootstrap 3 capped the container at 1170/970/750. Bootstrap 5 uses
+   1140/960/720 and adds an xxl tier of 1320 above 1400px — so a straight port
+   is NARROWER than v1 at three of four desktop widths and wider only on very
+   large screens. All four tiers are pinned to v1's exact measure.
+
+   The xxl tier is deliberately NOT used. Bootstrap 5 would widen the container
+   to 1320px above 1400px, and on the previous upgrade that was accepted as an
+   improvement — but it moves every column on the page and the owner's standing
+   expectation is that the design MATCHES v1 unless something is genuinely
+   better. A different measure is not better, it is different. v1's three tiers
+   are reproduced exactly and nothing widens.
+
+   It is `width`, not `max-width`. Bootstrap 3 gave the container a HARD
+   width; Bootstrap 5 gives it `width: 100%` plus a `max-width` cap. Those agree
+   in a normal block parent and disagree completely inside a shrink-to-fit one
+   — an absolutely positioned box, a float, an inline-block, a flex item —
+   where 100% resolves against a parent that is itself sized by its content.
+   There the Bootstrap 5 container collapses to the width of its own text.
+
+   Every inner page here puts its title and breadcrumb in
+   `.tv-inner-page-title`, which is `position: absolute` with no width. The
+   container inside it measured 1170px in v1 and between 238 and 606px in v2 —
+   a different width on each of fourteen pages, because each collapsed around
+   whatever its own breadcrumb said. The banner still looked centred, since the
+   absolute box is centred with a transform, so nothing looked obviously wrong
+   on any single page; the heading just sat at a slightly different place on
+   each one. `max-width: 100%` is kept alongside so a container in a genuinely
+   narrow parent still fits, which Bootstrap 3 would not have done. */
+/* Bootstrap 5 has a tier Bootstrap 3 does not: from 576px it caps the
+   container at 540px. Bootstrap 3's first tier is 768, so everything from 576
+   to 767 — large phones held sideways, small tablets — was full width and is
+   now a 540px column with 30px of dead space either side. It is not obviously
+   a bug at any single width; the page just starts looking oddly narrow, and
+   the collapsed navbar's logo and hamburger pull 45px in from the edges the
+   design puts them on. Unconditioned, so it beats Bootstrap's media query by
+   coming later in the cascade; the tiers below restore Bootstrap 3's own. */
+.container { max-width: 100%; }
+@media (min-width: 768px)  { .container { width: 750px;  max-width: 100%; } }
+@media (min-width: 992px)  { .container { width: 970px;  max-width: 100%; } }
+@media (min-width: 1200px) { .container { width: 1170px; max-width: 100%; } }
+@media (min-width: 1400px) { .container { width: 1170px; max-width: 100%; } }
+
+/* --- Lightbox -----------------------------------------------------------
+   Replaces magnific-popup, which v1 loaded as a plugin and initialised from an
+   inline <script> on eight pages. main.js builds the dialog; without these
+   rules it is an unstyled div appended to <body>, permanently visible and
+   impossible to close — which is exactly how it shipped until the interactive
+   gate caught it. */
+/* --- Controls promoted to real <button> ---------------------------------
+   The upgrade turns several things into buttons that v1 built out of <div>
+   and <a>: owl's arrows and dots, and the back-to-top control. That is the
+   right call — a control a keyboard cannot reach is a defect the original
+   shipped, not a design decision — but a <button> arrives wearing the UA's
+   own chrome, and the template's stylesheet never had to reset any of it
+   because the element used to be an anchor.
+
+   It is disproportionately ugly. Back-to-top went from a bare 40px icon to a
+   grey #f0f0f0 box with a 2px outset border, and because the border and
+   padding eat into the fixed 40x40 frame the icon itself shrank to 24px —
+   the owner saw a small pink heart in a white box where v1 has a clean
+   arrow. The owl dot strip measured 29px against v1's 25px for the same
+   reason: 2px of border top and bottom on every dot.
+
+   WRAPPED IN :where() so it has ZERO specificity, and that is the whole point.
+   Written plainly, `button.tv-back-to-top` scores (0,1,1) and beats the
+   template's own `.tv-back-to-top` at (0,1,0) — so on a template that DOES
+   style its back-to-top, this reset wins and strips it: Chic-n-Jewel's gold
+   button came out transparent with 14px text where v1 has 20px on #dfb858, on
+   all fifteen pages. The reset only has to beat the USER AGENT, which any
+   author rule does, so it needs no weight at all. Same mistake as the gutter
+   rule earlier in this file, and the same fix. */
+:where(.owl-nav button, .owl-dots button,
+       button.owl-prev, button.owl-next, button.owl-dot,
+       button#back-to-top, button.tv-back-to-top, button.back-to-top,
+       button.tv-site-btn, button.tv-site-btn2, button.tv-site-btn3,
+       /* Every <a href="#"> the porter promotes to a submit button gets
+          `.tv-linkbutton`, so this list no longer has to be kept in step with
+          whatever each template happens to call its controls. The ones that
+          were already styled — `.btn`, `.tv-site-btn` — are unaffected, because
+          :where() has no specificity and their own rules win. */
+       .tv-linkbutton) {
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    color: inherit;
+    line-height: inherit;
+    -webkit-appearance: none;
+    appearance: none;
+    /* Form controls are the one place letter-spacing is NOT inherited: the UA
+       stylesheet pins `letter-spacing: normal` on button/input/select. A
+       template that spaces its type through the body — this one sets 1px —
+       loses it on every control the upgrade promoted to a <button>. */
+    letter-spacing: inherit;
+    word-spacing: inherit;
+}
+
+.tv-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1090;
+    background: rgba(0, 0, 0, .9);
+    align-items: center;
+    justify-content: center;
+}
+.tv-lightbox.is-open { display: flex; }
+.tv-lightbox img {
+    max-width: 90vw;
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, .5);
+}
+.tv-lightbox button {
+    position: absolute;
+    background: transparent;
+    border: 0;
+    color: #fff;
+    font-size: 40px;
+    line-height: 1;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: var(--tv-ease, all .3s ease);
+}
+.tv-lightbox button:hover,
+.tv-lightbox button:focus-visible { color: var(--tv-accent, #333); }
+.tv-lb-close { top: 10px; right: 16px; font-size: 48px; }
+.tv-lb-prev { left: 10px; top: 50%; transform: translateY(-50%); }
+.tv-lb-next { right: 10px; top: 50%; transform: translateY(-50%); }
+@media (max-width: 575.98px) {
+    .tv-lightbox button { font-size: 30px; }
+    .tv-lb-close { font-size: 36px; }
+}
+
+/* --- Carousel prev/next controls ---------------------------------------
+   Bootstrap 3 and Bootstrap 5 name these completely differently:
+
+     BS3  <a class="left carousel-control"  data-slide="prev">
+     BS5  <button class="carousel-control-prev" data-bs-slide="prev">
+
+   The port rewrites the data attribute, so the controls still WORK, but the
+   classes stay Bootstrap 3's — and Bootstrap 5 has no rules for them. They
+   kept their markup and their click handler and simply became invisible: the
+   background-slider layout lost both arrows while v1 showed them either side
+   of the hero.
+
+   Renaming the classes instead would break the template's own overrides, which
+   target `.carousel-control` and `.carousel-control.left/.right` directly
+   (`#resortlayout2` sets top:50% and opacity:1 and drops the gradient). So
+   Bootstrap 3's base is restored here and the template layers over it exactly
+   as it always did. Gradients included, because the template only cancels them
+   on one layout. */
+/* Every BS3 slide was a STACKING CONTEXT: `perspective: 1000px` on
+   `.carousel-inner > .item` (under the transform-3d media query, i.e.
+   everywhere). So a caption's z-index — ResortIn's `.banner-title` is
+   z-index: 2 — stayed inside its slide, and the arrows, which come later in
+   the DOM, painted on top. BS5's .carousel-item has backface-visibility
+   only, which creates no context: the caption's z-index escaped to the page
+   and sat OVER the arrows, which drew but could not be clicked. Owner
+   report: "next buttons are not clickable" on the background-slider home. */
+:where(.carousel-item) { isolation: isolate; }
+/* Bootstrap 3's caption carried `z-index: 10`; Bootstrap 5's has none, so a
+   caption that sits INSIDE the slide beside a positioned image (PurrKatty's
+   vertical banner: the logo card over the photo) paints under the photo. */
+:where(.carousel-caption) { z-index: 10; }
+.carousel-control {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    width: 15%;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+    background-color: rgba(0, 0, 0, 0);
+    opacity: .5;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, .5) 0, rgba(0, 0, 0, .0001) 100%);
+    background-repeat: repeat-x;
+}
+.carousel-control.right {
+    right: 0;
+    left: auto;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, .0001) 0, rgba(0, 0, 0, .5) 100%);
+}
+.carousel-control:hover,
+.carousel-control:focus {
+    color: #fff;
+    text-decoration: none;
+    opacity: .9;
+}
+
+/* --- Carousel indicators ------------------------------------------------
+   BS3 rendered these as <li>, BS5 as <button>. Same dots, different element —
+   and a different DRAWING: BS3's were 10px hollow circles, inline-block in a
+   centred block, 12px and filled when active; BS5's are 30x3 bars in a flex
+   row. An earlier version of this block kept BS5's bars and only widened the
+   hit area. ResortIn's rooms carousel showed why that is wrong: its template
+   rule `.carousel-indicators li { display: block }` STACKS the dots down the
+   right edge of the slider, which a flex container ignores, and it only sets
+   the size of the ACTIVE dot because BS3 sized the others. Restored to
+   BS3's values; a template that restyles them still wins on order. */
+.carousel-indicators {
+    display: block;
+    bottom: 20px;
+    left: 50%;
+    right: auto;
+    width: 60%;
+    margin: 0 0 10px -30%;   /* the 10px is BS3's <ol> margin-bottom */
+    padding-left: 0;
+    text-align: center;
+    list-style: none;
+}
+.carousel-indicators [data-bs-slide-to] {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 10px;
+    height: 10px;
+    margin: 1px;
+    padding: 0;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: transparent;
+    background-clip: padding-box;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    opacity: 1;
+    transition: none;
+    flex: none;
+}
+/* (0,2,0), the same weight as Bootstrap 3's own `.carousel-indicators .active`
+   — so a template restyling the active dot with that very selector still wins
+   on order, as it did in v1. The earlier `[data-bs-slide-to].active` form was
+   (0,3,0) and turned PortrayStore's green active dot white. */
+.carousel-indicators .active {
+    width: 12px;
+    height: 12px;
+    margin: 0;
+    background-color: #fff;
+}
+
+/* .thumbnail: a block with 4px of white padding and a 1px #ddd frame around
+   an image. Bootstrap 5 dropped it. A template that only recolours the
+   frame — ToddleFun's `a.thumbnail { border: 2px solid #ff3366 }` on the
+   product page — is left with an INLINE anchor: the border wraps one line of
+   text-height nothing, and the photograph beside it floats free with a pink
+   stripe across its middle. Values are Bootstrap 3's own; the porter turns
+   .thumbnail into .card only where the template does not style it itself. */
+:where(.thumbnail) {
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border .2s ease-in-out;
+}
+:where(.thumbnail) > img, :where(.thumbnail a) > img { display: block; max-width: 100%; height: auto; margin-right: auto; margin-left: auto; }
+:where(.thumbnail .caption) { padding: 9px; color: #333; }
+
+/* --- Bootstrap 3 components Bootstrap 5 deleted outright -----------------
+   These have no Bootstrap 5 equivalent at all, so a template using them keeps
+   the class names and loses every declaration behind them. Found by
+   dropped.mjs on BetterBodiez before a single page was looked at: six classes
+   across nine pages, including round trainer photographs that would have
+   rendered as squares and a media object whose image and text would have
+   stacked instead of sitting side by side.
+
+   Values are Bootstrap 3's own. The media object is rebuilt with flex rather
+   than table-cell — same layout, and it does not need the display:table
+   wrapper Bootstrap 3 relied on. */
+.img-circle { border-radius: 50%; }
+.img-rounded { border-radius: 6px; }
+.img-thumbnail {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    padding: 4px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Bootstrap 3 media object, as TABLE CELLS — which is what Bootstrap 3 did,
+   and not the flex version that used to be here. The difference is what a
+   template can do to it: CargoPush stacks the counter blocks on a phone with
+   `.media-left { display: block }`, and a block that is a flex ITEM does not
+   stack — the parent keeps it in the row. With table-cells the child override
+   works exactly as it did in v1, and the phone layout matches. */
+.media { margin-top: 15px; }
+.media:first-child { margin-top: 0; }
+.media, .media-body { overflow: hidden; zoom: 1; }
+.media-body { width: 10000px; }
+.media-left, .media-right, .media-body { display: table-cell; vertical-align: top; }
+.media-left { padding-right: 10px; }
+.media-right { padding-left: 10px; }
+.media-middle { vertical-align: middle; }
+.media-bottom { vertical-align: bottom; }
+.media-object { display: block; }
+.media-heading { margin-top: 0; margin-bottom: 5px; }
+
+/* --- Bootstrap 3 classes Bootstrap 5 DELETED ----------------------------
+   These carry no styling at all in BS5. The markup still has them — it is the
+   original's markup — so each one is an element that silently lost whatever
+   the old framework gave it. Restored at BS3's own values.
+
+   They are grouped here because they share a shape: nothing errors, nothing
+   is missing from the page, and the layout is simply a little wrong in a way
+   that is hard to attribute to anything. */
+
+/* `.navbar-header` and `.navbar-right` were BS3's navbar layout. BS5 makes the
+   navbar a flex container and expects `ms-auto` instead, so an unconverted
+   navbar puts its menu hard against the logo. */
+@media (min-width: 768px) {
+    .navbar-header { float: left; }
+    /* Bootstrap 3 let the brand and a right-aligned nav sit IN the container's
+       padding: -15px on the brand's left, -15px on .navbar-right's right. That
+       is 30px of menu width, and on CargoPush at 768 it is exactly the
+       difference between six items on one line (v1) and "Pages" wrapping onto
+       a second row under the logo. */
+    .navbar-right { margin-left: auto; margin-right: -15px; }
+    .navbar > .container .navbar-brand,
+    .navbar > .container-fluid .navbar-brand { margin-left: -15px; }
+}
+.navbar-header { display: flex; align-items: center; }
+/* ...and a header the template centred with `text-center` (ResortIn, at
+   tablet width: brand on its own line above the menu) centred an INLINE
+   brand. In a flex box text-align does nothing; the axis alignment does. */
+.navbar-header.text-center { justify-content: center; }
+
+/* The COLLAPSED navbar, below Bootstrap 3's `@grid-float-breakpoint` of 768.
+   Bootstrap 3 made `.navbar-header` a full-width block and let the brand float
+   left and the toggle float right inside it. Under Bootstrap 5 the navbar is
+   flex, so `.navbar-header` is a flex ITEM: it shrinks to its content, and
+   `float` on its children is ignored entirely, because floats do not apply
+   inside a flex container.
+
+   The result is the hamburger sitting immediately LEFT of the logo, both
+   huddled against the left edge, where v1 has the logo left and the hamburger
+   hard right. `float: right` is in this file and does nothing about it — which
+   is why this needs saying: the fix for a misplaced control in a ported navbar
+   is never another float.
+
+   Ordered rather than floated, so it holds whichever way round the source
+   markup happens to put them.
+
+   767.98 alone only matches Bootstrap 3's OWN collapse point. A template on
+   `navbar-expand-lg` (this campaign's default mapping for a BS3 template that
+   collapsed at col-md, per its own one-tier-up column shift) keeps the
+   collapsed toggler-plus-brand header all the way to 991.98 — Citreat's own
+   hamburger sat hard against the logo at 768-991 with only the narrower query
+   here, tablet width, the one the owner reviews first. Extended to 991.98
+   rather than left template-specific: on a narrower `navbar-expand-md/sm`
+   template the toggler is `display:none` in that range anyway (Bootstrap's
+   own rule), so the wider query changes nothing for those. */
+@media (max-width: 991.98px) {
+    .navbar-header {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .navbar-header > .navbar-brand { order: 1; }
+    .navbar-header > .navbar-toggler { order: 2; margin-left: auto; }
+}
+
+/* Bootstrap 3's brand box: 50px tall with 15px of padding, which is what sets
+   the height of the whole bar. Bootstrap 5 uses .3125rem vertical padding and
+   no height, so a logo ported straight across sits in a box 9px shorter and
+   30px narrower than the one the design was drawn around. */
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 15px;
+    font-size: 18px;
+    line-height: 20px;
+    margin-right: 0;   /* BS5 adds 1rem here; BS3 had none. On CargoPush at 768 that 16px was the last straw for a six-item menu. */
+}
+
+/* `.input-lg` became `.form-control-lg`, `.btn-block` became `.w-100`, and
+   `.input-group-btn` was dropped entirely (BS5 puts buttons straight into the
+   input group). Restated rather than renamed in the markup, because several of
+   these templates style the old names themselves. */
+.form-control.input-lg, .input-lg {
+    min-height: calc(1.5em + 1rem + 2px);
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+}
+.btn-block { display: block; width: 100%; }
+/* `.btn-block` on an INPUT GROUP, which several of these templates do to make
+   the group full width. Under Bootstrap 3 that was harmless: `.input-group` is
+   `display: table` and `.btn-block` overrode it to block, but the children were
+   `display: table-cell`, and table-cells in a block parent get an anonymous
+   table around them — so they stayed on one line anyway.
+
+   Under Bootstrap 5 the children are ordinary blocks and the group is flex, so
+   `display: block` from `.btn-block` genuinely stacks them. The cart's quantity
+   cell showed a narrow empty box with the gold remove button underneath it
+   instead of the two side by side.
+
+   Only when the group's children ARE input-group parts. PortrayStore's cart
+   wraps the field in a <p> and the two buttons in a <div> — plain blocks that
+   Bootstrap 3 stacked (field above, buttons below) and that a blanket flex
+   put side by side. */
+.input-group.btn-block:has(> .form-control, > .input-group-btn, > .input-group-addon, > .input-group-text) { display: flex; }
+.input-group-btn { display: flex; align-items: stretch; }
+.input-group-btn > .btn { height: 100%; }
+/* Bootstrap 3 squared the corner where a button meets the field
+   (`.input-group-btn:last-child > .btn { border-top-left-radius: 0 }`, at
+   (0,2,1) — above a template's own `.tv-link-button { border-radius: 2px }`).
+   Bootstrap 5 squares only its DIRECT children, and the button here sits in
+   the wrapper, so AppiRays' Subscribe button grew rounded inner corners. */
+.input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group > .btn { border-top-left-radius: 0; border-bottom-left-radius: 0; }
+.input-group-btn:first-child > .btn, .input-group-btn:first-child > .btn-group > .btn { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+
+/* Bootstrap 3's small and large input groups. Bootstrap 5 has the modifiers but
+   different numbers — and no HEIGHT at all, so the `.form-control { height:
+   34px }` above (which is Bootstrap 3's own default) leaks into them and a
+   small control comes out full size. The product listing's "Sort By" and
+   "Show" selects rendered 34px tall at 14px inside 30px gold labels sized for
+   12px, so the row no longer lined up. */
+.input-group-sm > .form-control, .input-group-sm > .form-select,
+.input-group-sm > .input-group-text, .input-group-sm > .input-group-addon,
+.input-group-sm > .btn, .input-group-sm > .input-group-btn > .btn {
+    height: 30px;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+.input-group-lg > .form-control, .input-group-lg > .form-select,
+.input-group-lg > .input-group-text, .input-group-lg > .input-group-addon,
+.input-group-lg > .btn, .input-group-lg > .input-group-btn > .btn {
+    height: 46px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+}
+
+/* --- legend --------------------------------------------------------------
+   Bootstrap 5's Reboot gives <legend> `float: left` and a fluid
+   `calc(1.275rem + .3vw)`; Bootstrap 3 made it a 21px BLOCK with a 20px gap
+   and a hairline under it.
+
+   The float is the part that matters. A floated legend is out of flow, so the
+   first field of the fieldset rises to sit beside it and the group's box no
+   longer adds up — on this template's checkout the first `.form-group`
+   measured 76px where every other one measured 34, and the fieldset came out
+   9px short of the arithmetic. Three fieldsets, and the billing column lost
+   24px against v1 in a way that read as "the form is a bit tighter" rather
+   than as a bug with a cause. */
+legend {
+    display: block;
+    float: none;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: inherit;
+    border: 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+/* BS3's form-check equivalents. `.radio` and `.checkbox` were block wrappers
+   with spacing; `.checkbox-inline` and `.radio-inline` put them on one line. */
+/* `.form-check` is here because the HTML porter renames `.checkbox` to it, and
+   Bootstrap 5's version is a different component: `min-height: 1.5rem` and
+   `padding-left: 1.5em` on the wrapper, a floated `.form-check-input` inside.
+   Applied to Bootstrap 3 markup — a plain <input> inside a <label> inside the
+   wrapper — it inherits the reserved gutter without anything sitting in it, and
+   the row grows from 20px to 31px. On a checkout page with two of them that is
+   22px; on a form with ten it is a visible change of rhythm. */
+.radio, .checkbox, .form-check { position: relative; display: block; min-height: 0; padding-left: 0; margin-top: 10px; margin-bottom: 10px; }
+.radio label, .checkbox label, .form-check label { padding-left: 20px; margin-bottom: 0; font-weight: 400; cursor: pointer; }
+/* Bootstrap 3 pulled the box out of the text flow and hung it in the 20px of
+   padding above. Without this the box sits INLINE: it takes a text input's
+   width, pushes the label onto a second line and, where a rule in the template
+   sizes `input`, renders as a full-width empty field beside its own caption.
+   The `-inline` variants need it as much as the block ones and were missing. */
+.radio input[type="radio"], .checkbox input[type="checkbox"],
+.form-check input[type="radio"], .form-check input[type="checkbox"],
+.radio-inline input[type="radio"], .checkbox-inline input[type="checkbox"] {
+    position: absolute;
+    float: none;
+    width: auto;
+    height: auto;
+    margin-left: -20px;
+    margin-top: 4px;
+}
+/* Some v1 markup already carried Bootstrap 4's class names — `.form-check-
+   input` INSIDE the label — with nothing styling them under Bootstrap 3, so
+   the box was the browser's native 13px one. Bootstrap 5 styles that class:
+   `appearance: none` plus a 1em width and a drawn border. With the width
+   reset to auto above and appearance still none, the box measured 2x2 —
+   ResortIn's form-fields page showed eleven captions with no boxes at all.
+   A box inside its label is the BS3 shape; it keeps the native control.
+   (Real BS5 markup puts the input BESIDE the label and is untouched.) */
+.radio label > .form-check-input, .checkbox label > .form-check-input, .form-check label > .form-check-input {
+    appearance: auto;
+    -webkit-appearance: auto;
+    border: 0;
+    background: none;
+    print-color-adjust: economy;
+}
+.radio-inline, .checkbox-inline {
+    position: relative;
+    display: inline-block;
+    padding-left: 20px;
+    margin-bottom: 0;
+    font-weight: 400;
+    vertical-align: middle;
+    cursor: pointer;
+}
+/* Bootstrap 3 pulled consecutive boxes together by 5px so a stack of them read
+   as one group rather than as separate rows. */
+.radio + .radio, .checkbox + .checkbox, .form-check + .form-check { margin-top: -5px; }
+.radio-inline + .radio-inline, .checkbox-inline + .checkbox-inline { margin-top: 0; margin-left: 10px; }
+
+/* --- More Bootstrap defaults that moved ---------------------------------
+   Each of these is a value the framework supplied and the template never
+   restated, so the port inherits Bootstrap 5's answer instead of Bootstrap 3's.
+   None of them breaks anything; together they are why a careful port still
+   does not quite look like the original. */
+
+/* `<hr>`. BS3 drew it as `border-top: 1px solid #eee` on a transparent
+   element. BS5 rebuilt it as a CURRENT-COLOUR border at 25% opacity, so the
+   rule reads as `color` rather than `border-color` — and a template that
+   colours its rules through `color` (this one sets `.tv-light-line` grey) gets
+   a black line at quarter opacity instead of a grey one at full. */
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eeeeee;
+    opacity: 1;
+    /* BS3 never set a colour on <hr>, so the browser default (gray) applied;
+       BS5 sets `color: inherit`, which on a dark banner makes it black. The
+       property is invisible wherever a template draws its own rule, but it is
+       a real difference wherever one does not. */
+    color: gray;
+    background-color: transparent;
+}
+
+/* --- clearfix ----------------------------------------------------------
+   Bootstrap 3's clearfix was a pair of `display: table` pseudo-elements;
+   Bootstrap 5's is one `display: block` one. The difference is margin
+   collapsing: a table box is CONTENT, so a child's bottom margin stayed
+   inside a BS3 .clearfix and an empty `<div class="clearfix">` kept the
+   margins either side of it apart. Under BS5 both collapse through. On
+   ResortIn that took 15px off every `.tv-wrap-box.clearfix` (its last
+   heading's margin) and 20px from under the alerts, where an empty clearfix
+   div sat between the last alert and the next heading. */
+.clearfix::before, .clearfix::after { display: table; content: " "; }
+.clearfix::after { clear: both; }
+
+/* BS3 rounded the navbar by 4px — but only once it was no longer full-bleed,
+   i.e. from its collapse breakpoint up. Applying it at every width puts a 4px
+   radius on the edge-to-edge mobile bar, which v1 never had. */
+@media (min-width: 768px) { .navbar { border-radius: 4px; } }
+.navbar-fixed-top, .navbar-fixed-bottom, .navbar.fixed-top, .navbar.fixed-bottom { border-radius: 0; }
+
+/* The BS3 button SIZE SCALE. The base is set on `.btn` further up this file;
+   these are the modifiers, and `.btn-group-*` matters as much as `.btn-*`
+   because Bootstrap 3 sized a whole group through the wrapper — which is how
+   this template sizes its product-layout toggles. */
+.btn-lg, .btn-group-lg > .btn {
+    --bs-btn-padding-y: 10px; --bs-btn-padding-x: 16px;
+    --bs-btn-font-size: 18px; --bs-btn-line-height: 1.3333333;
+    --bs-btn-border-radius: 6px;
+}
+.btn-sm, .btn-group-sm > .btn {
+    --bs-btn-padding-y: 5px; --bs-btn-padding-x: 10px;
+    --bs-btn-font-size: 12px; --bs-btn-line-height: 1.5;
+    --bs-btn-border-radius: 3px;
+}
+.btn-xs, .btn-group-xs > .btn {
+    --bs-btn-padding-y: 1px; --bs-btn-padding-x: 5px;
+    --bs-btn-font-size: 12px; --bs-btn-line-height: 1.5;
+    --bs-btn-border-radius: 3px;
+}
+
+/* Tables. BS3's `.table` painted no background and bordered cells with #ddd;
+   BS5 paints `--bs-table-bg` white onto every cell and borders with #dee2e6.
+   On a table sitting over a tinted section the white is the visible change —
+   the cart's product rows turned from transparent to opaque white. */
+.table {
+    --bs-table-bg: transparent;
+    border-color: #dddddd;
+    margin-bottom: 20px;   /* BS3: 20px below a table; BS5: 1rem. 4px per table, and a mini-cart has two */
+}
+.table > :not(caption) > * > * {
+    background-color: transparent;
+    box-shadow: none;
+    border-bottom-width: 0;
+}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #dddddd;
+}
+.table > thead > tr > th { vertical-align: bottom; border-bottom: 2px solid #dddddd; }
+
+/* BS3 zeroed the top border on the FIRST row of the first thead, so a table
+   does not draw a line above its own header. Restating the general cell border
+   without the exception puts a 1px #ddd line across the top of every table —
+   visible against this template's black header row. */
+.table > thead:first-child > tr:first-child > th,
+.table > thead:first-child > tr:first-child > td { border-top: 0; }
+
+/* --- blockquote ---------------------------------------------------------
+   BS3 styled blockquotes and their attribution; BS5 dropped both. The
+   attribution is the one that shows: `blockquote footer` was 80% of the quote
+   size in a muted grey, and without it the byline renders at the quote's own
+   17.5px in full-strength body colour — as large as the quotation it credits. */
+blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 17.5px;
+    border-left: 5px solid #eeeeee;
+}
+blockquote footer, blockquote small, blockquote .small {
+    display: block;
+    font-size: 80%;
+    line-height: 1.42857143;
+    color: #777777;
+}
+blockquote footer::before, blockquote small::before, blockquote .small::before {
+    content: "\2014 \00A0";
+}
+
+/* BS3 framed a horizontally-scrolling table on small screens: `.table-
+   responsive` got a 1px #ddd border and a bottom margin below 768, so a table
+   that scrolls sideways reads as a contained panel rather than as content
+   running off the edge. BS5 reduced the class to `overflow-x: auto` and
+   nothing else, so the frame disappears at exactly the width where it was the
+   only thing telling you the table continues. */
+@media screen and (max-width: 767px) {
+    .table-responsive {
+        width: 100%;
+        margin-bottom: 15px;
+        overflow-y: hidden;
+        border: 1px solid #dddddd;
+    }
+    .table-responsive > .table { margin-bottom: 0; }
+    .table-responsive > .table > thead > tr > th,
+    .table-responsive > .table > tbody > tr > th,
+    .table-responsive > .table > tbody > tr > td,
+    .table-responsive > .table > tfoot > tr > td { white-space: nowrap; }
+}
+
+/* --- .form-inline -------------------------------------------------------
+   Bootstrap 5 DELETED this class outright; the replacement is a grid row or
+   flex utilities, which of course the original markup does not have. So a form
+   that laid out as one horizontal row in Bootstrap 3 — label, two fields, a
+   submit — becomes a stack of full-width controls.
+
+   Chic-n-Jewel's newsletter is exactly that: v1 is "Subscribe to us" beside a
+   name field, an email field and a Submit button, all on one line across the
+   page. Ported, it rendered as three stacked boxes down the left third of an
+   otherwise empty band, which is what the owner saw as the home page being
+   "messed" — the form was not broken, it was simply a different shape.
+
+   BS3 applied this only from 768 up, leaving forms stacked on a phone, and
+   that breakpoint is part of the behaviour rather than an implementation
+   detail. */
+@media (min-width: 768px) {
+    .form-inline .form-group {
+        display: inline-block;
+        margin-bottom: 0;
+        vertical-align: middle;
+    }
+    .form-inline .form-control {
+        display: inline-block;
+        width: auto;
+        vertical-align: middle;
+    }
+    .form-inline .form-control-static { display: inline-block; }
+    .form-inline .input-group { display: inline-table; vertical-align: middle; }
+    .form-inline .input-group .form-control,
+    .form-inline .input-group .input-group-addon,
+    .form-inline .input-group .input-group-btn { width: auto; }
+    .form-inline .input-group > .form-control { width: 100%; }
+    .form-inline .control-label { margin-bottom: 0; vertical-align: middle; }
+    .form-inline .radio, .form-inline .checkbox {
+        display: inline-block;
+        margin-top: 0;
+        margin-bottom: 0;
+        vertical-align: middle;
+    }
+    .form-inline .radio label, .form-inline .checkbox label { padding-left: 0; }
+    .form-inline .radio input[type="radio"], .form-inline .checkbox input[type="checkbox"] {
+        position: relative;
+        margin-left: 0;
+    }
+    .form-inline .btn { vertical-align: middle; }
+}
+
+/* `.btn-block` on a DROPDOWN MENU (PortrayStore's category list and its
+   mini-cart wear both). In Bootstrap 3 the buttons block came before the
+   dropdowns block, so `.dropdown-menu { display: none }` won and `.btn-block`
+   only widened the menu once open. Here the layer loads after Bootstrap 5, so
+   the same pair opened every such menu on page load. Closed until shown. */
+.dropdown-menu.btn-block:not(.show) { display: none; }
+
+/* Bootstrap 3's responsive utilities. The porter used to rename `hidden-xs`
+   to `d-none d-md-block` — which HIDES correctly and then forces
+   `display: block` everywhere else, so a `<li>` the template had made
+   inline-block (PortrayStore's cart in the top menu) broke onto its own line
+   at every desktop width. Bootstrap 3's own rule only ever said "none", and
+   left the element's display alone otherwise. Same for the visible-* set,
+   which Bootstrap 3 did force to block below the breakpoint. */
+/* ...and the plain `.hidden` (Bootstrap 5 spells it `.d-none`): Jerrick's UI-kit
+   pages carry a `<li class="hidden">` that came out visible. */
+.hidden { display: none !important; }
+@media (max-width: 767.98px) { .hidden-xs { display: none !important; } }
+@media (min-width: 768px) and (max-width: 991.98px) { .hidden-sm { display: none !important; } }
+@media (min-width: 992px) and (max-width: 1199.98px) { .hidden-md { display: none !important; } }
+@media (min-width: 1200px) { .hidden-lg { display: none !important; } }
+.visible-xs, .visible-sm, .visible-md, .visible-lg { display: none !important; }
+@media (max-width: 767.98px) { .visible-xs { display: block !important; } }
+@media (min-width: 768px) and (max-width: 991.98px) { .visible-sm { display: block !important; } }
+@media (min-width: 992px) and (max-width: 1199.98px) { .visible-md { display: block !important; } }
+@media (min-width: 1200px) { .visible-lg { display: block !important; } }
+
+/* Bootstrap 3's `.form-horizontal`: label and field as columns inside a
+   `.form-group` that was itself a row (clearfix, -15px margins). The flex and
+   gutter rules above already lay the columns out; what they cannot know is
+   the negative margin — without it every field in PortrayStore's register
+   form came out 25px narrower than v1 — and the label's right alignment. The
+   porter used to DELETE the class from the markup; it stays now. */
+.form-horizontal .form-group { margin-right: -15px; margin-left: -15px; }
+.form-horizontal .radio, .form-horizontal .checkbox,
+.form-horizontal .radio-inline, .form-horizontal .checkbox-inline { padding-top: 7px; margin-top: 0; margin-bottom: 0; }
+@media (min-width: 768px) {
+    .form-horizontal .form-label, .form-horizontal .control-label { padding-top: 7px; margin-bottom: 0; text-align: right; }
+}
+
+/* Bootstrap 3's `.container` (and `.container-fluid`) was a clearfix — its
+   ::before/::after were `display: table`, so floated children were contained.
+   Bootstrap 5's container is a plain block. PortrayStore's top line is a
+   container holding `.leftside { float: left }` and `.rightside { float:
+   right }` and nothing else: it collapsed from 57px to 21px and the logo row
+   climbed 36px. Containers only — a `.row` is flex in Bootstrap 5 and a
+   table-display pseudo-element there would become a flex item. */
+.container::after, .container-fluid::after { display: block; clear: both; content: ""; }
+
+/* Bootstrap 3 gave every column `min-height: 1px`, so an EMPTY spacer column
+   (PortrayStore's offers row opens with `<div class="col-md-2"></div>`) still
+   took its place in the float run. Bootstrap 5's flex columns keep their
+   width at zero height, which is the same layout — but a zero-height box is
+   invisible to anything that measures, the parity gate included. */
+:where([class*="col-"]) { min-height: 1px; }
+
+/* Bootstrap 3's list group: 10px 15px per item (BS5: .5rem 1rem = 8px 16px),
+   a block, 20px below. Four pixels a row across PortrayStore's 13-row account
+   sidebar put the footer 52px higher than v1. */
+.list-group { display: block; padding-left: 0; margin-bottom: 20px; }
+.list-group-item { position: relative; display: block; padding: 10px 15px; margin-bottom: -1px; }
+.list-group-item:first-child { border-top-left-radius: 4px; border-top-right-radius: 4px; }
+.list-group-item:last-child { margin-bottom: 0; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; }
+
+/* --- .text-justify ---------------------------------------------------
+   Bootstrap 3's alignment utility; Bootstrap 5 dropped it (4.0 kept it,
+   5.0 removed it). Albert justifies its three service paragraphs with it.
+   The porter leaves the class alone (nothing to rename it to); this is
+   the rule. */
+.text-justify { text-align: justify !important; }
+
+/* --- Font Awesome 6 glyph weights ----------------------------------------
+   Font Awesome 4 was one font file; font-weight meant nothing to it, and
+   templates wrote `i { font-weight: 400 }` or `normal` on their icon rules
+   without consequence. Font Awesome 6 Free is TWO files under one family
+   name, told apart by weight: 900 is the solid set, 400 the regular set. A
+   template rule that sets 400 on a solid icon makes the browser look the
+   glyph up in the regular file, and for most icons it is not there — the
+   map marker and the telephone in ToddleFun's footer rendered as the
+   missing-glyph box on every page, beside an envelope that happened to be
+   regular. !important because this file loads before style.css and the
+   template's rule wins every tie; there is no legitimate reason to want a
+   solid icon at any other weight. */
+.fas, .fa-solid { font-weight: 900 !important; }
+.far, .fa-regular, .fab, .fa-brands { font-weight: 400 !important; }

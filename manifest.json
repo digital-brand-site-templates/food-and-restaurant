@@ -1,0 +1,23 @@
+{
+  "category": "food-and-restaurant",
+  "templates": [
+    {
+      "name": "Citreat",
+      "folder": "citreat",
+      "version": "2.0.0",
+      "description": "Citreat \u2013 static HTML/Bootstrap Food & Restaurant website template.",
+      "idealFor": [
+        "restaurants",
+        "cafes and bistros",
+        "catering businesses"
+      ],
+      "requiredClientInputs": [
+        "restaurantName",
+        "primaryColorHex",
+        "logoUrl",
+        "reservationEmail"
+      ],
+      "preview": "citreat/preview.png"
+    }
+  ]
+}

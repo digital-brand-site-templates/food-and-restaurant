@@ -1,0 +1,42 @@
+/* ==========================================================================
+   Modernisation pass (owner-approved, 2026-09-19, "Same as before
+   (recommended)") — additive only. Palette (#ff3300 / #ffffff / #222222),
+   type and layout untouched; nothing here changes resting-state geometry,
+   so the already-approved parity/boxes/interactive gates stay green.
+   ========================================================================== */
+
+/* Card hover-lift — promo tiles, blog teasers, chef photos and the
+   tabservice sidebar block all sit flat against the page; a small lift on
+   hover is the one thing v1 never had on any of its card-shaped content.
+   Transform/shadow only apply on :hover/:focus-within, so the box a visitor
+   first sees — and what parity.mjs measures at load — is unchanged. */
+.tv-promotions-block,
+.tv-blog-block,
+.tv-blog-single,
+.tv-tabservice-block,
+.tv-ourteam-block .tv-team-img,
+.tv-chef-img {
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+.tv-promotions-block:hover,
+.tv-blog-block:hover,
+.tv-ourteam-block .tv-team-img:hover,
+.tv-chef-img:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, .12);
+}
+
+/* Buttons — the dashed-border look stays (it's distinctive), just a touch
+   of radius so it reads less like a wireframe placeholder. */
+.tv-cbutton1,
+.tv-citreat-button a, .tv-citreat-button button,
+.tv-submit-button {
+    border-radius: 3px;
+}
+
+/* Statistics icons get the same soft edge as the contact icon already has
+   from v1's own border-radius:50%, so the block doesn't read as one rounded
+   shape next to a square one. */
+.tv-statistics-block .media-object {
+    border-radius: 50%;
+}

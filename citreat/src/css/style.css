@@ -1,0 +1,949 @@
+/*
+Template Name: citreat
+File Name: style.css
+Author Name: ThemeVault
+Author URI: https://www.themevault.net/
+License URI: https://www.themevault.net/license/
+Version: 2.0
+*/
+
+/* ==========================================================================
+   1. Design tokens — taken from the ORIGINAL's own palette, not invented
+   ========================================================================== */
+:root {
+    --tv-accent: #ff3300;
+    --tv-ink: #222222;
+    --tv-ink-soft: #000000;
+    --tv-white: #fff;
+    /* v1's own body rule: margin:0; color:#000; font-family:'Muli',sans-serif;
+       font-size:13px; background-color:#fff. Bootstrap 5's own defaults are
+       16px/#212529 — silently enlarges and lightens every paragraph. */
+    --tv-body: #000;
+
+    --tv-radius: 5px;
+    --tv-ease: all .45s ease-in-out 0s;
+    --tv-section-pad: 80px;
+}
+
+/* ==========================================================================
+   2. Fonts — self-hosted. Put the woff2 files in fonts/webfonts/.
+   Take latin FIRST: Google's CSS returns cyrillic-ext first, and copying the
+   first URL yields a font with no latin glyphs at all.
+   ========================================================================== */
+@font-face {
+    font-display: swap;
+    font-family: "Kaushan Script";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/webfonts/kaushanscript-400-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+    font-display: swap;
+    font-family: "Kaushan Script";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/webfonts/kaushanscript-400-latin-ext.woff2") format("woff2");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Kaushan Script ships ONE weight on Google Fonts (400) — it's a decorative
+   script face. v1's own CSS asks for font-weight:500 on it; the browser
+   just renders the only face it has rather than faux-bolding a web font. */
+@font-face {
+    font-display: swap;
+    font-family: "Muli";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/webfonts/muli-400-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+    font-display: swap;
+    font-family: "Muli";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/webfonts/muli-400-latin-ext.woff2") format("woff2");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+    font-display: swap;
+    font-family: "Muli";
+    font-style: normal;
+    font-weight: 500;
+    src: url("../fonts/webfonts/muli-500-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+    font-display: swap;
+    font-family: "Muli";
+    font-style: normal;
+    font-weight: 500;
+    src: url("../fonts/webfonts/muli-500-latin-ext.woff2") format("woff2");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+    font-display: swap;
+    font-family: "Muli";
+    font-style: normal;
+    font-weight: 600;
+    src: url("../fonts/webfonts/muli-600-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+    font-display: swap;
+    font-family: "Muli";
+    font-style: normal;
+    font-weight: 600;
+    src: url("../fonts/webfonts/muli-600-latin-ext.woff2") format("woff2");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+    font-display: swap;
+    font-family: "Muli";
+    font-style: normal;
+    font-weight: 700;
+    src: url("../fonts/webfonts/muli-700-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+    font-display: swap;
+    font-family: "Muli";
+    font-style: normal;
+    font-weight: 700;
+    src: url("../fonts/webfonts/muli-700-latin-ext.woff2") format("woff2");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+    font-display: swap;
+    font-family: "Muli";
+    font-style: normal;
+    font-weight: 800;
+    src: url("../fonts/webfonts/muli-800-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+    font-display: swap;
+    font-family: "Muli";
+    font-style: normal;
+    font-weight: 800;
+    src: url("../fonts/webfonts/muli-800-latin-ext.woff2") format("woff2");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+    font-display: swap;
+    font-family: "Muli";
+    font-style: normal;
+    font-weight: 900;
+    src: url("../fonts/webfonts/muli-900-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+    font-display: swap;
+    font-family: "Muli";
+    font-style: normal;
+    font-weight: 900;
+    src: url("../fonts/webfonts/muli-900-latin-ext.woff2") format("woff2");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ==========================================================================
+   3. Base — v1's own body rule (margin:0; color:#000; font-family:'Muli',
+   sans-serif; font-size:13px; background-color:#fff) plus its global reset
+   (h1..h6,p { margin:0; padding:0; }).
+   ========================================================================== */
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
+body {
+    margin: 0;
+    font-family: "Muli", system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--tv-body);
+    font-size: 13px;
+    background-color: #fff;
+}
+h1, h2, h3, h4, h5, h6, p { margin: 0; padding: 0; }
+a { text-decoration: none; color: inherit; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--tv-accent);
+    outline-offset: 2px;
+}
+img { max-width: 100%; height: auto; }
+ul, li { list-style: none; }
+
+/* ==========================================================================
+   4. Components — against the original's own class names, values read
+   straight from v1's style.css (this port carries no other stylesheet).
+   ========================================================================== */
+
+/* ---- Navigation (v1: "Navigation CSS") ---------------------------------- */
+.tv-navbar-custom {
+    background: transparent;
+    border: medium none;
+    margin-bottom: 0;
+    transition: background .5s ease-in-out, padding .5s ease-in-out;
+}
+/* bs3-compat.css's hamburger default is dark (#333) for a light navbar; v1's
+   own responsive.css (".navbar-default .navbar-toggle .icon-bar") sets it
+   white with a transparent border, since this navbar is always transparent
+   over either a dark photo or (past scroll / on 404) solid orange — a dark
+   icon disappears in both. */
+.navbar-default .navbar-toggler { border-color: transparent; }
+.navbar-default .navbar-toggler .icon-bar { background-color: #ffffff; }
+.tv-banner-image {
+    width: 100%;
+    position: relative;
+    min-height: 700px;
+}
+/* ---- Inner-page banner (v1: "tv-inner-banner-image", every non-home page) */
+.tv-inner-banner-image {
+    width: 100%;
+    position: relative;
+    min-height: 400px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.tv-bg-black { background: #000000; }
+.tv-opacity-medium {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    opacity: 0.7;
+}
+.tv-citreat-logo {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand { color: #ffffff; }
+.tv-menu {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.navbar-default .navbar-nav > li > a { color: #ffffff; }
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > li > a.active, .navbar-default .navbar-nav > li > a.active:focus, .navbar-default .navbar-nav > li > a.active:hover {
+    background-color: transparent;
+    color: #ff3300;
+}
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+    background-color: rgba(0, 0, 0, 0);
+    color: #ff3300;
+}
+/* v1's orange hover/focus/active colour reads fine against the transparent
+   navbar over a dark photo (its only state in v1 — BS3's own scrollspy never
+   focused the toggle, so the scrolled/solid state and the focused state
+   never combined there). BS5 leaves :focus on the link after a click, so
+   opening the "Home" dropdown once scrolled — solid #ff3300 background —
+   turned its own label orange-on-orange. Past that scroll point the nav
+   itself is solid, so white reads the same as the resting state everywhere
+   else in the bar. */
+.navbar.nav-scroll .navbar-nav > li > a:focus, .navbar.nav-scroll .navbar-nav > li > a:hover,
+.navbar.nav-scroll .navbar-nav > .active > a, .navbar.nav-scroll .navbar-nav > li > a.active {
+    color: #ffffff;
+}
+.tv-banner-title {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* v1's own responsive.css sets width:100% here at EVERY breakpoint —
+       .tv-banner-title has no explicit width, and an absolutely positioned
+       box with only "left" set (no "right") shrink-to-fits against
+       (container width - left offset) = half the container, always,
+       regardless of viewport. That's plenty of room at 1440 (720px) but not
+       at 768 (384px), which is why Call Us/Location/Email wrapped to a
+       stack there specifically. width:100% removes the constraint at every
+       width, matching v1 exactly. */
+    width: 100%;
+}
+.tv-banner-title h2 { color: #ffffff; font-size: 35px; font-weight: 800; letter-spacing: 2px; text-transform: capitalize; }
+.tv-banner-title h1 { color: #ff3300; font-size: 70px; font-weight: 800; letter-spacing: 1px; margin: 30px 0; text-transform: uppercase; }
+.tv-banner-title span { color: #ff3300; }
+.tv-banner-title p { color: #ffffff; font-size: 16px; font-weight: 600; letter-spacing: 1px; }
+.tv-drop-menu.open > a, .tv-drop-menu.open > a:focus, .tv-drop-menu.open > a:hover {
+    background-color: transparent !important;
+    color: #ffffff !important;
+}
+.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover, .dropdown-item:focus, .dropdown-item:hover {
+    background-color: #ff3300;
+    color: #ffffff;
+    text-decoration: none;
+}
+.tv-sub-menu {
+    background: #222222;
+    box-shadow: none;
+    min-width: 200px;
+    padding: 0;
+    margin-top: 2px !important;
+    border-radius: 0;
+    border: 0;
+}
+.tv-sub-menu li a, .tv-sub-menu .dropdown-item {
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding: 18px;
+    position: relative;
+    text-transform: uppercase;
+    transition: all 0.4s ease 0s;
+}
+.tv-drop-menu a > i { margin-left: 5px; line-height: 0; }
+/* bs3-compat.css's real BS3 default (a:hover,a:focus{text-decoration:underline})
+   reaches every link including the nav — v1's own nav never shows an
+   underline since its hover state only ever changes colour. */
+.navbar-nav .nav-link, .navbar-nav .nav-link:hover, .navbar-nav .nav-link:focus,
+.dropdown-item, .dropdown-item:hover, .dropdown-item:focus,
+.tv-menu, .tv-menu:hover, .tv-menu:focus,
+.navbar-brand, .navbar-brand:hover, .navbar-brand:focus { text-decoration: none; }
+/* Owner (2026-09-20): the dashed/solid buttons (Read More, Submit, Get in
+   touch) underlined on hover too — same cause as the nav (bs3-compat.css's
+   real BS3 default, a:hover/a:focus{text-decoration:underline}, reaching
+   every link on the page). None of v1's own hover states use underline —
+   they all recolour or fill a background — so cancel it site-wide here
+   rather than list every button class one at a time. */
+a:hover, a:focus, button:hover, button:focus { text-decoration: none; }
+.tv-header-location, .tv-header-call { display: inline-block; float: left; margin-right: 50px; }
+.tv-header-email { display: inline-block; float: left; }
+.tv-contact-details { display: inline-block; }
+.tv-header-call > h3, .tv-header-location > h3, .tv-header-email > h3 {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 10px 0;
+}
+
+/* ---- Eating Well (v1: "Eating Well CSS") -------------------------------- */
+.tv-fixed-img {
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    position: relative;
+}
+.tv-citreat-button a, .tv-citreat-button button {
+    background-color: transparent;
+    border: 2px dashed #ff3300;
+    color: #ff3300;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 5px 15px;
+    transition: all 0.4s ease 0s;
+}
+.tv-citreat-button a:hover, .tv-citreat-button button:hover {
+    border: 2px solid #ff3300;
+    color: #fff;
+    background-color: #ff3300;
+}
+.tv-well-block > h3 { font-weight: 700; letter-spacing: 1px; margin-bottom: 20px; }
+.tv-well-block > p { font-size: 14px; font-weight: 600; letter-spacing: 1px; line-height: 22px; margin-bottom: 30px; }
+.tv-service-block { margin-top: 30px; text-align: center; }
+.tv-service-block > p { font-size: 15px; font-weight: 700; letter-spacing: 1px; margin-top: 10px; }
+
+/* ---- Services / shared section title (v1: "Services CSS") -------------- */
+.tv-service-title > p, .tv-citreat-title > p { color: #707070; font-size: 14px; letter-spacing: 1px; margin-bottom: 10px; }
+.tv-service-title > h3, .tv-citreat-title > h3 { color: #ff3300; font-family: "Kaushan Script", cursive; font-size: 30px; font-weight: 500; }
+.tv-citreat-title, .tv-service-title { text-align: center; margin-bottom: 30px; }
+.hr-service { margin: 10px 0; border-color: rgba(0, 0, 0, .1); }
+.tv-service-content h4 { font-weight: 600; letter-spacing: 1px; }
+.tv-service-content p { letter-spacing: 1px; }
+.tv-service-content { margin-bottom: 40px; }
+
+/* ---- Menu (v1: "Menu CSS") ----------------------------------------------- */
+.tv-home-menu-title > h4 { color: #ff3300; font-size: 20px; font-weight: 700; letter-spacing: 1px; margin-bottom: 5px; }
+.tv-home-menu-title > p { color: #ff3300; font-weight: 600; letter-spacing: 1px; }
+.tv-home-menu h4 { display: inline-block; font-size: 16px; font-weight: 600; letter-spacing: 1px; }
+.tv-home-menu span { float: right; font-size: 15px; font-weight: 600; }
+.tv-home-menu p { letter-spacing: 1px; margin-top: 5px; width: 60%; }
+.tv-home-menu { margin-bottom: 20px; }
+
+/* ---- How It Works (v1: "Work CSS") --------------------------------------- */
+.tv-work-block > h4 { font-weight: 600; letter-spacing: 1px; margin: 10px 0; }
+.tv-work-block > p { letter-spacing: 1px; margin-bottom: 10px; }
+
+/* ---- Reservation (v1: "Reservation CSS") --------------------------------- */
+.tv-reservation-img img { border-radius: 15px; }
+/* IMPROVEMENT (owner, 2026-09-20): "Our Best Services" / "How It Works" /
+   "Reservation Now" pair a photo column against a text column of very
+   different natural height — the photo, sized to its own aspect ratio,
+   left a growing dead white gap under it as the viewport narrowed and the
+   text column's height stayed roughly constant (6 service items, 3 numbered
+   steps). BS5's row already stretches columns to equal height; these make
+   the photo itself fill that full height instead of floating at the top. */
+.tv-service-img, .tv-work-img, .tv-reservation-img { height: 100%; min-height: 260px; }
+.tv-service-img img, .tv-work-img img, .tv-reservation-img img { width: 100%; height: 100%; object-fit: cover; }
+.tv-reservation-block { margin-bottom: 10px; }
+.tv-reservation-block label { display: block; font-weight: 600; letter-spacing: 1px; }
+.tv-reservation-input {
+    background: transparent;
+    border: 1px solid #222222;
+    font-weight: 600;
+    height: 40px;
+    letter-spacing: 1px;
+    padding: 10px 15px;
+    width: 100%;
+}
+.tv-reservation-textarea {
+    border: 1px solid #222222;
+    font-size: 14px;
+    font-weight: 600;
+    height: 150px;
+    letter-spacing: 1px;
+    line-height: 16px;
+    padding: 15px 20px;
+    resize: none;
+    text-transform: capitalize;
+    width: 100%;
+}
+
+/* ---- Testimonial (v1: "Testimonial CSS") --------------------------------- */
+.tv-testimonial-content { color: #222222; padding: 0 28px; } /* clears the owl-nav buttons (40px wide, 8px from the card edge) at items:1, where the card is nearly the full carousel width */
+.tv-testimonial-block { background: #ff3300; padding: 20px; text-align: center; border-radius: 10px; }
+.tv-testimonial-img img { border: 3px solid #ffffff; margin: 0 auto; }
+.tv-testimonial-content > p { color: #ffffff; letter-spacing: 1px; margin: 20px 0; }
+.tv-testimonial-content > h4 { color: #ffffff; font-weight: 700; letter-spacing: 1px; margin-bottom: 10px; }
+.tv-testimonial-content h5 { color: #ffffff; letter-spacing: 1px; }
+
+/* ---- Carousel nav (v1 had this on Owl 1.x's simpler DOM; main.js's own
+   engine builds Owl 2's real structure — .owl-nav wrapping .owl-prev/.owl-next
+   buttons — so the arrows need their own sizing/position, not v1's bare
+   ".owl-prev{left:-5%}" hack, which only ever worked against the old markup
+   and left the buttons an unstyled 14px text glyph.) ------------------------ */
+.owl-carousel .owl-stage { display: flex; align-items: stretch; }
+.owl-carousel .owl-item { float: none; }
+.owl-carousel .owl-item > * { height: 100%; }
+.owl-nav { position: absolute; top: 50%; left: 8px; right: 8px; transform: translateY(-50%); display: flex; justify-content: space-between; pointer-events: none; margin-top: 0; }
+.owl-nav.disabled { display: none; }
+.owl-nav .owl-prev, .owl-nav .owl-next {
+    pointer-events: auto;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    background: #ff3300;
+    color: #fff;
+    font-size: 16px;
+}
+.owl-nav .owl-prev:hover, .owl-nav .owl-next:hover { background: #222222; color: #fff; }
+.owl-dots { text-align: center; margin-top: 20px; }
+.owl-dots.disabled { display: none; }
+.owl-dots .owl-dot span { display: block; width: 10px; height: 10px; margin: 0 5px; border-radius: 50%; background: #ddd; }
+.owl-dots .owl-dot.active span { background: #ff3300; }
+
+/* ---- Dishes category (v1: "Dishes Category") ----------------------------- */
+.tv-dishescat-block img { margin: 0 auto; width: 200px; }
+.tv-dishescat-block { text-align: center; margin-bottom: 20px; }
+.menu-item .image { position: relative; }
+.hover-zoom { overflow: hidden; }
+.hover-zoom:hover img, .hover-zoom:hover .bg { transform: scale(1.1); }
+.hover-zoom img, .hover-zoom .bg { transition: all 0.85s ease-out 0s; }
+.menu-item-content > p { letter-spacing: 1px; }
+.menu-item-content > h4 { font-weight: 600; letter-spacing: 1px; margin-bottom: 10px; }
+
+/* ---- Statistics / counters (v1: "Counter CSS") --------------------------- */
+.tv-statistics-block img { margin-right: 20px; }
+.tv-statistics-block .media-left { vertical-align: middle; }
+.tv-statistics-counter > p { color: #ffffff; font-size: 40px; font-weight: 900; letter-spacing: 3px; margin-bottom: 10px; }
+.tv-statistics-counter > h5 { color: #ffffff; font-weight: 600; letter-spacing: 1px; }
+.counter-p { color: #ffffff !important; }
+
+/* bs3-compat.css's .media (a real BS3 table-cell layout, kept deliberately —
+   see its own comment) sizes .media-body via a "width:10000px" hack that
+   only works when the table has a stable outer width from a start. Inside a
+   BS5 flex grid COLUMN (every column now, since BS5's grid is flex-based),
+   the anonymous table instead treats 10000px as a serious request and
+   distributes the column's real width proportionally between the two cells
+   — .media-left (icon/thumbnail) gets a sliver, sometimes literally 0. Every
+   icon on this page sat inside a media object, so this was not cosmetic:
+   the service icons, the menu thumbnails and the counter icons were
+   invisible, which is what read as "the theme colour is missing" — the
+   accent-coloured icons were never rendering, not the (correctly black)
+   text next to them. Scoped per section: a blanket main-wide override lost
+   to some other rule's specificity in testing; these don't. */
+.tv-service-content .media-object, .tv-home-menu .media-object, .tv-statistics-block .media-object, .tv-team-content .media-object, .tv-contact-content .media-object, .tv-chooseus-content .media-object { max-width: none; }
+.tv-service-content .media-object { width: 32px; }
+
+/* ---- Event / planning (v1: "Event CSS") ---------------------------------- */
+.tv-event-button a { background-color: transparent; border: 2px dashed #ff3300; color: #ff3300; font-weight: 700; letter-spacing: 1px; padding: 10px 20px; transition: all 0.4s ease 0s; text-transform: uppercase; }
+.tv-event-button a:hover { background-color: #ff3300; border: 2px solid #ff3300; color: #fff; }
+.tv-event-button { margin: 40px 0; } /* dropped while transcribing v1's style.css — the "Get in touch" button had no clearance from "Planning An Event" above it, so a 2-line wrap collided with it */
+.tv-planning-block { text-align: center; }
+.tv-planning-block > h4 { color: #ff3300; font-size: 35px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+.planning-1 { font-size: 15px; font-weight: 600; letter-spacing: 1px; margin-bottom: 10px; text-transform: capitalize; }
+.planning-2 { font-weight: 600; letter-spacing: 1px; }
+
+/* ---- Gallery (v1: "Gallery CSS") ------------------------------------------ */
+.tv-grid-gutter-10 { padding: 10px; }
+.portfolio-img { margin: 0; padding: 0; position: relative; display: block; cursor: pointer; overflow: hidden; aspect-ratio: 1 / 1; }
+.portfolio-img figure { margin: 0; height: 100%; } /* the <figure> between .portfolio-img and its <img> has no size of its own — img's height:100% needs a definite ancestor to resolve against */
+.portfolio-img:hover figcaption { opacity: 1; top: 0; }
+.portfolio-img figcaption {
+    opacity: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 51, 0, 0.8);
+    color: #fff;
+    transition: all .4s ease;
+    transition-delay: .4s;
+}
+/* v1's real photos are square (gallery.html ships pre-cropped assets); the
+   demo/review set is not, so the grid rows went uneven height instead of
+   v1's flush square tiles. aspect-ratio + object-fit crops every photo the
+   same way v1's own source images already were. */
+.portfolio-img img { transition: all 0.4s; transition-delay: 0.4s; cursor: pointer; display: block; opacity: 1; width: 100%; height: 100%; object-fit: cover; }
+.portfolio-img:hover img { transform: scale(1.1); }
+.tv-img-content { left: 50%; position: absolute; top: 50%; transform: translate(-50%, -50%); width: 100%; }
+.tv-img-content img { margin: 0 auto; }
+
+/* ---- Chef (v1: "Chef CSS") ------------------------------------------------ */
+.tv-chef-img img { margin: 0 auto; }
+.tv-chef-block { text-align: center; }
+.tv-social-navbar > a > span {
+    border: 1px solid #000000;
+    border-radius: 3px;
+    color: #000000;
+    display: inline-block;
+    font-size: 10px;
+    height: 22px;
+    line-height: 21px;
+    margin: 0 10px;
+    transition: all 0.5s ease 0s;
+    width: 22px;
+}
+.tv-social-navbar > a > span:hover { background: #ff3300; border-color: #ff3300; color: #ffffff; }
+.tv-chef-content { padding: 0 28px; } /* clears the owl-nav buttons at items:1, same as .tv-testimonial-content */
+.tv-chef-content > p { letter-spacing: 1px; margin: 20px auto; width: 92%; }
+.tv-chef-content > h4 { font-weight: 600; letter-spacing: 1px; margin-top: 10px; text-transform: uppercase; }
+
+/* ---- Blog (v1: "Blog CSS") ------------------------------------------------ */
+.tv-blog-block { display: flex; flex-direction: column; height: 100%; }
+.tv-blog-block .media-left { vertical-align: middle; text-align: center; }
+.tv-blog-block .media-left > h4 { font-size: 25px; font-weight: 700; }
+.tv-blog-block .media-left > p { font-weight: 600; }
+.tv-blog-block .media-body > p { letter-spacing: 1px; }
+.tv-blog-block .media-body > span { letter-spacing: 1px; color: #707070; }
+.tv-blog-block .media { margin-bottom: 40px; }
+.tv-blog-block > p { letter-spacing: 1px; flex: 1 1 auto; }
+.tv-blog-block .tv-event-button { margin-top: 20px; }
+
+/* ---- Footer (v1: "Footer CSS") -------------------------------------------- */
+.tv-bg-citreat { background: #ff3300; }
+.tv-footer-bg { width: 100%; height: 100%; top: 0; left: 0; position: absolute; opacity: 0.7; }
+.tv-footer-title > a { font-size: 22px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; color: #ffffff; }
+.tv-footer-desc a { color: #ffffff; line-height: 31px; text-decoration: none; }
+.list-unstyled.footer-menu > li { display: inline-block; padding: 0 10px; }
+.tv-section-footer-padding { padding-top: 70px; }
+.tv-footer-copyright.text-center > p { color: #ffffff; font-size: 1.2em; font-weight: 600; letter-spacing: 2px; }
+.tv-footer-copyright { margin-bottom: 20px; margin-top: 40px; }
+.footer-menu a:hover { color: #000000; }
+
+/* ---- Section padding utilities (v1: "Section Padding") ------------------- */
+.tv-section-padding { padding-top: 80px; }
+.tv-section-padding-70 { padding-top: 70px; padding-bottom: 70px; }
+.padding-0 { padding: 0; }
+.width-100 { width: 100%; }
+
+/* ==========================================================================
+   5. Per-template shim — v1's own responsive.css still loads relative to
+   this build's own chrome; each rule below names the gate/behaviour it
+   answers.
+   ========================================================================== */
+
+/* v1's real scroll behaviour (js/scrolling-nav.js): past 50px the fixed
+   navbar goes solid, the logo turns white-on-solid, the active link's hover
+   swaps to dark-on-solid. Toggled by main.js; classes are v1's own. */
+.nav-scroll { background: #ff3300; border: 0; border-radius: 0; }
+.tv-scroll-logo { color: #ffffff !important; }
+.menu-scroll-menu:hover, .menu-scroll-menu:focus { color: #222222 !important; }
+.menu-active > .active > a { background-color: rgba(0, 0, 0, 0); color: #222222 !important; }
+
+/* v1's own inline background-image styles, mapped to classes on the same
+   elements (PORT-REPORT equivalent: 4 fixed-background images on the home
+   page — banner, well, statistics, event). */
+.tv-bg-banner { background: rgba(0, 0, 0, 0) url('../images/Image1.png') no-repeat scroll center top / cover; }
+.tv-bg-well { background-image: url('../images/Image2.png'); }
+.tv-bg-statistics { background-image: url('../images/Image22.png'); }
+.tv-bg-event { background-image: url('../images/Image6.png'); }
+.tv-bg-footer { background-image: url('../images/Image7.png'); }
+
+/* v1's own responsive.css still ships (scrolling-nav.css/owl CSS are vendor
+   files, but responsive.css is v1's own) and carries
+   ".navbar-collapse.collapse { display:none!important }" below 992px — it
+   beats Bootstrap 5's own (non-important) ".collapse.show" by source order,
+   so the toggler opens nothing. */
+.navbar-collapse.collapse.show { display: block !important; }
+
+/* main.js hooks */
+#back-to-top { display: none; position: fixed; right: 20px; bottom: 20px; z-index: 999; width: 44px; height: 44px; border: 0; border-radius: 50%; background: var(--tv-accent); color: #fff; font: inherit; cursor: pointer; }
+#back-to-top.is-visible { display: block; }
+.tv-form-note { color: var(--tv-accent); margin: 15px 0 0; font-size: 14px; font-weight: 600; }
+.form-control.is-invalid, select.is-invalid, textarea.is-invalid, input.is-invalid { border-color: #dc3545 !important; }
+.tv-lightbox { position: fixed; inset: 0; z-index: 99999; display: none; align-items: center; justify-content: center; background: rgba(0, 0, 0, .92); }
+.tv-lightbox.is-open { display: flex; }
+.tv-lightbox img { max-width: 92vw; max-height: 84vh; box-shadow: 0 10px 40px rgba(0, 0, 0, .6); }
+.tv-lightbox button { position: absolute; border: 0; background: transparent; color: #fff; font-size: 34px; line-height: 1; cursor: pointer; opacity: .8; padding: 10px; }
+.tv-lb-close { top: 10px; right: 20px; font-size: 42px; } .tv-lb-prev { left: 10px; top: 50%; transform: translateY(-50%); } .tv-lb-next { right: 10px; top: 50%; transform: translateY(-50%); }
+
+/* ==========================================================================
+   6. Responsive
+   The original's queries may use *-device-width, which matches the PHYSICAL
+   screen and never fires in a resized window. Convert every one to min-width
+   / max-width.
+   ========================================================================== */
+
+/* v1 (responsive.css, two narrow bands 992-999 and 1000-1100 merged): the
+   expanded (non-collapsed) nav shrinks its link padding/font to fit before
+   the toggler takes over at the next breakpoint down. */
+@media (min-width: 992px) and (max-width: 1100px) {
+    .tv-menu { padding: 15px 7px !important; font-size: 10px; }
+}
+/* v1 (responsive.css, repeated near-identically at every band from 991px
+   down): the collapsed menu's dropdown panel gets a dark background. */
+@media (max-width: 991.98px) {
+    .tv-small-bg { background: #222222; }
+}
+/* v1 (responsive.css, 768-991 band): fixed parallax disabled under the well
+   section specifically — some tablet browsers render it oddly. */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    #well .tv-fixed-img { background-attachment: unset; }
+}
+
+/* ==========================================================================
+   Inner pages — component CSS for classes home.html never used.
+   ========================================================================== */
+
+/* ---- Contact Us (v1: "Contact Us") --------------------------------------- */
+#map { height: 300px; }
+.tv-contact-content h4 { font-size: 16px; font-weight: 600; margin-top: 20px; }
+.tv-contact-content h5 { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+.tv-contact-content p { letter-spacing: 1px; }
+.tv-contact-content .media.media { margin-bottom: 20px; }
+.tv-contactus-form .ordernowinput:focus { border-color: #888; box-shadow: none; outline: 0 none; }
+.tv-contactus-form input {
+    background: transparent; border: 1px solid #888; border-radius: 0;
+    font-weight: 600; height: 44px; letter-spacing: 1px; padding: 10px 15px; width: 100%;
+}
+.tv-contactus-form textarea {
+    border: 1px solid #888; font-size: 14px; font-weight: 600; height: 165px;
+    letter-spacing: 1px; line-height: 16px; padding: 15px 20px; resize: none;
+    text-transform: capitalize; width: 100%;
+}
+.tv-custom-sidebar { margin-bottom: 40px; }
+.tv-custom-sidebar h3 {
+    background-color: #ff3300; border-color: #222222; border-left: 4px solid #222222;
+    color: #ffffff; font-size: 15px; font-weight: 600; letter-spacing: 1px;
+    margin-bottom: 8px; padding: 14px 15px 12px;
+}
+/* IMPROVEMENT (owner, 2026-09-21, "Opening Hours content needs left
+   aligned"): v1's own list padding (5px all round) doesn't match its own
+   header's 15px left inset directly above it (.tv-custom-sidebar h3) — the
+   list reads indented less than its own title. Matched to 15px so the text
+   lines up with the header, and dropped the float:right on the time (see
+   below) so both day and time sit flush left together. */
+.opening-hours-list > li { border-bottom: 1px solid #888; font-size: 14px; font-weight: 600; letter-spacing: 1px; padding: 5px 5px 5px 15px; color: #ff3300; }
+.opening-hours-list .time { margin-left: 6px; }
+.textwidget > p { letter-spacing: 1px; margin-bottom: 20px; }
+
+/* ---- Tabbed services block (v1: "Services CSS" — shared by findus.html,
+   services.html and todaymenu.html; only the active tab differs) --------- */
+#tabservices .nav-tabs > li { float: none; margin-bottom: -1px; }
+.tv-tabservice-block {
+    background-color: #f7f7f7; border: 1px solid #e8e8e3;
+    border-radius: 4px; padding: 20px 28px;
+}
+.tv-tabservice-block h4 {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12); font-weight: 700;
+    letter-spacing: 1px; margin-bottom: 16px; padding-bottom: 16px; font-size: 17px;
+}
+#tabservices .service-tab > li.active > a, .service-tab > li.active > a:focus, .service-tab > li.active > a:hover,
+#tabservices .service-tab > li > a.active, .service-tab > li > a.active:focus, .service-tab > li > a.active:hover {
+    background-color: #ff3300; border: 2px solid #ffffff; border-radius: 0;
+    box-shadow: 0 0 0 2px #ff3300; color: #ffffff; font-size: 13px;
+    font-weight: 700; letter-spacing: 1px; margin: 7px 0; padding-left: 14px; padding-right: 14px;
+}
+#tabservices .service-tab > li > a {
+    border: none; color: #222222; margin: 7px 0; padding-left: 14px; padding-right: 14px;
+    border-radius: 0; font-size: 13px; font-weight: 700; letter-spacing: 1px;
+}
+#tabservices .service-tab > li > a:focus, .service-tab > li > a:hover {
+    background-color: #ff3300; color: #ffffff !important;
+    border: 2px solid #ffffff !important; box-shadow: 0 0 0 2px #ff3300;
+}
+.service-tab { border-bottom: 0; }
+.tv-tabservice-content h3 { font-size: 20px; font-weight: 600; letter-spacing: 1px; }
+.tv-tabservice-content > p { letter-spacing: 1px; }
+/* IMPROVEMENT (owner, 2026-09-21, "check everywhere" — mobile/tablet
+   spacing): v1 itself has zero gap between the sidebar block and the
+   content column once they stack below 992px — confirmed on v1's own
+   shortcodes.html. Shared by findus/services/gallery/todaymenu/shortcodes,
+   so this one rule fixes the sidebar-to-content gap on all five. */
+@media (max-width: 991.98px) {
+    .tv-tabservice-block { margin-bottom: 20px; }
+}
+.tv-tabservice-block-content { display: block; margin-bottom: 20px; }
+.hr-service { margin: 10px 0; }
+
+/* ---- Gallery (v1: "Gallery CSS" — shared tabservice block, own image grid) */
+.tv-gallery-img { margin-bottom: 20px; }
+.tv-tabgallery-block-content h3 { font-size: 20px; font-weight: 600; letter-spacing: 1px; }
+.tv-tabgallery-block-content { margin-bottom: 20px; }
+
+/* ---- Shortcodes (v1: "Acordeon styles" / "Block CSS" / "Button CSS" /
+   "Drop Cap" / "Message CSS" — CSS-only accordion via checkbox/radio hack) */
+.tab { position: relative; margin-bottom: 1px; width: 100%; color: #fff; overflow: hidden; }
+#accordian input { position: absolute; opacity: 0; z-index: -1; }
+#tabservices label {
+    background: rgba(255, 51, 0, 0.8); color: #ffffff; cursor: pointer; display: block;
+    font-size: 14px; font-weight: 700; letter-spacing: 1px; line-height: 3;
+    padding: 0 0 0 1em; position: relative; text-transform: capitalize;
+}
+.blue label { background: rgba(255, 51, 0, 0.8); }
+.tab .tab-content {
+    max-height: 0; overflow: hidden; background: rgba(255, 51, 0, 0.8);
+    transition: max-height .35s;
+}
+.blue .tab-content { background: rgba(255, 51, 0, 0.8); }
+#accordian .tab-content p { font-size: 13px; font-weight: 500; letter-spacing: 1px; margin: 1em; }
+input:checked ~ .tab-content { max-height: 10em; }
+input[type="checkbox"] + label::after { content: "+"; font-size: 16px; }
+.blue label::after, #tabservices label::after {
+    display: block; height: 3em; line-height: 3; position: absolute; right: 0;
+    text-align: center; top: 0; transition: all 0.35s ease 0s; width: 3em;
+}
+input[type=radio] + label::after { content: "\25BC"; }
+input[type=checkbox]:checked + label::after { transform: rotate(315deg); }
+input[type=radio]:checked + label::after { transform: rotateX(180deg); }
+.tv-box-inner-head h3 { font-size: 20px; font-weight: 600; letter-spacing: 1px; }
+/* v1's own responsive.css (every band below 768px): ".half { margin-top:
+   20px }" — the two accordion columns stack with no gap otherwise. */
+@media (max-width: 767.98px) {
+    .half { margin-top: 20px; }
+}
+.tv-shortcodes-quote > p { letter-spacing: 1px; margin-bottom: 20px; }
+.tv-about-content-style { color: #707070; font-size: 15px; font-weight: 600; letter-spacing: 1px; }
+blockquote { border-left: 5px solid #ff3300; }
+.tv-cbutton1 {
+    background-color: transparent; border: 2px dashed #ff3300; color: #ff3300;
+    font-weight: 700; letter-spacing: 1px; padding: 5px 15px; transition: all 0.4s ease 0s;
+}
+.tv-cbutton1:hover { background-color: #ff3300; border: 2px solid #ff3300; color: #fff; }
+.tv-shortcodes-button { margin-top: 20px; }
+.cbutton { margin-top: 30px; }
+.cbutton2 a { padding: 10px 20px; }
+.cbutton3 a { padding: 15px 25px; }
+.cbutton3 { margin-top: 40px; }
+.cbutton4 a { padding: 20px 30px; }
+.cbutton4 { margin-top: 50px; }
+.cbutton5 a { padding: 25px 35px; }
+.cbutton5 { margin-top: 60px; }
+.tv-shortcode-dropcap {
+    float: left; font-size: 29px; height: 32px; line-height: 32px;
+    margin: 4px 7px 0 2px; text-align: center; width: 32px;
+}
+.tv-dropcap p { letter-spacing: 1px; }
+.tv-shortcode-dropcap.circle { border-radius: 16px; font-size: 19px; margin-right: 10px; }
+.message-box-wrapper.red { background-color: #ffdcdd; border-color: #e9b9bb; color: #713a3c; }
+.message-box-wrapper { margin-bottom: 20px; padding: 20px; }
+.message-box-title { font-size: 16px; font-weight: 600; letter-spacing: 1px; }
+.message-box-content { letter-spacing: 1px; margin-top: 10px; }
+.message-box-wrapper.blue { background-color: #c2e1ee; border-color: #8ec3d9; color: #3d5058; }
+.message-box-wrapper.green { background-color: #e1ffd9; border-color: #badeb1; color: #435b3d; }
+.message-box-wrapper.yellow { background-color: #ffffe0; border-color: #e1db8b; color: #4d4d39; }
+
+/* ---- Promotions (v1: "Promotions CSS") ------------------------------------ */
+.tv-promotions-block { position: relative; overflow: hidden; margin-bottom: 20px; }
+.tv-planning-content { background: #f5f5f5; padding: 10px 15px; text-align: center; }
+.tv-planning-content > span { color: #ff3300; display: block; font-size: 14px; font-weight: 600; letter-spacing: 1px; margin: 10px 0; }
+.tv-planning-content > a { font-weight: 600; letter-spacing: 1px; text-transform: capitalize; }
+.tv-planning-content h4 { color: #ff3300; font-weight: 700; letter-spacing: 1px; }
+.ribbon.right { right: -42px; transform: rotate(45deg); }
+.ribbon.red { background: #ff3000; }
+.ribbon {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); color: #eee; font-size: 14px; font-weight: 700;
+    letter-spacing: 1px; padding: 5px 0; position: absolute; text-align: center; top: 42px; width: 200px;
+}
+
+/* ---- Spacing utilities (v1: "Spacing Value") ------------------------------ */
+.tv-offspace-20 { margin-top: 20px; }
+.tv-offspace-30 { margin-top: 30px; }
+.tv-offspace-40 { margin-top: 40px; }
+.tv-offspace-50 { margin-top: 50px; }
+.tv-offspace-left-15 { margin-left: 15px; }
+.tv-offspace-bottom-20 { margin-bottom: 20px; }
+.tv-offspace-bottom-30 { margin-bottom: 30px; }
+.tv-offspace-bottom-40 { margin-bottom: 40px; }
+.tv-offspace-bottom-50 { margin-bottom: 50px; }
+.tv-offspace-bottom-60 { margin-bottom: 60px; }
+.tv-offspace-bottom-70 { margin-bottom: 70px; }
+
+/* ---- About Us (v1: "Inner About CSS") ------------------------------------- */
+.tv-recognition-content h4 { margin-bottom: 20px; color: #ff3300; font-family: "Kaushan Script", cursive; font-size: 30px; font-weight: 500; }
+.tv-recognition-content > p { letter-spacing: 1px; margin-bottom: 20px; }
+.tv-chooseus-content img { background: #ff3300; border-radius: 50%; height: 60px; padding: 15px; }
+.tv-chooseus-content p { letter-spacing: 1px; }
+.tv-chooseus-content h4 { font-size: 18px; font-weight: 600; letter-spacing: 1px; margin-bottom: 10px; }
+.tv-first-chooseus-block { margin-left: 200px; padding-bottom: 30px; }
+.tv-second-chooseus-block { margin-left: 100px; padding-bottom: 40px; width: 60%; }
+.tv-third-chooseus-block { width: 60%; padding-bottom: 40px; }
+/* v1 responsive.css: every band below 992px resets these to full width, no
+   offset — the same values repeated at 5 separate breakpoints there. */
+@media (max-width: 991.98px) {
+    .tv-first-chooseus-block { margin-left: 0; padding-bottom: 0; }
+    .tv-second-chooseus-block { margin-left: 0; padding-bottom: 0; width: 100%; }
+    .tv-third-chooseus-block { padding-bottom: 0; width: 100%; }
+}
+@media (max-width: 767.98px) {
+    .tv-recognition-img img, .tv-chooseus-img img { margin-top: 20px; }
+}
+
+/* ---- Our Team (v1: "Our Team CSS") ---------------------------------------- */
+.tv-team-content h3 { font-weight: 600; letter-spacing: 1px; margin-bottom: 20px; }
+.tv-team-content h4 { font-weight: 600; margin-bottom: 40px; }
+.tv-team-content > p { letter-spacing: 1px; margin-bottom: 40px; }
+.tv-team-content h5 { font-size: 20px; font-weight: 600; }
+.tv-team-content span { color: #ff3300; text-transform: capitalize; }
+.tv-ourteam-favourite-content { letter-spacing: 1px; }
+.tv-team-content .media-body { vertical-align: middle; }
+.our-team-label { color: #ff3300; display: block; font-size: 15px; letter-spacing: 1px; margin-bottom: 20px; text-align: center; }
+.tv-ourteam-block { display: inline-block; margin-bottom: 20px; overflow: hidden; }
+/* The 4 original chef photos turned out to be real MasterChef (UK) contestant
+   promotional photos with the show's logo visible on the apron and set — an
+   IP/likeness issue, not a design choice (owner, 2026-09-21: "if the chef
+   images are original person images needs to replace it"). No same-quality,
+   unbranded, mixed-gender chef photo set exists anywhere in the campaign's
+   asset library; the only unbranded alternative is 3 small (180-207px)
+   portraits already used once elsewhere (foodvivers), all male. Per the
+   owner's own call, matching Eatry's fix for this exact problem: down to 3
+   chefs, small circular avatars sized for the source instead of a large
+   stretched panel — the recent stretch-to-fill treatment above assumed a
+   large source photo and would have upscaled these into a soft, pixelated
+   mess at column width. */
+.tv-ourteam-block .tv-team-img { text-align: center; }
+.tv-ourteam-block .tv-team-img img {
+    width: 180px; height: 180px; border-radius: 50%; object-fit: cover;
+    margin: 0 auto;
+}
+.tv-ourteam-block .row.tv-row-flex { align-items: center; }
+@media (max-width: 767.98px) {
+    .tv-team-content h5 { font-size: 16px; }
+    .tv-team-content img { width: 100px !important; }
+    .tv-team-content .media { margin-bottom: 20px; }
+    .tv-team-content { margin-top: 20px; }
+    .tv-ourteam-block .tv-team-img { margin-bottom: 20px; }
+}
+
+/* ---- Blog article (new page, not in v1 — reuses .tv-blog-block's date
+   badge and the site's existing type scale; only the article body itself
+   is new). ---------------------------------------------------------------- */
+.tv-blog-single-img { margin-bottom: 20px; }
+.tv-blog-single .media-left { text-align: center; }
+.tv-blog-single .media-left > h4 { font-size: 25px; font-weight: 700; }
+.tv-blog-single .media-left > p { font-weight: 600; }
+.tv-blog-single .media-body > span { letter-spacing: 1px; color: #707070; }
+.tv-blog-single-title { font-size: 24px; font-weight: 600; letter-spacing: 1px; margin-bottom: 8px; }
+.tv-blog-single > p { letter-spacing: 1px; margin-bottom: 20px; }
+
+/* ---- 404 page (new page, not in v1) ---------------------------------------- */
+/* Every other page has a dark photo banner behind the fixed nav, which is
+   what makes the nav's own transparent/white-text styling readable; 404 has
+   none, so the bar stays solid from the start here instead of only past
+   scroll. Same colour the scroll state already uses everywhere else. */
+body#error-404 .tv-navbar-custom { background: #ff3300; }
+/* Sticky-footer layout, scoped to this page only: body becomes the flex
+   column, the 404 section grows to fill whatever space the footer doesn't
+   need, and centers its own content in that space. Between them the page is
+   always exactly 100vh tall — no dead scroll-required gap before the footer
+   the way a fixed min-height guessed from the footer's height left, and no
+   more than a couple of centred lines look "lost" on a mostly-empty page. */
+body#error-404 { display: flex; flex-direction: column; min-height: 100vh; }
+body#error-404 footer { margin-top: 0; flex-shrink: 0; }
+.tv-404-section {
+    flex: 1 0 auto;
+    display: flex;
+    align-items: center;
+    padding-top: 100px;
+    padding-bottom: 60px;
+}
+.tv-404-code { color: #ff3300; font-family: "Kaushan Script", cursive; font-size: 90px; font-weight: 500; line-height: 1; }
+.tv-404-title { font-weight: 600; letter-spacing: 1px; margin: 10px 0 20px; }
+.tv-404-text { color: #707070; letter-spacing: 1px; }
+.tv-404-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 0; }
+.tv-404-links a { color: #222222; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; font-size: 13px; }
+.tv-404-links a:hover { color: #ff3300; }
+@media (max-width: 767.98px) {
+    .tv-404-section { padding-top: 80px; }
+}
+
+/* ==========================================================================
+   Mobile IMPROVEMENTS (owner, 2026-09-20: "whole mobile looks needs
+   improvements" — licensed to differ from v1, not just match it).
+   ========================================================================== */
+@media (max-width: 575.98px) {
+    /* the hero title held its full 70px desktop size at any width — v1 itself
+       scales it down at narrow widths (responsive.css), just not enough; this
+       goes further so "QUALITY & TASTE" doesn't eat half the first screen. */
+    .tv-banner-title h1 { font-size: 40px; margin: 15px 0; }
+    .tv-banner-title h2 { font-size: 24px; }
+
+    /* Call Us / Location / Email are float:left (so they sit in a row on
+       desktop) with no reset for narrow widths — v1's own responsive.css
+       resets them at every band below 992px, a rule this port never
+       carried. Without it they still float, landing bunched on the LEFT of
+       the banner (measured ~x140/390 of centre) instead of stacked under
+       the centred heading above them — the real "text above hero not
+       aligned" the owner is pointing at, not the heading itself (checked:
+       the heading's own two lines measure pixel-identical centres). */
+    .tv-header-call, .tv-header-location, .tv-header-email {
+        display: block; float: none; margin-right: 0; margin-bottom: 20px;
+    }
+
+    /* "Welcome Eating Well" and "Planning An Event" sit their text directly
+       over the fixed background photo with no darkening — fine on desktop,
+       where the column only ever covers the plain side of the image, but at
+       this width the column is full-bleed and can land on the busy part of
+       either photo. A soft scrim behind the text keeps it readable regardless
+       of what's under it, without touching the image or the desktop layout. */
+    .tv-well-block, .tv-planning-block { position: relative; padding: 24px 20px; }
+    .tv-well-block::before, .tv-planning-block::before {
+        content: ""; position: absolute; inset: 0;
+        background: rgba(255, 255, 255, .82); border-radius: 8px; z-index: 0;
+    }
+    .tv-well-block > *, .tv-planning-block > * { position: relative; z-index: 1; }
+
+    /* the decorative cutout photo between "How It Works" and "Reservation
+       Now" carries no information — it just floats in its own gap on a
+       narrow single-column page. Skip it here, not at any width that still
+       has room to lay it out beside real content. */
+    .tv-work-img { display: none; }
+
+    /* "Our Awesome Dishes" and "Our Gallery" go from a 2-up grid at every
+       other width straight to full-bleed 1-up at this one, turning a short
+       browse into a very long scroll for what are small category tiles and
+       thumbnails. Two columns keeps the same grid feel all the way down. */
+    .tv-dishescat-clear > [class*="col-"], #grid > [class*="col-"] { width: 50%; flex: 0 0 50%; max-width: 50%; }
+
+    /* the statistics counters (icon beside a 4-digit number) had ~20px less
+       room than they needed even at 2-per-row and ran past their own column
+       — bs3-compat.css's .media is a real table-cell layout specifically so
+       a template can force this stack with a plain display override (see its
+       own comment); no width competition once the icon sits above the number. */
+    .tv-statistics-block .media-left, .tv-statistics-block .media-body { display: block; text-align: center; width: auto; }
+    .tv-statistics-block .media-left { padding: 0 0 8px; }
+    .tv-statistics-block img { margin: 0 auto; }
+}

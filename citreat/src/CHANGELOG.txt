@@ -1,0 +1,59 @@
+Citreat — HTML5 Restaurant Website Layout Template
+=============================================
+
+Version 2.0 — 2026
+-------------------
+
+A rebuild on a modern stack: Bootstrap 5, vanilla JavaScript, two new pages
+the site never had, a reservation-confirmation email, and a light
+modernisation in the template's own colours: orange, white and charcoal.
+
+
+TWO NEW PAGES AND AN EMAIL
+- blog-post.html — a full article page behind the home page's existing blog
+  teaser cards, which never linked anywhere in the original package.
+- 404.html — not present in the original package.
+- email-reservation.html — a standing HTML confirmation email for the
+  reservation form, inline-styled and table-based for Gmail, Outlook and
+  Apple Mail.
+
+SECURITY FIX
+- Removed a hardcoded, exposed Google Maps API key shipped in the original
+  package's contact page, along with the map embed it powered.
+
+TEAM PHOTOS
+- The original package's four "chef" stock photos were actual MasterChef
+  (UK) contestant promotional photos, with the show's logo visible on the
+  aprons and set. Replaced with verified, unbranded chef photos already in
+  use elsewhere in the ThemeVault catalogue; the team page now introduces
+  three chefs instead of four to match.
+
+STACK
+- Bootstrap 3 + jQuery -> Bootstrap 5, vanilla JS. Owl Carousel and the
+  original page's lightbox both reproduced without jQuery. Self-hosted
+  fonts (Kaushan Script, Muli). FontAwesome 4 -> 6.
+
+FIXES ALONG THE WAY
+- Every dead "#" link either wired to a real destination or made a clearly
+  labelled placeholder; the reservation and contact forms validate and
+  confirm submission.
+- Icons across the site restored — the original package's Font Awesome 4
+  class names (chef social links, nav carets) render as intended under
+  Font Awesome 6.
+- Assorted icon-visibility and tab/active-state fixes carried over from a
+  Bootstrap 3 -> 5 markup change that the original CSS didn't anticipate:
+  service and gallery tab highlighting, the sticky navbar's text contrast
+  once scrolled, the mobile menu icon's colour and position.
+- Real, on-brand copy in place of lorem-ipsum placeholder text throughout.
+- One-page nav ("Citreat One Page") scroll-highlighting reproduced without
+  jQuery.
+
+RESPONSIVE
+- Tablet and mobile spacing pass across every page — sidebar-to-content
+  gaps, stacked accordion columns, and the chef team layout all tightened
+  for tablet width specifically.
+
+MODERNISATION
+- An additive `_modern.css` layer: card hover treatments, a touch of
+  border-radius on buttons — the original layout and positions are
+  unchanged; this sits on top of a structural match to the original design.

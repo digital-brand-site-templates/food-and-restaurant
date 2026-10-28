@@ -1,0 +1,35 @@
+{
+  "name": "tpl-food-and-restaurant-citreat",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve src",
+    "build": "echo static site, no build step",
+    "verify": "echo static site, nothing to verify"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "agentMeta": {
+    "category": "food-and-restaurant",
+    "idealFor": [
+      "restaurants",
+      "cafes and bistros",
+      "catering businesses"
+    ],
+    "buildOutputDir": "src",
+    "customizationMap": {
+      "themeColors": "src/css/style.css",
+      "siteMetadata": "src/index.html (<head> title and meta tags)",
+      "navigation": "src/index.html (<header>/<nav> block, repeated in each page)",
+      "pagesDir": "src"
+    },
+    "requiredClientInputs": [
+      "restaurantName",
+      "primaryColorHex",
+      "logoUrl",
+      "reservationEmail"
+    ]
+  }
+}
