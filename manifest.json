@@ -17,7 +17,15 @@
         "logoUrl",
         "reservationEmail"
       ],
-      "preview": "citreat/preview.png"
+      "preview": "citreat/preview.png",
+      "orderNumber": "TVORD33831600",
+      "license": {
+        "templateOrderAmount": 0.0,
+        "creditRemovalPermitted": true,
+        "accountLicense": [
+          "TVORD30331596 Pro \u2014 Lifetime"
+        ]
+      }
     }
   ]
 }
