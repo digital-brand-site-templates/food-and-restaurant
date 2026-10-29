@@ -1,0 +1,1061 @@
+<!--
+Template Name: Food-Vivers
+File Name: index.html
+Author Name: ThemeVault
+Author URI: https://www.themevault.net/
+License URI: https://www.themevault.net/license/
+Version: 2.0
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Food-Vivers - Food and Restaurant HTML Template</title>
+        <meta name="description" content="A restaurant website template: the menu, reservations, chefs, events and a gallery. Built on Bootstrap 5.">
+        <link rel="icon" href="images/favicon.png" type="image/png">
+
+        <!-- Bootstrap 5, the Bootstrap 3 compatibility layer, Font Awesome 6 -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bs3-compat.css" rel="stylesheet">
+        <link href="css/fontawesome.min.css" rel="stylesheet">
+
+        <!-- Template styles (Montserrat and Lato are self-hosted from fonts/, see the top of style.css) -->
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="mypage">
+    <header>
+                    <nav class="navbar navbar-expand-md tv-navbar-default">
+                        <div class="container">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#myNavbar" aria-controls="myNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="index.html"><img src="images/logo.png" class="img-fluid" alt="Food-Vivers"></a>
+                            </div>
+                            <div class="search-btn display-hide">
+                                 <form id="search" class="tv-search" action="menu.html" method="get" role="search">
+                                            <label for="site-search" class="visually-hidden">Search the menu</label>
+                                            <input type="search" name="q" id="site-search" placeholder="Search" autocomplete="off">
+                                        </form>
+                            </div>
+                            <div class="collapse navbar-collapse" id="myNavbar">
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="dis-nn">
+                                        <form id="menu-search" class="tv-search" action="menu.html" method="get" role="search">
+                                            <label for="menu-site-search" class="visually-hidden">Search the menu</label>
+                                            <input type="search" name="q" id="menu-site-search" placeholder="Search" autocomplete="off">
+                                        </form>
+                                    </li>
+                                    <li class="nav-item active"><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
+                                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                                    <li class="nav-item"><a href="menu.html" class="nav-link">Menu</a></li>
+                                    <li class="nav-item"><a href="service.html" class="nav-link">Service</a></li>
+                                    <li class="nav-item"><a href="event.html" class="nav-link">Events</a></li>
+                                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact Us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </header>
+            <div id="Carousel1" class="carousel slide" data-bs-ride="carousel">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="images/BannerBgImage.png" class="img-fluid w-100" alt="" height="556">
+                        <div class="carousel-caption tv-hero">
+                            <h1>The best<br> fresh food for you</h1>
+                            <p>A short seasonal menu, bread from our own oven, sixty seats inside and thirty on the terrace.</p>
+                            <div class="tv-hero-actions">
+                                <a class="button" href="reservation.html"><span>Book a table</span></a>
+                                <a class="button tv-button-ghost" href="menu.html"><span>See the menu</span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="images/BannerBgImage2.png" class="img-fluid w-100" alt="" height="556">
+                        <div class="carousel-caption tv-hero">
+                            <h1>Sunday brunch<br> ten till four</h1>
+                            <p>A fixed menu, a glass of something on arrival, and the kitchen's blueberry pancakes.</p>
+                            <div class="tv-hero-actions">
+                                <a class="button" href="reservation.html"><span>Book a table</span></a>
+                                <a class="button tv-button-ghost" href="menu.html"><span>See the menu</span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="images/BannerBgImage3.png" class="img-fluid w-100" alt="" height="556">
+                        <div class="carousel-caption tv-hero">
+                            <h1>Dinner until<br> the last table leaves</h1>
+                            <p>Six starters, seven mains, four desserts — and the Tuesday-to-Thursday set menu at $24.</p>
+                            <div class="tv-hero-actions">
+                                <a class="button" href="reservation.html"><span>Book a table</span></a>
+                                <a class="button tv-button-ghost" href="menu.html"><span>See the menu</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Left and right controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#Carousel1" data-bs-slide="prev">
+                    <span class="tv-arrow tv-arrow-left" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#Carousel1" data-bs-slide="next">
+                    <span class="tv-arrow tv-arrow-right" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <section class="restaurant-block">
+                <div class="container">
+                    <div class="tv-heading text-center">
+                        <h2>Welcome to Food-Vivers</h2>
+                        <hr>
+                        <p>A neighbourhood restaurant with a short seasonal menu, bread from our own oven and a terrace for the summer.</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-4 width-100">
+                            <div class="restaurant-image">
+                                <img src="images/restaurant1.png" class="img-fluid" alt="restaurant1">
+                            </div>
+                            <div class="restaurant-details">
+                                <h3>Fresh every morning</h3>
+                                <p>We cook from a short menu that changes with the season, and everything on it is made in this kitchen. Gift cards are available for any amount and never expire.</p>
+                                <a class="btn btn-default" href="about.html">Read More</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-4 width-100 margin-top30">
+                            <div class="restaurant-image">
+                                <img src="images/restaurant2.png" class="img-fluid" alt="restaurant2">
+                            </div>
+                            <div class="restaurant-details">
+                                <h3>From our own kitchen</h3>
+                                <p>Breakfast is served from seven, lunch from eleven, and dinner until the last table leaves. Gift cards are available for any amount and never expire.</p>
+                                <a class="btn btn-default" href="about.html">Read More</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-4 width-100 margin-top30">
+                            <div class="restaurant-image">
+                                <img src="images/restaurant3.png" class="img-fluid" alt="restaurant3">
+                            </div>
+                            <div class="restaurant-details">
+                                <h3>A table for everyone</h3>
+                                <p>Our bread comes out of the oven every morning; the pasta is rolled the same afternoon it is served. Gift cards are available for any amount and never expire.</p>
+                                <a class="btn btn-default" href="about.html">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="service-block">
+                <div class="container">
+                    <div class="tv-heading text-center">
+                        <h2>What we serve</h2>
+                        <hr>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-3 width-50">
+                            <div class="service-details text-center tv-service-tile">
+                                <div class="service-image">
+                                    <img src="images/spoon.png" class="img-fluid" alt="spoon">
+                                    <img class="hoverPhoto" src="images/spoon2.png" alt="">
+                                </div>
+                                <h4><a href="service-details.html">Dinner & Desert</a></h4>
+                                <p>From six, seven nights. The set menu Tue – Thu.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-3 width-50">
+                            <div class="service-details text-center tv-service-tile">
+                                <div class="service-image">
+                                    <img src="images/coffee.png" class="img-fluid" alt="spoon">
+                                    <img class="hoverPhoto" src="images/coffee2.png" alt="">
+                                </div>
+                                <h4><a href="service-details.html">breakfast</a></h4>
+                                <p>From seven. Eggs every way, pancakes, the full breakfast.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-3 width-50 mtop-30">
+                            <div class="service-details text-center tv-service-tile">
+                                <div class="service-image">
+                                    <img src="images/ice-cream.png" class="img-fluid" alt="spoon">
+                                    <img class="hoverPhoto" src="images/ice-cream2.png" alt="">
+                                </div>
+                                <h4><a href="service-details.html">Ice Cream</a></h4>
+                                <p>Churned here in small batches; flavours change weekly.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-3 width-50 mtop-30">
+                            <div class="service-details text-center tv-service-tile">
+                                <div class="service-image">
+                                    <img src="images/drink.png" class="img-fluid" alt="spoon">
+                                    <img class="hoverPhoto" src="images/drink2.png" alt="">
+                                </div>
+                                <h4><a href="service-details.html">beverages</a></h4>
+                                <p>Six wines by the glass, three beers on draught, cocktails.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="deal-block">
+                <div class="bgcolor1 text-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="w-100 px-0"><div class="deal-details">
+                                <h1>Set menu, Tue – Thu</h1>
+                                <p>Two courses for $24 or three for $29, chosen from the whole menu — add a glass of the house pour for $5.</p>
+                                <a class="btn btn-default" href="menu.html"><span>Read More</span></a>
+                            </div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tabs-block">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="w-100 px-0"><div class="container">
+                            <div class="tv-heading text-center">
+                                <h2>Delicious food</h2>
+                                <hr>
+                            </div>
+                            <div class="row">
+                                <div class="w-100 px-0"><div class="gallery-block">
+                                    <div class="col-lg-12 col-md-12 col-12">
+                                        <ul class="nav nav-tabs">
+                                            <li class="nav-item" role="presentation"><a class="nav-link active" aria-selected="true" data-bs-toggle="tab" href="#allfood">All Food</a></li>
+                                            <li class="nav-item" role="presentation"><a class="nav-link" aria-selected="false" data-bs-toggle="tab" href="#starters">starters</a></li>
+                                            <li class="nav-item" role="presentation"><a class="nav-link" aria-selected="false" data-bs-toggle="tab" href="#beverages">Drinks & beverages</a></li>
+                                            <li class="nav-item" role="presentation"><a class="nav-link" aria-selected="false" data-bs-toggle="tab" href="#dinner">Dinner</a></li>
+                                            <li class="nav-item" role="presentation"><a class="nav-link" aria-selected="false" data-bs-toggle="tab" href="#breakfast">breakfast & Lunch</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div id="allfood" class="tab-pane fade show active">
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50">
+                                                        <a class="tab-image" href="menu.html?q=fast%20food">
+                                                            <img src="images/tab1-1.png" class="img-fluid" alt="Fast Food">
+                                                            <div class="overlay">
+                                                                <div class="text">Fast Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50">
+                                                        <a class="tab-image" href="menu.html?q=sea%20food">
+                                                            <img src="images/tab1-2.png" class="img-fluid" alt="Sea Food">
+                                                            <div class="overlay">
+                                                                <div class="text">Sea Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50 mtop-35">
+                                                        <a class="tab-image" href="menu.html?q=italian%20food">
+                                                            <img src="images/tab1-3.png" class="img-fluid" alt="italian food">
+                                                            <div class="overlay">
+                                                                <div class="text">italian food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50 mtop-35">
+                                                        <a class="tab-image" href="menu.html?q=french%20food">
+                                                            <img src="images/tab1-4.png" class="img-fluid" alt="french food">
+                                                            <div class="overlay">
+                                                                <div class="text">french food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 mt-35 width-50">
+                                                        <a class="tab-image" href="menu.html?q=southindian%20food">
+                                                            <img src="images/tab1-5.png" class="img-fluid" alt="southindian Food">
+                                                            <div class="overlay">
+                                                                <div class="text">southindian Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 mt-35 width-50">
+                                                        <a class="tab-image" href="menu.html?q=indian%20food">
+                                                            <img src="images/tab1-6.png" class="img-fluid" alt="Indian Food">
+                                                            <div class="overlay">
+                                                                <div class="text">Indian Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 mt-35 width-50">
+                                                        <a class="tab-image" href="menu.html?q=chinese%20food">
+                                                            <img src="images/tab1-7.png" class="img-fluid" alt="chinese food">
+                                                            <div class="overlay">
+                                                                <div class="text">chinese food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 mt-35 width-50">
+                                                        <a class="tab-image" href="menu.html?q=healthy%20food">
+                                                            <img src="images/tab1-8.png" class="img-fluid" alt="Healthy Food">
+                                                            <div class="overlay">
+                                                                <div class="text">Healthy Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div><!--row-->
+                                            </div>
+                                            <div id="starters" class="tab-pane fade">
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50">
+                                                        <a class="tab-image" href="menu.html?q=fast%20food">
+                                                            <img src="images/tab1-1.png" class="img-fluid" alt="Fast Food">
+                                                            <div class="overlay">
+                                                                <div class="text">Fast Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50">
+                                                        <a class="tab-image" href="menu.html?q=sea%20food">
+                                                            <img src="images/tab1-2.png" class="img-fluid" alt="Sea Food">
+                                                            <div class="overlay">
+                                                                <div class="text">Sea Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50 mtop-35">
+                                                        <a class="tab-image" href="menu.html?q=italian%20food">
+                                                            <img src="images/tab1-3.png" class="img-fluid" alt="italian food">
+                                                            <div class="overlay">
+                                                                <div class="text">italian food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50 mtop-35">
+                                                        <a class="tab-image" href="menu.html?q=french%20food">
+                                                            <img src="images/tab1-4.png" class="img-fluid" alt="french food">
+                                                            <div class="overlay">
+                                                                <div class="text">french food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 mt-35 width-50">
+                                                        <a class="tab-image" href="menu.html?q=southindian%20food">
+                                                            <img src="images/tab1-5.png" class="img-fluid" alt="southindian Food">
+                                                            <div class="overlay">
+                                                                <div class="text">southindian Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 mt-35 width-50">
+                                                        <a class="tab-image" href="menu.html?q=indian%20food">
+                                                            <img src="images/tab1-6.png" class="img-fluid" alt="Indian Food">
+                                                            <div class="overlay">
+                                                                <div class="text">Indian Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 mt-35 width-50">
+                                                        <a class="tab-image" href="menu.html?q=chinese%20food">
+                                                            <img src="images/tab1-7.png" class="img-fluid" alt="chinese food">
+                                                            <div class="overlay">
+                                                                <div class="text">chinese food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div><!--row-->
+                                            </div>
+                                            <div id="beverages" class="tab-pane fade">
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50">
+                                                        <a class="tab-image" href="menu.html?q=fast%20food">
+                                                            <img src="images/tab1-1.png" class="img-fluid" alt="Fast Food">
+                                                            <div class="overlay">
+                                                                <div class="text">Fast Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50">
+                                                        <a class="tab-image" href="menu.html?q=sea%20food">
+                                                            <img src="images/tab1-2.png" class="img-fluid" alt="Sea Food">
+                                                            <div class="overlay">
+                                                                <div class="text">Sea Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50 mtop-35">
+                                                        <a class="tab-image" href="menu.html?q=italian%20food">
+                                                            <img src="images/tab1-3.png" class="img-fluid" alt="italian food">
+                                                            <div class="overlay">
+                                                                <div class="text">italian food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50 mtop-35">
+                                                        <a class="tab-image" href="menu.html?q=french%20food">
+                                                            <img src="images/tab1-4.png" class="img-fluid" alt="french food">
+                                                            <div class="overlay">
+                                                                <div class="text">french food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 mt-35 width-50">
+                                                        <a class="tab-image" href="menu.html?q=southindian%20food">
+                                                            <img src="images/tab1-5.png" class="img-fluid" alt="southindian Food">
+                                                            <div class="overlay">
+                                                                <div class="text">southindian Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 mt-35 width-50">
+                                                        <a class="tab-image" href="menu.html?q=indian%20food">
+                                                            <img src="images/tab1-6.png" class="img-fluid" alt="Indian Food">
+                                                            <div class="overlay">
+                                                                <div class="text">Indian Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div><!--row-->
+                                            </div>
+                                            <div id="dinner" class="tab-pane fade">
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50">
+                                                        <a class="tab-image" href="menu.html?q=fast%20food">
+                                                            <img src="images/tab1-1.png" class="img-fluid" alt="Fast Food">
+                                                            <div class="overlay">
+                                                                <div class="text">Fast Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50">
+                                                        <a class="tab-image" href="menu.html?q=sea%20food">
+                                                            <img src="images/tab1-2.png" class="img-fluid" alt="Sea Food">
+                                                            <div class="overlay">
+                                                                <div class="text">Sea Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50 mtop-35">
+                                                        <a class="tab-image" href="menu.html?q=italian%20food">
+                                                            <img src="images/tab1-3.png" class="img-fluid" alt="italian food">
+                                                            <div class="overlay">
+                                                                <div class="text">italian food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50 mtop-35">
+                                                        <a class="tab-image" href="menu.html?q=french%20food">
+                                                            <img src="images/tab1-4.png" class="img-fluid" alt="french food">
+                                                            <div class="overlay">
+                                                                <div class="text">french food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 mt-35 width-50">
+                                                        <a class="tab-image" href="menu.html?q=southindian%20food">
+                                                            <img src="images/tab1-5.png" class="img-fluid" alt="southindian Food">
+                                                            <div class="overlay">
+                                                                <div class="text">southindian Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 mt-35 width-50">
+                                                        <a class="tab-image" href="menu.html?q=indian%20food">
+                                                            <img src="images/tab1-6.png" class="img-fluid" alt="Indian Food">
+                                                            <div class="overlay">
+                                                                <div class="text">Indian Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 mt-35 width-50">
+                                                        <a class="tab-image" href="menu.html?q=chinese%20food">
+                                                            <img src="images/tab1-7.png" class="img-fluid" alt="chinese food">
+                                                            <div class="overlay">
+                                                                <div class="text">chinese food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 mt-35 width-50">
+                                                        <a class="tab-image" href="menu.html?q=healthy%20food">
+                                                            <img src="images/tab1-8.png" class="img-fluid" alt="Healthy Food">
+                                                            <div class="overlay">
+                                                                <div class="text">Healthy Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div><!--row-->
+                                            </div>
+                                            <div id="breakfast" class="tab-pane fade">
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50">
+                                                        <a class="tab-image" href="menu.html?q=fast%20food">
+                                                            <img src="images/tab1-1.png" class="img-fluid" alt="Fast Food">
+                                                            <div class="overlay">
+                                                                <div class="text">Fast Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50">
+                                                        <a class="tab-image" href="menu.html?q=sea%20food">
+                                                            <img src="images/tab1-2.png" class="img-fluid" alt="Sea Food">
+                                                            <div class="overlay">
+                                                                <div class="text">Sea Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50 mtop-35">
+                                                        <a class="tab-image" href="menu.html?q=italian%20food">
+                                                            <img src="images/tab1-3.png" class="img-fluid" alt="italian food">
+                                                            <div class="overlay">
+                                                                <div class="text">italian food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 width-50 mtop-35">
+                                                        <a class="tab-image" href="menu.html?q=french%20food">
+                                                            <img src="images/tab1-4.png" class="img-fluid" alt="french food">
+                                                            <div class="overlay">
+                                                                <div class="text">french food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 mt-35 width-50">
+                                                        <a class="tab-image" href="menu.html?q=southindian%20food">
+                                                            <img src="images/tab1-5.png" class="img-fluid" alt="southindian Food">
+                                                            <div class="overlay">
+                                                                <div class="text">southindian Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 mt-35 width-50">
+                                                        <a class="tab-image" href="menu.html?q=chinese%20food">
+                                                            <img src="images/tab1-7.png" class="img-fluid" alt="chinese food">
+                                                            <div class="overlay">
+                                                                <div class="text">chinese food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-3 mt-35 width-50">
+                                                        <a class="tab-image" href="menu.html?q=healthy%20food">
+                                                            <img src="images/tab1-8.png" class="img-fluid" alt="Healthy Food">
+                                                            <div class="overlay">
+                                                                <div class="text">Healthy Food</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div><!--row-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div></div>
+                            </div><!--row-->
+                        </div></div>
+                    </div><!--row-->
+                </div><!--Container-fluid-->
+            </section>
+
+            <section class="counter-block">
+                <div class="bgcolor1 text-center">
+                    <div class="container">
+                    <div class="tv-heading text-center">
+                        <h2>In numbers</h2>
+                        <hr>
+                    </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-3 width-50 width-100">
+                                <div class="counter-details text-center">
+                                    <div class="counter-image">
+                                        <img src="images/user.png" class="tv-swap-base" alt="">
+                                        <img src="images/user2.png" class="tv-swap-hover" alt="">
+                                    </div>
+                                    <div class="counter-value">
+                                        <h5 class='counter' data-slno='1' data-min='0' data-max='5000' data-delay='.5' data-increment=4>5000</h5>
+                                        <h4>Happy Customers</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-3 width-50 width-100 margin-top30">
+                                <div class="counter-details text-center">
+                                    <div class="counter-image">
+                                        <img src="images/dinner.png" class="tv-swap-base" alt="">
+                                        <img src="images/dinner2.png" class="tv-swap-hover" alt="">
+                                    </div>
+                                    <div class="counter-value">
+                                        <h5 class='counter' data-slno='1' data-min='0' data-max='900' data-delay='8' data-increment="1">900</h5>
+                                        <h4>Dishes Served</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-3 width-50 mtop-30 width-100">
+                                <div class="counter-details text-center">
+                                    <div class="counter-image">
+                                        <img src="images/glass.png" class="tv-swap-base" alt="">
+                                        <img src="images/glass2.png" class="tv-swap-hover" alt="">
+                                    </div>
+                                    <div class="counter-value">
+                                        <h5 class='counter' data-slno='1' data-min='0' data-max='600' data-delay='.5' data-increment="11">600</h5>
+                                        <h4>Total beverages</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-3 width-50 mtop-30 width-100">
+                                <div class="counter-details text-center">
+                                    <div class="counter-image">
+                                        <img src="images/cup.png" class="tv-swap-base" alt="">
+                                        <img src="images/cup2.png" class="tv-swap-hover" alt="">
+                                    </div>
+                                    <div class="counter-value">
+                                        <h5 class='counter' data-slno='1' data-min='0' data-max='1400' data-delay='.5' data-increment="11">1400</h5>
+                                        <h4>Cup of Coffee</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="menu-block">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="w-100 px-0"><div class="container">
+                            <div class="tv-heading text-center">
+                                <h2>Our menu</h2>
+                                <hr>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-6 lb-album width-100">
+                                    <div class="gallery-image tv-tile">
+                                        <a href="images/gallery1-1.png" class="less-opacity" data-image-popup aria-label="View larger">
+                                            <img src="images/gallery1.png" class="img-fluid" alt="Grilled skewers">
+                                        </a>
+                                        <p class="tv-tile-caption"><span>Grilled skewers</span><b>$18</b></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-6 width-100 margin-top30">
+                                    <div class="gallery-image tv-tile">
+                                        <a href="images/gallery2-2.png" class="less-opacity" data-image-popup aria-label="View larger">
+                                            <img src="images/gallery2.png" class="img-fluid" alt="Blueberry pancakes">
+                                        </a>
+                                        <p class="tv-tile-caption"><span>Blueberry pancakes</span><b>$10</b></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-6 marginT-30 width-100">
+                                    <div class="gallery-image tv-tile">
+                                        <a href="images/gallery3-3.png" class="less-opacity" data-image-popup aria-label="View larger">
+                                            <img src="images/gallery3.png" class="img-fluid" alt="Beef stew">
+                                        </a>
+                                        <p class="tv-tile-caption"><span>Beef stew</span><b>$19</b></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-6 marginT-30 width-100">
+                                    <div class="gallery-image tv-tile">
+                                        <a href="images/gallery4-4.png" class="less-opacity" data-image-popup aria-label="View larger">
+                                            <img src="images/gallery4.png" class="img-fluid" alt="Grilled salmon">
+                                        </a>
+                                        <p class="tv-tile-caption"><span>Grilled salmon</span><b>$24</b></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-6 mt-30 width-100">
+                                    <div class="gallery-image tv-tile">
+                                        <a href="images/gallery5-5.png" class="less-opacity" data-image-popup aria-label="View larger">
+                                            <img src="images/gallery5.png" class="img-fluid" alt="Margherita pizza">
+                                        </a>
+                                        <p class="tv-tile-caption"><span>Margherita pizza</span><b>$14</b></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-6 mt-30 width-100">
+                                    <div class="gallery-image tv-tile">
+                                        <a href="images/gallery6-6.png" class="less-opacity" data-image-popup aria-label="View larger">
+                                            <img src="images/gallery6.png" class="img-fluid" alt="Smash burger">
+                                        </a>
+                                        <p class="tv-tile-caption"><span>Smash burger</span><b>$16</b></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-6 mt-30 width-100">
+                                    <div class="gallery-image tv-tile">
+                                        <a href="images/gallery7-7.png" class="less-opacity" data-image-popup aria-label="View larger">
+                                            <img src="images/gallery7.png" class="img-fluid" alt="Chicken curry">
+                                        </a>
+                                        <p class="tv-tile-caption"><span>Chicken curry</span><b>$18</b></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-6 mt-30 width-100">
+                                    <div class="gallery-image tv-tile">
+                                        <a href="images/gallery8-8.png" class="less-opacity" data-image-popup aria-label="View larger">
+                                            <img src="images/gallery8.png" class="img-fluid" alt="Teriyaki salmon">
+                                        </a>
+                                        <p class="tv-tile-caption"><span>Teriyaki salmon</span><b>$23</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="client-block">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="w-100 px-0"><div class="container">
+                            <div class="tv-heading text-center">
+                                <h2>What our guests say</h2>
+                                <hr>
+                            </div>
+                        </div></div>
+                        <div class="w-100 px-0"><div data-bs-ride="carousel" class="carousel slide" id="myCarousel2">
+                            <div class="container">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-3 width_50">
+                                                <div class="client-image">
+                                                    <img class="img-fluid rounded-circle" src="images/client1.png" alt="">
+                                                    <div class="overlay">
+                                                        <a class="info tv-nolink">Pedro Araez</a>
+                                                    </div>
+                                                </div>
+                                                <p class="tv-client-name">Pedro Araez</p>
+                                                <p class="tv-client-quote">“The sourdough alone is worth the trip. We come every Sunday.”</p>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3 col-3 width_50">
+                                                <div class="client-image">
+                                                    <img class="img-fluid rounded-circle" src="images/client2.png" alt="">
+                                                    <div class="overlay">
+                                                        <a class="info tv-nolink">Fidel Martin</a>
+                                                    </div>
+                                                </div>
+                                                <p class="tv-client-name">Fidel Martin</p>
+                                                <p class="tv-client-quote">“Best rib-eye in town, and they remembered my table.”</p>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3 col-3 width_50 margin-top30">
+                                                <div class="client-image">
+                                                    <img class="img-fluid rounded-circle" src="images/client3.png" alt="">
+                                                    <div class="overlay">
+                                                        <a class="info tv-nolink">Henry Jurk</a>
+                                                    </div>
+                                                </div>
+                                                <p class="tv-client-name">Henry Jurk</p>
+                                                <p class="tv-client-quote">“Brunch with the kids, no fuss, and a proper coffee.”</p>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3 col-3 width_50 margin-top30">
+                                                <div class="client-image">
+                                                    <img class="img-fluid rounded-circle" src="images/client4.png" alt="">
+                                                    <div class="overlay">
+                                                        <a class="info tv-nolink">Jules Boutin</a>
+                                                    </div>
+                                                </div>
+                                                <p class="tv-client-name">Jules Boutin</p>
+                                                <p class="tv-client-quote">“The tasting evening was the best meal I had all year.”</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-3 width_50">
+                                                <div class="client-image">
+                                                    <img class="img-fluid rounded-circle" src="images/client1.png" alt="">
+                                                    <div class="overlay">
+                                                        <a class="info tv-nolink">Pedro Araez</a>
+                                                    </div>
+                                                </div>
+                                                <p class="tv-client-name">Pedro Araez</p>
+                                                <p class="tv-client-quote">“The sourdough alone is worth the trip. We come every Sunday.”</p>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3 col-3 width_50">
+                                                <div class="client-image">
+                                                    <img class="img-fluid rounded-circle" src="images/client2.png" alt="">
+                                                    <div class="overlay">
+                                                        <a class="info tv-nolink">Fidel Martin</a>
+                                                    </div>
+                                                </div>
+                                                <p class="tv-client-name">Fidel Martin</p>
+                                                <p class="tv-client-quote">“Best rib-eye in town, and they remembered my table.”</p>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3 col-3 width_50 margin-top30">
+                                                <div class="client-image">
+                                                    <img class="img-fluid rounded-circle" src="images/client3.png" alt="">
+                                                    <div class="overlay">
+                                                        <a class="info tv-nolink">Henry Jurk</a>
+                                                    </div>
+                                                </div>
+                                                <p class="tv-client-name">Henry Jurk</p>
+                                                <p class="tv-client-quote">“Brunch with the kids, no fuss, and a proper coffee.”</p>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3 col-3 width_50 margin-top30">
+                                                <div class="client-image">
+                                                    <img class="img-fluid rounded-circle" src="images/client4.png" alt="">
+                                                    <div class="overlay">
+                                                        <a class="info tv-nolink">Jules Boutin</a>
+                                                    </div>
+                                                </div>
+                                                <p class="tv-client-name">Jules Boutin</p>
+                                                <p class="tv-client-quote">“The tasting evening was the best meal I had all year.”</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel2" data-bs-slide="prev">
+                    <span class="tv-arrow tv-arrow-left3" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel2" data-bs-slide="next">
+                    <span class="tv-arrow tv-arrow-right3" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+                        </div></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="book-form-block">
+                <div class="bg-banner">
+                    <div class="container">
+                    <div class="tv-heading text-center">
+                        <h2>Book a table</h2>
+                        <hr>
+                        <p>We confirm every booking by phone within the hour.</p>
+                    </div>
+                        <form name="sentMessage" id="contactForm" action="#" method="post" novalidate>
+                            <div class="row">
+                                <div class="w-100 px-0"><div class="book-form">
+                                    <div class="offset-lg-1 col-lg-5 col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="name" class="visually-hidden">Name</label>
+                                            <input type="text" id="name" name="name" class="form-control placeholder-fix" placeholder="Name :" required autocomplete="name">
+                                            <p class="form-text text-danger"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="contact" class="visually-hidden">Phone number</label>
+                                            <input type="tel" id="contact" name="phone" class="form-control placeholder-fix" placeholder="Number :" required autocomplete="tel">
+                                            <p class="form-text text-danger"></p>
+                                        </div>
+                                    </div>
+                                    <div class="offset-lg-1 col-lg-5 col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="email" class="visually-hidden">Email</label>
+                                            <input type="email" id="email" name="email" class="form-control placeholder-fix" placeholder="Email :" required autocomplete="email">
+                                            <p class="form-text text-danger"></p>
+                                        </div>
+                                    </div>
+                                    <div class=" col-lg-5 col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="sel1" class="visually-hidden">Meal</label>
+                                            <select class="form-control" id="sel1" name="meal" required>
+                                                <option value="">Select Meal</option>
+                                                <option>Breakfast</option>
+                                                <option>Lunch</option>
+                                                <option>Dinner</option>
+                                                <option>Sunday brunch</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="offset-lg-1 col-lg-10 col-md-12 col-12">
+                                        <div class="form-group">
+                                            <label for="message" class="visually-hidden">Message</label>
+                                            <textarea name="message" id="message" class="form-control placeholder-fix" rows="4" placeholder="Message :" required></textarea>
+                                            <p class="form-text text-danger"></p>
+                                        </div>
+                                    </div>
+                                </div></div>
+                            </div>
+                            <div class="action-buttons">
+                                <button type="submit" class="btn">Submit</button>
+                                <p class="tv-form-note" hidden tabindex="-1">Thank you — your request has been sent. We confirm every booking by phone within the hour.</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section class="chef-block pb-100">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="w-100 px-0"><div class="container">
+                            <div class="tv-heading text-center">
+                                <h2>Meet the chefs</h2>
+                                <hr>
+                            </div>
+                        </div></div>
+                        <div class="w-100 px-0"><div data-bs-ride="carousel" class="carousel slide" id="myCarousel3">
+                            <div class="container">
+                                <div class="carousel-inner text-center">
+                                    <div class="carousel-item active">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-4">
+                                                <div class="chef-image">
+                                                    <a href="chef.html" aria-hidden="true" tabindex="-1"><img class="img-fluid rounded-circle" src="images/chef1.png" alt=""></a>
+                                                </div>
+                                                <div class="chef-details">
+                                                    <h4><a href="chef.html">Fritz Wold</a></h4>
+                                                    <p class="tv-chef-role">Head chef</p>
+                                                    <hr>
+                                                    <p>Book a table online or by phone; walk-ins are welcome when there is a free table. Gift cards are available for any amount and never expire.</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-4">
+                                                <div class="chef-image">
+                                                    <a href="chef.html" aria-hidden="true" tabindex="-1"><img class="img-fluid rounded-circle" src="images/chef2.png" alt=""></a>
+                                                </div>
+                                                <div class="chef-details">
+                                                    <h4><a href="chef.html">Joe Shestak</a></h4>
+                                                    <p class="tv-chef-role">Sous chef</p>
+                                                    <hr>
+                                                    <p>Every dish is labelled for the eight common allergens, and the kitchen can adapt most of them. Gift cards are available for any amount and never expire.</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-4">
+                                                <div class="chef-image">
+                                                    <a href="chef.html" aria-hidden="true" tabindex="-1"><img class="img-fluid rounded-circle" src="images/chef3.png" alt=""></a>
+                                                </div>
+                                                <div class="chef-details">
+                                                    <h4><a href="chef.html">David King</a></h4>
+                                                    <p class="tv-chef-role">Pastry chef</p>
+                                                    <hr>
+                                                    <p>Sunday brunch runs from ten to four with a fixed menu and a glass of something on arrival. Gift cards are available for any amount and never expire.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-4">
+                                                <div class="chef-image">
+                                                    <a href="chef.html" aria-hidden="true" tabindex="-1"><img class="img-fluid rounded-circle" src="images/chef1.png" alt=""></a>
+                                                </div>
+                                                <div class="chef-details">
+                                                    <h4><a href="chef.html">Fritz Wold</a></h4>
+                                                    <p class="tv-chef-role">Head chef</p>
+                                                    <hr>
+                                                    <p>The wine list is short and mostly European, with six by the glass and a house pour under ten dollars. Gift cards are available for any amount and never expire.</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-4">
+                                                <div class="chef-image">
+                                                    <a href="chef.html" aria-hidden="true" tabindex="-1"><img class="img-fluid rounded-circle" src="images/chef2.png" alt=""></a>
+                                                </div>
+                                                <div class="chef-details">
+                                                    <h4><a href="chef.html">Joe Shestak</a></h4>
+                                                    <p class="tv-chef-role">Sous chef</p>
+                                                    <hr>
+                                                    <p>Private dining for up to twenty is available in the back room, with a set menu chosen with the chef. Gift cards are available for any amount and never expire.</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-4">
+                                                <div class="chef-image">
+                                                    <a href="chef.html" aria-hidden="true" tabindex="-1"><img class="img-fluid rounded-circle" src="images/chef3.png" alt=""></a>
+                                                </div>
+                                                <div class="chef-details">
+                                                    <h4><a href="chef.html">David King</a></h4>
+                                                    <p class="tv-chef-role">Pastry chef</p>
+                                                    <hr>
+                                                    <p>Our coffee is roasted two streets away and the ice cream is churned here, in small batches. Gift cards are available for any amount and never expire.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel3" data-bs-slide="prev">
+                    <span class="tv-arrow tv-arrow-left3" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel3" data-bs-slide="next">
+                    <span class="tv-arrow tv-arrow-right3" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+                        </div></div>
+                    </div>
+                </div>
+            </section>
+
+    <footer class="footer-block mt-80 bgcolor1">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 col-6 width-100">
+                                <div class="footer-details">
+                                    <h3>About Us</h3>
+                                    <hr>
+                                    <p>A neighbourhood restaurant with a short seasonal menu, bread from our own oven and a terrace for the summer. Breakfast from seven, lunch from eleven, dinner until the last table leaves; Sunday brunch from ten. Sixty seats inside, thirty out, and a back room for twenty.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-6 width-100 margin-top30">
+                                <div class="footer-details">
+                                    <h3>Navigation</h3>
+                                    <hr>
+                                    <ul class="footer-links">
+                                        <li class="active"><a href="index.html">Home</a></li>
+                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="menu.html">Menu</a></li>
+                                        <li><a href="service.html">Service</a></li>
+                                        <li><a href="event.html">Events</a></li>
+                                        <li><a href="contact.html">Contact Us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-6 width-100 mt_30">
+                                <div class="footer-details">
+                                    <h3>Opening Hours</h3>
+                                    <hr>
+                                    <ul class="contact-list tv-hours">
+                                        <li><i class="far fa-clock fa-lg" aria-hidden="true"></i><p>Mon – Thu: 11am – 10pm</p></li>
+                                        <li><i class="far fa-clock fa-lg" aria-hidden="true"></i><p>Fri – Sat: 11am – midnight</p></li>
+                                        <li><i class="far fa-clock fa-lg" aria-hidden="true"></i><p>Sunday: brunch 10am – 4pm</p></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-6 width-100 mt_30">
+                                <div class="footer-details">
+                                    <h3>Contact US</h3>
+                                    <hr>
+                                    <ul class="contact-list">
+                                        <li>
+                                            <i class="fas fa-location-dot fa-lg"></i>
+                                            <p><a href="https://www.google.com/maps/place/Richmond,+VA,+USA" target="_blank" rel="noopener"> 701 Old York Drive Richmond USA.</a></p>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-phone fa-lg"></i>
+                                            <p><a href="tel:+1-202-555-0100"> +1-202-555-0100</a></p>
+                                        </li>
+                                        <li>
+                                            <i class="far fa-envelope fa-lg"></i>
+                                            <p><a href="mailto:demo@info.com"> demo@info.com</a></p>
+                                        </li>
+                                    </ul>
+                                    <div class="footer-social-icon">
+                                        <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-square-facebook" aria-hidden="true"></i></a>
+                                        <a href="https://twitter.com/" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-square-twitter" aria-hidden="true"></i></a>
+                                        <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                                        <a href="https://www.google.com/" target="_blank" rel="noopener" aria-label="Google"><i class="fab fa-square-google-plus" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </footer>
+    <div class="bgcolor2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-12">
+                                <div class="copyright">
+                                    © 2017 All right reserved.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <button type="button" id="back-to-top" class="scrollTop back-to-top" aria-label="Back to top">
+                <i class="fas fa-chevron-up" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <!-- Bootstrap 5 and the template's own script (no jQuery, counterUp, waypoints) -->
+        <script src="js/bootstrap.bundle.min.js" defer></script>
+        <script src="js/main.js" defer></script>
+    </body>
+</html>

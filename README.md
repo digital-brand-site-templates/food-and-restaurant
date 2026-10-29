@@ -9,3 +9,4 @@ Static website templates for the Food & Restaurant category.
 Preview gallery: https://digital-brand-site-templates.github.io/food-and-restaurant/
 
 - [Ci-treat](ci-treat/)
+- [Food-Vivers](food-vivers/)

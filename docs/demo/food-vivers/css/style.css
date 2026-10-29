@@ -1,0 +1,2131 @@
+/*
+Template Name: foodvivers
+File Name: style.css
+Author Name: ThemeVault
+Author URI: https://www.themevault.net/
+License URI: https://www.themevault.net/license/
+Version: 2.0
+*/
+
+/* ==========================================================================
+   1. Design tokens — taken from the ORIGINAL's own palette, not invented
+   ========================================================================== */
+:root {
+    --tv-accent: #3498db;
+    --tv-ink: #000000;
+    --tv-ink-soft: #1b1b1b;
+    --tv-white: #fff;
+    /* Bootstrap 3's base was 14px/#333. Bootstrap 5 uses 16px/#212529, which
+       silently enlarges and lightens every paragraph in the port. v1 set body
+       to 100% (16px) and #000 itself. */
+    --tv-body: #000;
+
+    --tv-radius: 5px;
+    --tv-ease: all .45s ease-in-out 0s;
+    --tv-navbar-h: 100px;
+    --tv-section-pad: 100px;
+}
+
+/* ==========================================================================
+   2. Fonts — Montserrat (the body face) and Lato (the hero headline only),
+   self-hosted. v1 fetched both from Google Fonts: Montserrat in seventeen
+   cuts of which five weights are used (300/400/500/600/900 plus bold), Lato
+   400/700/900/900i — the Lato files are the exact ones Google's css?family=
+   endpoint serves, split latin / latin-ext as Google does. The aileron and
+   antonio-exotic folders v1 also shipped were never referenced and are
+   dropped. Nothing is fetched from a third party.
+   ========================================================================== */
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("../fonts/webfonts/montserrat-300.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/webfonts/montserrat-400.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("../fonts/webfonts/montserrat-500.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("../fonts/webfonts/montserrat-600.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("../fonts/webfonts/montserrat-700.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url("../fonts/webfonts/montserrat-800.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url("../fonts/webfonts/montserrat-900.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Lato";
+    font-style: italic;
+    font-weight: 900;
+    font-display: swap;
+    src: url("../fonts/webfonts/lato-900i-latin-ext.woff2") format("woff2");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+    font-family: "Lato";
+    font-style: italic;
+    font-weight: 900;
+    font-display: swap;
+    src: url("../fonts/webfonts/lato-900i-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/webfonts/lato-400-latin-ext.woff2") format("woff2");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/webfonts/lato-400-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("../fonts/webfonts/lato-700-latin-ext.woff2") format("woff2");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("../fonts/webfonts/lato-700-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url("../fonts/webfonts/lato-900-latin-ext.woff2") format("woff2");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url("../fonts/webfonts/lato-900-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ==========================================================================
+   3. Base
+   ========================================================================== */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--tv-navbar-h);
+    /* overflow-x belongs HERE, never on body: on body it forces overflow-y to
+       compute as auto, which makes body a scroll container and breaks
+       Bootstrap 5's IntersectionObserver-based ScrollSpy. */
+    overflow-x: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
+body {
+    font-family: Montserrat, "Helvetica Neue", Arial, sans-serif;
+    color: var(--tv-body);
+    /* v1 said body { font-size: 100% } on top of Bootstrap 3's html { font-size:
+       10px } — so body was 10px, and every element that inherits it (inputs,
+       the copyright, list items without their own size) rendered at 10px.
+       The ROOT stays 16px (see _port-css.mjs, the rem trap); body is 10px. */
+    font-size: 10px;
+}
+h1, h2, h3, h4, h5, h6 { margin-top: 0; }
+a { text-decoration: none; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--tv-accent);
+    outline-offset: 2px;
+}
+img { max-width: 100%; height: auto; }
+
+/* ==========================================================================
+   4. Components - ported from v1's style.css, with the Bootstrap 3 selectors
+   rewritten for Bootstrap 5. See _port-css.mjs for the exact mapping.
+
+   ORDER MATTERS, and it is taken from the <link> tags rather than chosen here.
+   Where two of a template's stylesheets set the same property at the same
+   specificity, the later one wins — so reordering them silently changes the
+   design. AquaLand loaded scrolling-nav.css before style.css; appending it
+   after instead turned ".navbar{padding:10px}" into "padding:20px 0" and added
+   20px to the menu bar at every desktop width.
+
+   The responsive stylesheet is simply the last link: v1's queries are
+   max-width based and land on breakpoints Bootstrap 5 shares, so they carry
+   across unchanged.
+   ========================================================================== */
+/*
+Template Name: FoodVivers
+File Name: style.css
+Author Name: ThemeVault
+Author URI: http://www.themevault.net/
+License URI: http://www.themevault.net/license/
+*/
+
+html {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Montserrat, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #000;
+    
+    letter-spacing: 1px;
+}
+#mypage{
+    overflow: hidden;
+}
+textarea:focus, input:focus, select:focus, select:active{
+    outline: none;
+    box-shadow:none;
+}
+.form-control:focus {
+    box-shadow: none;
+    outline: 0 none;
+}
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn.focus:active, .btn:active:focus, .btn:focus {outline: none;}
+a,h1,h2,h3,h4,h5{cursor: pointer;}
+a:focus, a:hover{text-decoration: none;}
+a:focus {outline: none; outline-offset: 0;}
+ul{list-style: none;}
+.placeholder-fix:focus::-webkit-input-placeholder  {color:transparent !important; }
+.placeholder-fix:focus::-moz-placeholder   {color:transparent !important;}
+.placeholder-fix:-moz-placeholder   {color:transparent !important;}
+.mt-35{
+    margin-top:35px;
+}
+.mt-30{
+    margin-top: 30px;
+}
+.mt-50{
+    margin-top:50px;
+}
+.pb-100{
+    padding-bottom: 100px;
+}
+.display-hide{
+    display: none;
+}
+.navbar {  
+    margin-bottom: 0;
+    background-color: #fff;
+    border: 0;
+    letter-spacing: 4px;
+    padding: 20px 0;
+    vertical-align: middle;
+}
+.navbar li a:before{
+    content: "\f111";
+    font-family: FontAwesome;
+    font-size: 6px;
+    left: 0px;
+    position:absolute;
+}
+.navbar li a{ 
+    color: #000 !important;
+    font-size: 15px !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 20px;
+}
+.navbar-brand{
+    padding: 0;
+}
+.navbar-nav li a:hover {
+    color: #3498db !important;
+}
+.navbar-nav li.active a {
+    color: #3498db !important;
+    background-color: transparent !important;
+}
+.tv-navbar-default .navbar-toggler {
+    border-color: transparent;
+}
+:is(.carousel-control-prev, .carousel-control-next){
+    top:50%;
+    opacity: 1;
+}
+.carousel-control-prev, .carousel-control-next {
+    background-image: none;
+}
+.carousel-caption{
+    font-family: 'Lato', sans-serif;
+    top:25%;
+}
+.carousel-inner h1 {
+    font-size: 60px;
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: 6px;
+    line-height: 75px;
+    text-transform: uppercase;
+    text-shadow: 3px 2px 2px rgb(0, 0, 0);
+}
+.carousel-caption .button {
+    background-color: #3498db;
+    border: medium none;
+    border-radius: 2px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin: 30px 0;
+    padding: 14px 0px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all 0.5s ease 0s;
+    width: 160px;
+}
+.deal-details .btn{
+    background-color: transparent;
+    border: 1px solid #fff;
+    border-radius: 2px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding: 12px 0px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all 0.5s ease 0s;
+    width: 160px;
+}
+.deal-details .btn:hover, .action-buttons .btn:hover{
+    background-color: #3498db;
+    border-color: #3498db;
+}
+.carousel-caption .button span, .deal-details .btn span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.carousel-caption .button span:after, .deal-details .btn span:after {
+    content: '\00bb';
+    font-size: 22px !important;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: -6px;
+    transition: all 0.5s ease 0s;
+}
+.carousel-caption .button:hover span, .deal-details .btn:hover span {
+    padding-right: 25px;
+}
+
+.carousel-caption .button:hover span:after, .deal-details .btn:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+section{
+    padding: 100px 0 0;
+}
+.restaurant-image img {
+    border-bottom: 10px solid #3498db;
+}
+.restaurant-details h3 {
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    line-height: 30px;
+    margin: 15px 0;
+    text-transform: uppercase;
+}
+.restaurant-details p {
+   font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    line-height: 22px;
+    margin-bottom: 20px;
+    max-height: 7.5em;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+}
+.restaurant-details .btn, .event-details .btn{
+    background: transparent none repeat scroll 0 0;
+    border: 1px solid #000;
+    border-radius: 0;
+    color: #000;
+    letter-spacing: 2px;
+    padding: 10px;
+    text-transform: uppercase;
+}
+.deal-details .btn{
+    border: 1px solid #fff;
+    color: #fff;
+}
+.restaurant-details .btn:hover, .event-details .btn:hover{
+    background-color: #3498db;
+    border-color: #3498db;
+    color:#fff;
+}
+.service-image img{
+    margin-left: auto;
+    margin-right: auto;
+}
+.service-image {
+    border: 1px solid #000;
+    border-radius: 50%;
+    height: 90px;
+    width: 90px;
+    margin-left: auto;
+    margin-right: auto; 
+    position: relative;
+    display: inline-block;
+}
+.service-image img {
+    left: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.service-image .hoverPhoto {
+    display: none;
+    z-index: 99;
+    left: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.service-image:hover{
+    border-color:#3498db; 
+}
+.service-image:hover .hoverPhoto {
+    display: inline;
+}
+.service-details h4 {
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-top: 35px;
+    text-transform: uppercase;
+}
+.bgcolor1{
+    background-color: #181a1e;
+    padding: 55px 0;
+    color:#fff;
+}
+.deal-details > h1 {
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    margin: 0;
+    text-transform: uppercase;
+    line-height: 22px;
+}
+.deal-details > p {
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    line-height: 30px;
+    margin: 30px auto;
+    width: 75%;
+}
+.nav-tabs > li {
+    display: inline-block;
+    float: none;
+    margin-right: 15px;
+}
+.nav-tabs {
+    border-bottom: medium none;
+}
+.gallery-block ul{
+    margin-bottom: 70px;
+    margin-top: 0;
+}
+.gallery-block .nav-tabs > li > .nav-link {
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    line-height: 20px;
+    padding: 5px 15px;
+    text-transform: uppercase;
+}
+.nav-tabs > li > .nav-link.active, .nav-tabs > li > .nav-link.active:focus, .nav-tabs > li > .nav-link.active:hover, .nav-tabs > li > .nav-link:hover {
+    background-color: #3498db;
+    color: #fff;
+}
+.nav-tabs, .nav-pills{
+    text-align: center; 
+}
+.verticalHeader h1 {
+    font-size: 20px;
+    height: 100%;
+    left: 45px;
+    line-height: 34px;
+    margin-top: 95px;
+    overflow-wrap: break-word;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    width: 18px;
+}
+.tab-image { display: block;
+    display: block;
+    width: 100%;
+    height: auto;
+    position:relative;
+}
+.overlay {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    background-color: rgba(20, 21, 20, 0.55);
+    overflow: hidden;
+    width: 100%;
+    height:0;
+    transition: .5s ease;
+}
+
+.tab-image:hover .overlay {
+    bottom: 0;
+    height: 100%;
+}
+
+.overlay .text {
+    white-space: nowrap; 
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-transform: capitalize;
+    cursor: pointer;
+}
+.counter-value > h5 {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin: 40px 0;
+}
+.counter-value > h4 {
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.menu-block .verticalHeader h1{
+    margin-top: 35px;
+}
+#myCarousel2 :is(.carousel-control-prev, .carousel-control-next), #myCarousel3 :is(.carousel-control-prev, .carousel-control-next){
+    width:8%;
+}
+.client-image img, .chef-image img{
+    margin-left: auto;
+    margin-right: auto;
+}
+.client-image{
+    display: block;
+    width: 100%;
+    height: auto;
+    position:relative;
+}
+.client-image .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: rgba(20, 21, 20, 0.7);
+    width:208px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.client-image:hover .overlay {
+    opacity: 1;
+}
+.client-image .overlay .info {
+    white-space: nowrap; 
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    color:rgb(52,152,219);
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-transform: capitalize;
+}
+.bg-banner {
+    background-image: url("../images/bgbanner2.png");
+    background-position: center center;
+    background-size: cover;
+    height: auto;
+    padding: 30px 0 30px;
+    width: 100%;
+}
+.form-group select {
+    margin: 15px 0;      
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image:
+        linear-gradient(45deg, transparent 50%, #fff 50%),
+        linear-gradient(135deg, #fff 50%, transparent 50%);
+    background-position:
+        calc(100% - 20px) calc(1em + 10px),
+        calc(100% - 15px) calc(1em + 10px);
+    background-size:
+        5px 5px,
+        5px 5px,
+        1px 1.5em;
+    background-repeat: no-repeat;
+    text-transform: uppercase;
+}
+.form-control {
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    box-shadow: none;
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    height: 55px;
+    line-height: 1.42857;
+    margin-top: 15px;
+    padding: 6px 8px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+}
+.form-control::-moz-placeholder {
+    color: #fff;
+    font-weight: 400;
+    opacity: 1;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.form-control::-webkit-input-placeholder{
+     color: #fff;
+    font-weight: 400;
+    opacity: 1;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.form-group textarea{
+    height: 150px;
+}
+.form-group select option{
+    color:#000;
+}
+.action-buttons {
+    margin-top: 20px;
+    text-align: center;
+}
+.action-buttons .btn {
+    background: transparent none repeat scroll 0 0;
+    border-color: #fff;
+    border-radius: 0;
+    color: #fff;
+    letter-spacing: 2px;
+    margin-left: 10px;
+    padding: 12px 14px;
+    text-transform: uppercase;
+}
+.chef-details hr {
+    border-color: #000;
+    color: #000;
+    content: "";
+    display: block;
+    height: 2px;
+    width: 25%;
+    margin-bottom: 20px;
+}
+.chef-details > h4 {
+    font-weight: 600;
+    letter-spacing: 3px;
+    margin: 30px 0;
+    text-transform: uppercase;
+}
+.chef-details > h4:hover{
+    color:#3498db;
+}
+.chef-details > p {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 22px;
+}
+footer {
+    padding: 40px 0;
+}
+.footer-details > h3 {
+    font-size: 21px;
+    letter-spacing: 3px;
+    margin: 0;
+    text-transform: uppercase;
+}
+.footer-details > hr {
+    border: 1px solid #fff;
+    margin: 35px 0;
+    width:85%;
+}
+.footer-links{
+    padding: 0;
+}
+.footer-links a {
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 2px;
+    line-height: 33px;
+    text-transform: uppercase;
+}
+.footer-links a:hover, .footer-links li.active a, .contact-list li:hover i, .contact-list li:hover a, .footer-social-icon > a:hover, .restaurant-details h3:hover, .event-details h3:hover {
+    color:#3498DB;  
+}
+
+.footer-details > p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    text-align: left;
+}
+.twitter-feed > span {
+    float: left;
+    font-size: 20px;
+    margin-right: 10px;
+    margin-top: 2px;
+    color:#3498DB; 
+}
+.twitter-feed > p {
+    font-size: 14px;
+    letter-spacing: 1px;
+    line-height: 22px;
+    overflow: hidden;
+      font-weight: 300;
+}
+.contact-list{padding-left: 0}
+.contact-list i {
+    display: inline-block;
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 15px;
+    margin-top: 7px;
+}
+.contact-list p {
+    overflow: hidden;
+}
+.contact-list a {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    line-height: 26px;
+}
+.bgcolor2{
+    background-color: #3498DB;
+    padding: 15px 0;
+}
+.copyright {
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+.copyright > a {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+}
+.copyright > a:hover{
+    color:#000;
+}
+.footer-social-icon > a {
+    color: #fff;
+    font-size: 28px;
+    line-height: 50px;
+    margin-right: 6px;
+}
+input {
+    outline: none;
+}
+input[type=search] {
+    -webkit-appearance: textfield;
+    -webkit-box-sizing: content-box;
+    font-family: inherit;
+    font-size: 100%;
+}
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button {
+    display: none; 
+}
+input[type=search] {
+    border: solid 1px #000;
+    padding: 9px 10px 9px 26px;
+    -webkit-border-radius: 10em;
+    -moz-border-radius: 10em;
+    border-radius: 10em;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: all .5s;
+}
+input[type=search]:focus {
+    width: 130px;
+    background-color: #fff;
+    border-color: #3498DB;
+    -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+    -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+    box-shadow: 0 0 5px rgba(109,207,246,.5);
+}
+:is(#search, #menu-search) input:-moz-placeholder {
+    color: #000;
+    font-size: 12px;
+}
+:is(#search, #menu-search) input::-webkit-input-placeholder {
+    color: #000;
+    font-size: 12px;
+}
+/* Demo 2 */
+:is(#search, #menu-search){
+    margin-top: 13px;
+    margin-right: 14px;
+}
+:is(#search, #menu-search) input[type=search] {
+    background: #fff url("../images/search-icon.png") no-repeat scroll 9px center;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    letter-spacing: 1px;
+    width: 0;
+}
+:is(#search, #menu-search) input[type=search]:focus {
+    width: 130px;
+    padding-left: 32px;
+    color: #000;
+    background-color: #fff;
+    cursor: auto;
+}
+:is(#search, #menu-search) input:-moz-placeholder {
+    color: #000 !important;
+}
+:is(#search, #menu-search) input::-webkit-input-placeholder {
+    color: #555 !important;
+}
+.back-to-top {
+    background: #3498DB;
+    bottom: 5px;
+    color: #000 !important;
+    cursor: pointer;
+    font-size: 17px;
+    height: 40px;
+    line-height: 37px;
+    outline: medium none;
+    position: fixed;
+    right: 5px;
+    text-align: center;
+    text-decoration: none;
+    width: 40px;
+    z-index: 9999;
+    border-radius: 2px;
+}
+.back-to-top:hover{
+    background: #000;
+    color:#fff !important;
+}
+/*about page*/
+.top-bgbanner {
+    background-image: url("../images/innerpage-banner.png");
+    background-position: center center;
+    background-size: cover;
+    height: 300px;
+    padding: 134px 0;
+    width: 100%;
+}
+.inner-page-heading h1 {
+    color: #3498db;
+    font-size: 46px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    line-height: 31px;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 3px 2px 2px rgb(0, 0, 0);
+}
+/*event page*/
+.event-details  h3 {
+    font-size: 22px;
+    line-height: 30px;
+    text-transform: uppercase;
+    color:#000;
+}
+.event-details > h4 {
+    color: #3498db;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 30px;
+}
+.event-details > p {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 28px;
+     margin-bottom: 25px;
+}
+/*contact page*/
+.map {
+    border: 2px solid #000;
+}
+.map iframe {
+    height: 300px;
+    width: 100%;
+}
+.contact-us-details > li {
+    padding: 0 0 30px;
+}
+.contact-us-details i {
+    float: left;
+    font-size: 20px;
+    font-weight: 500;
+    margin-right: 20px;
+    margin-top: 3px;
+    width: 20px;
+}
+.contact-us-details p {
+    overflow: hidden;
+}
+.contact-us-details a {
+    color: #000;
+    font-size: 16px;
+    letter-spacing: 2px;
+    line-height: 20px;
+}
+.contact-us-details li:hover i, .contact-us-details li:hover a{
+    color:#3498DB;
+}
+.gallery-image .less-opacity img:hover {
+    opacity: 0.6;
+}
+.gallery-image:hover {
+    background: #000 none repeat scroll 0 0;
+}
+.gallery-image img {
+    opacity: 1;
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+.single-event-block .event-details > p{
+    text-align: justify;
+}
+
+.newsletter-detail h2::after {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #777;
+    bottom: -4px;
+    content: "";
+    display: block;
+    height: 0;
+    left: 50%;
+    margin-left: -5px;
+    position: absolute;
+    width: 0;
+}
+.newsletter-detail h2 {
+    border-bottom: 1px solid #777;
+    color: #2e2e2e;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    margin: 0 0 20px;
+    padding: 10px 0;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+}
+.widget-content {
+    border: 1px solid #777;
+    border-radius: 1px;
+    display: block;
+    font-family: inherit;
+    margin: 0;
+    padding: 0 0 5px;
+}
+.widget-content p {
+    border-bottom: 2px solid #ebebeb;
+    border-radius: 20px;
+    color: #000;
+    font-size: 15px;
+    line-height: 22px;
+    margin: 5px auto 20px;
+    padding: 5px 10px;
+    text-align: center;
+    width: 80%;
+}
+.widget-content form {
+    margin-bottom: 10px !important;
+}
+.widget-content .rssform input {
+    background-color: #fcfcfc;
+    border: 1px solid #ebebeb;
+    border-radius: 1px;
+    box-sizing: border-box !important;
+    color: #000;
+    display: block;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: normal;
+    height: 38px;
+    margin: 20px auto 15px;
+    outline: medium none !important;
+    padding: 8px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 90%;
+}
+.widget-content .rssform .button {
+    background: #010101 none repeat scroll 0 0;
+    color: white !important;
+    cursor: pointer;
+    float: none;
+    font-size: 18px;
+    font-weight: normal;
+    margin-top: 15px;
+    outline: medium none !important;
+    padding: 5px 2px !important;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out 0s;
+    height: 38px;
+    width: 90%;
+}
+.post-details > h4 {
+    font-weight: 600;
+    padding: 10px 0;
+    text-align: center;
+    text-transform: capitalize;
+}
+.labels .label-size {
+    float: left;
+    font-size: 12px;
+    line-height: 1.2;
+    margin: 0 5px 5px 0;
+    opacity: 1;
+    transition: all 0.4s ease 0s;
+}
+.labels .label-size a{
+    background: transparent;
+    color: #000;
+    display: inline-block;
+    font-weight: 400;
+    padding: 8px;
+    text-transform: capitalize;
+    transition: initial;
+    border:1px solid #000;
+}
+.labels .label-size a:hover, .buttons .btn:hover{
+    background: #3498DB;
+    color:#fff;
+    border-color: #3498DB; 
+}
+.comment-form .form-control{
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid #000;
+    border-radius: 4px;
+    box-shadow: none;
+    color: #000;
+    display: block;
+    font-size: 14px;
+    height: 45px;
+    line-height: 1.42857;
+    margin-top: 15px;
+    padding: 6px 8px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+}
+.comment-form .form-control::-moz-placeholder {
+    color: #000;
+    font-weight: 300;
+    opacity: 1;
+    text-transform: uppercase;
+}
+.comment-form textarea{
+    height: 150px !important;
+}
+.buttons{
+    text-align: center;
+}
+.buttons .btn {
+    background: transparent none repeat scroll 0 0;
+    border: 1px solid #000;
+    margin-right: 6px;
+    text-align: center;
+}
+
+/*
+Template Name: FoodVivers
+File Name: responsive.css
+Author Name: ThemeVault
+Author URI: http://www.themevault.net/
+License URI: http://www.themevault.net/license/
+*/
+
+@media (max-width: 1315px){
+    .verticalHeader h1 {
+    left: 30px;
+    }
+}
+@media (max-width: 1279px){
+    .verticalHeader h1 {
+        font-size: 28px;
+        height: 100%;
+        letter-spacing: 4px;
+        line-height: 20px;
+        margin-bottom: 100px;
+        margin-left: 0;
+        margin-right: 0;
+        text-align: center;
+        text-transform: uppercase;
+        width:100%;
+        position: relative;
+        margin-top: 0px;
+        text-shadow: 3px 2px 2px rgb(160, 160, 160);
+        width: 100%;
+        left:0;
+    } 
+    .display-nn{
+        display: none;
+    }
+    .menu-block .verticalHeader h1{
+        margin-top: 0px;
+    }
+}
+@media (max-width: 1199px){
+    section {
+        padding: 80px 0 0;
+    }
+    .pb-100 {
+        padding-bottom: 80px;
+    }
+    .verticalHeader h1 {
+        margin: 0 0 80px;
+    }
+    .navbar li a {
+        font-size: 13px !important;
+        padding: 16px;
+    }
+    :is(#search, #menu-search) {
+        margin-right: 14px;
+        margin-top: 8px;
+    }
+    .carousel-inner h1 {
+        font-size: 46px;
+        line-height: 60px;
+    }
+    .restaurant-details h3 {
+        font-size: 20px;
+        margin: 10px 0; 
+    }
+    .restaurant-details p {
+        font-size: 13px;
+        line-height: 20px;
+    }
+    .deal-details > p {
+        font-size: 14px;
+        line-height: 30px;
+        margin: 20px auto;
+    }
+    .deal-details > h1 {
+        font-size: 26px;
+        letter-spacing: 4px;
+        line-height: 22px;
+    }
+    .gallery-block .nav-tabs > li > .nav-link {
+        font-size: 14px;
+    }
+    .nav-tabs > li {
+        margin-right: 10px;
+    }
+    .overlay .text {
+        font-size: 18px;
+    }
+    .counter-value > h4{
+        font-size: 16px;
+    }
+    .event-details > p {
+        font-size: 14px;
+    }
+    .event-details h3 {
+        font-size: 20px;
+    }
+    .widget-content p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .widget-content .rssform .button {
+        font-size: 16px;
+    }
+    .post-details > h4{
+        font-size: 16px;
+    }
+    .inner-page-heading h1 {
+        font-size: 40px;
+    }
+}
+@media (max-width: 991px){
+    section {
+        padding: 60px 0 0;
+    }
+    .pb-100 {
+        padding-bottom: 60px;
+    }
+    .dis-nn{
+        display: none !important;
+    }
+    .display-hide{
+        display: block !important;
+    }
+    .navbar-header {
+        width: 100%;
+    }
+    .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+        margin-left: -15px;
+        width: 100%;
+    }
+    .navbar-brand > img {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    :is(#search, #menu-search) {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0px;
+        width: 100%;
+    }
+    :is(#search, #menu-search) input[type="search"]{
+        float:right;
+    }
+    .navbar-nav{
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
+    .carousel-inner h1 {
+        font-size: 40px;
+        line-height: 50px;
+    }
+    .carousel-caption .button {
+        font-size: 14px;
+        margin: 20px 0;
+        padding: 10px 0;
+        width: 140px;
+    }
+    .carousel-caption .button span::after, .deal-details .btn span::after {
+        font-size: 20px !important;
+    }
+    .restaurant-details p {
+        font-size: 12px;
+        line-height: 20px;
+    }
+    .restaurant-details h3 {
+        font-size: 16px;
+        margin: 10px 0;
+    }
+    .restaurant-details .btn, .event-details .btn {
+        letter-spacing: 1px;
+        padding: 8px;
+        font-size: 12px;
+    }
+    .service-details h4 {
+        font-size: 13px;
+        letter-spacing: 2px;
+        margin-top: 35px;
+    }
+    .deal-details > p {
+        font-size: 13px;
+        line-height: 24px;
+    }
+    .deal-details > h1 {
+        font-size: 22px;
+        letter-spacing: 3px;
+        line-height: 16px;
+    }
+    .bgcolor1 {
+        padding: 45px 0;
+    }
+    .deal-details .btn {
+        font-size: 14px;
+        letter-spacing: 2px;
+        padding: 8px 0;
+        width: 150px;
+    }
+    .verticalHeader h1 {
+        margin: 0 0 60px;
+        font-size: 24px;
+    }
+    .gallery-block .nav-tabs > li > .nav-link {
+        font-size: 12px;
+        padding: 5px 6px;
+    }
+    .gallery-block ul {
+        margin-bottom: 40px;
+        margin-top: 0;
+    }
+    .overlay .text {
+        font-size: 14px;
+    }
+    .counter-value > h5 {
+        margin: 30px 0;
+    }
+    .counter-value > h4 {
+        font-size: 12px;
+    }
+    .counter-value > h4 {
+        letter-spacing: 2px;
+    }
+    .client-image .overlay{
+        width:auto;
+    }
+    .client-image .overlay .info {
+        font-size: 16px;
+    }
+    .form-control {
+        font-size: 12px;
+        height: 45px;
+        margin-top: 10px;
+        width: 100%;
+    }
+    .form-group textarea {
+        height: 120px;
+    }
+    .action-buttons .btn {
+        font-size: 12px;
+        padding: 9px 12px;
+    }
+    .action-buttons {
+        margin-top: 10px;
+    }
+    .chef-details > p {
+        font-size: 12px;
+        line-height: 20px;
+    }
+    .chef-details hr {
+        margin-bottom: 20px;
+    }
+    .chef-details > h4 {
+        font-size: 15px;
+        margin: 30px 0;
+    }
+    .footer-details > hr {
+        margin: 30px 0;
+    }
+    .footer-details > h3 {
+        font-size: 18px;
+    }
+    .footer-details > p {
+        font-size: 12px;
+        line-height: 20px;
+    }
+    .footer-links a {
+        font-size: 13px;
+        line-height: 30px;
+    }
+    .mt_30{
+        margin-top:30px;
+    }
+    .twitter-feed > span {
+        font-size: 16px;
+        margin-top: 4px;
+    }
+    .twitter-feed > p {
+        font-size: 12px;
+        line-height: 30px;
+    }
+    .contact-list i {
+        font-size: 14px;
+        margin-top: 9px;
+    }
+    .contact-list a {
+        font-size: 12px;
+        line-height: 30px;
+    }
+    .footer-social-icon > a {
+        font-size: 26px;
+    }
+    .copyright {
+        font-size: 13px;
+    }
+    .copyright > a {
+        font-size: 15px;
+    }
+    /*about page*/
+    .top-bgbanner {
+        height: 250px;
+        padding: 109px 0;
+    }
+    .inner-page-heading h1 {
+        font-size: 36px;
+    }
+    /*event page*/
+    .event-details > h4 {
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+    .event-details h3 {
+        font-size: 18px;
+    }
+    .event-details > p {
+        font-size: 13px;
+        line-height: 25px;
+        margin-bottom: 15px;
+    }
+    .newsletter-detail h2 {
+        font-size: 18px;
+    }
+    .widget-content .rssform input{
+        font-size: 11px;
+    }
+    .comment-form textarea {
+        height: 110px !important;
+    }
+    .comment-form .form-control {
+        font-size: 12px;
+        height: 40px;
+        margin-top: 10px;
+    }
+    .buttons .btn{
+        font-size: 12px;
+    }
+    .contact-us-details i {
+        font-size: 18px;
+    }
+    .contact-us-details a {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .contact-us-details > li {
+        padding: 0 0 25px;
+    }
+    .map iframe {
+        height: 250px;
+    }
+}
+@media (max-width: 842px){
+    .carousel-inner h1 {
+        font-size: 32px;
+        line-height: 44px;
+        letter-spacing: 4px;
+    } 
+    .carousel-caption .button {
+        font-size: 13px;
+        margin: 20px 0;
+        padding: 8px 0;
+        width: 120px;
+        letter-spacing: 1px;
+    }
+    .carousel-caption .button:hover span, .deal-details .btn:hover span {
+        padding-right: 20px;
+    }
+    .deal-details .btn span::after{
+        top:-8px;
+    }
+    .deal-details .btn {
+        font-size: 12px;
+        letter-spacing: 1px;
+        padding: 8px 0;
+        width: 120px;
+    }
+}
+@media (max-width: 767px){
+    .marginT-30{
+        margin-top: 30px;
+    }
+    .navbar-toggler {
+        background-color: #3498db;
+        margin-top: 17px;
+    }
+    .tv-navbar-default .navbar-toggler .icon-bar {
+        background-color: #000;
+    }
+    .tv-navbar-default .navbar-toggler:focus, .tv-navbar-default .navbar-toggler:hover {
+        background-color: #000;
+    }
+    .tv-navbar-default .navbar-toggler:focus .icon-bar, .tv-navbar-default .navbar-toggler:hover .icon-bar{
+        background-color: #3498db;
+    }
+    .dis-nn{
+        display: block !important;
+    }
+    .display-hide{
+        display:none !important;   
+    }
+    :is(#search, #menu-search) input[type="search"] {
+        float: none;
+    }
+    .navbar-nav {
+        text-align: left;
+        margin: 0;
+    }
+    .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+        margin-bottom: 14px;
+        margin-left: 30px;
+        vertical-align: middle;
+        width: auto;
+    }
+    .navbar-brand > img{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    :is(#search, #menu-search){
+        text-align: center; 
+    }
+    .navbar-nav .nav-link {
+        line-height: 0;
+    }
+    .tv-navbar-default .navbar-collapse, .tv-navbar-default .navbar-form {
+        border-color: transparent;
+    }
+    .carousel-inner h1 {
+        font-size: 28px;
+        letter-spacing: 3px;
+        line-height: 33px;
+    }
+    .carousel-caption {
+        top: 18%;
+    }
+    .carousel-caption .button {
+        margin: 10px 0;
+    }
+    .restaurant-details h3 {
+        font-size: 15px;
+        margin: 8px 0;
+    }
+    .restaurant-details p {
+        font-size: 11px;
+        line-height: 18px;
+    }
+    .restaurant-details .btn, .event-details .btn {
+        font-size: 11px;
+        letter-spacing: 1px;
+        padding: 7px;
+    }
+    .service-details h4 {
+        font-size: 10px;
+        margin-top: 25px;
+    }
+    section {
+        padding: 50px 0 0;
+    }
+    .bgcolor1 {
+        padding: 35px 0;
+    }
+    .deal-details > h1 {
+        font-size: 20px;
+        line-height: 10px;
+    }
+    .deal-details > p {
+        font-size: 12px;
+        line-height: 22px;
+    }
+    .verticalHeader h1 {
+        font-size: 22px;
+        margin: 0 0 50px;
+    }
+    .gallery-block .nav-tabs > li > .nav-link {
+        font-size: 11px;
+    }
+    .overlay .text {
+        font-size: 12px;
+    }
+    .counter-value > h5 {
+        font-size: 16px;
+        margin: 25px 0;
+    }
+    .gallery-image img {
+        width: 100%;
+    }
+    #myCarousel3 :is(.carousel-control-prev, .carousel-control-next) {
+        top:42%;
+    }
+    .top-bgbanner {
+        height: 200px;
+        padding: 85px 0;
+    }
+    .inner-page-heading h1 {
+        font-size: 32px;
+    }
+    .pb-100 {
+        padding-bottom: 50px;
+    }
+    .footer-details > hr {
+        margin: 20px 0;
+    }
+    .posts-image img {
+        margin: 0 auto;
+    }
+}
+@media (max-width: 500px){
+    .mtop-30{
+        margin-top:30px;
+    }
+    .mtop-35{
+        margin-top:35px;
+    }
+    .width-50{
+        width:50%;
+    }
+    .carousel-caption {
+        top: 12%;
+    }
+    .carousel-inner h1 {
+        font-size: 24px;
+        letter-spacing: 2px;
+        line-height: 30px;
+    }
+    .carousel-caption .button {
+        margin: 0;
+    }
+    .overlay .text {
+        font-size: 14px;
+    }
+    .client-image .overlay .info {
+    font-size: 11px;
+}
+.chef-details > p {
+    font-size: 11px;
+    line-height: 20px;
+}
+.chef-details > h4 {
+    font-size: 12px;
+    margin: 20px 0;
+}
+.footer-details > p {
+    font-size: 12px;
+    line-height: 18px;
+}
+.copyright {
+     font-size: 12px;
+    letter-spacing: 1px;
+}
+.copyright > a {
+    font-size: 13px;
+}
+.top-bgbanner {
+    height: 150px;
+    padding: 59px 0;
+}
+.inner-page-heading h1 {
+    font-size: 28px;
+    letter-spacing: 2px;
+}
+}
+@media (max-width: 400px){
+    .margin-top30{
+        margin-top:30px;
+    }
+    .width-100{
+        width:100%;
+    }
+    .width_50{
+      width:50%;  
+    }
+    .carousel-caption {
+    top: 2%;
+}
+.carousel-inner h1 {
+    font-size: 18px;
+    letter-spacing: 2px;
+    line-height: 22px;
+}
+.carousel-caption .button span::after, .deal-details .btn span::after{
+    top:-8px;
+}
+.restaurant-details {
+    text-align: center;
+}
+.client-image .overlay .info {
+    font-size: 14px;
+}
+#myCarousel2 :is(.carousel-control-prev, .carousel-control-next){
+    top:45%;
+     width: 12%;
+}
+.chef-details hr, .chef-details > p {
+    display: none;
+}
+.chef-details > h4 {
+    font-size: 10px;
+    margin: 15px 0;
+       letter-spacing: 1px;
+}
+#myCarousel3 :is(.carousel-control-prev, .carousel-control-next) {
+    top: 56%;
+     width: 12%;
+}
+.post-details > h4, .widget-content .rssform .button {
+    font-size: 14px;
+}
+}
+@media (max-width: 340px){
+    .carousel-caption {
+    top: -8px;
+}
+.carousel-inner h1 {
+    font-size: 16px;
+    letter-spacing: 2px;
+    line-height: 22px;
+}
+.inner-page-heading h1 {
+    font-size: 24px;
+}
+.verticalHeader h1 {
+    font-size: 20px;
+}
+.overlay .text {
+    font-size: 12px;
+}
+}
+
+.lb-album{
+	margin: 0 auto;
+}
+.lb-album .gallery-image{
+	position: relative;
+}
+.lb-album .gallery-image > a,
+.lb-album .gallery-image > a img{
+	display: block;
+}
+.lb-album .gallery-image > a{
+	position: relative;
+}
+.lb-album .gallery-image > a span{
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	text-align: center;
+	line-height: 150px;
+	color: rgba(27,54,81,0.8);
+	text-shadow: 0px 1px 1px rgba(255,255,255,0.6);
+	font-size: 24px;
+	opacity: 0;
+	filter: alpha(opacity=0); /* internet explorer */
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=0)"; /*IE8*/
+	background: rgba(20, 21, 20, 0.55);
+	background: radial-gradient(center, ellipse cover, rgba(20, 21, 20, 0.55) 0%,rgba(20, 21, 20, 1) 100%);
+	transition: opacity 0.3s linear;
+}
+.lb-album .gallery-image > a:hover span{
+	opacity: 1;
+	filter: alpha(opacity=99); /* internet explorer */
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=99)"; /*IE8*/
+}
+.lb-overlay{
+	width: 0px;
+	height: 0px;
+	position: fixed;
+	overflow: hidden;
+	left: 0px;
+	top: 0px;
+	padding: 0px;
+	z-index: 99;
+	text-align: center;
+	background: rgba(20, 21, 20, 0.55);
+	background: radial-gradient(center, ellipse cover, rgba(20, 21, 20, 0.55) 0%,rgba(241,210,194,1) 100%);
+}
+.lb-overlay > div{
+	position: relative;
+	color: rgba(27,54,81,0.8);
+	opacity: 0;
+	filter: alpha(opacity=0); /* internet explorer */
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=0)"; /*IE8*/
+	width: 550px;
+	margin: 10px auto 0px auto;
+	text-shadow: 0px 1px 1px rgba(255,255,255,0.6);
+	transition: opacity 0.3s linear 1.3s;
+}
+
+.lb-overlay a.lb-close{
+background: #000 none repeat scroll 0 0;
+    color: rgb(52, 152, 219);
+    font-size: 22px;
+    height: 30px;
+    left: 50%;
+    line-height: 26px;
+    margin-left: -25px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    top: 43px;
+    transition: opacity 0.3s linear 1.2s;
+    width: 40px;
+    z-index: 1001;
+}
+.lb-overlay img{
+	/* height: 100%; For Opera max-height does not seem to work */
+	max-height: 100%;
+	position: relative;
+	box-shadow: 0px 2px 7px rgba(0,0,0,0.2);
+         margin-left: auto;
+    margin-right: auto;
+}
+.lb-overlay:target {
+	width: auto;
+	height: auto;
+	bottom: 0px;
+	right: 0px;
+}
+.lb-overlay:target img {
+	animation: scaleDown 1.2s ease-in-out;
+}
+.lb-overlay:target a.lb-close,
+.lb-overlay:target > div{
+	opacity: 1;
+	filter: alpha(opacity=99); /* internet explorer */
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=99)"; /*IE8*/
+}
+@-webkit-keyframes scaleDown {
+  0% { -webkit-transform: scale(10,10); opacity: 0; }
+  100% { -webkit-transform: scale(1,1); opacity: 1; }
+}
+@-moz-keyframes scaleDown {
+  0% { -moz-transform: scale(10,10); opacity: 0; }
+  100% { -moz-transform: scale(1,1); opacity: 1; }
+}
+@-o-keyframes scaleDown {
+  0% { -o-transform: scale(10,10); opacity: 0; }
+  100% { -o-transform: scale(1,1); opacity: 1; }
+}
+@-ms-keyframes scaleDown {
+  0% { -ms-transform: scale(10,10); opacity: 0; }
+  100% { -ms-transform: scale(1,1); opacity: 1; }
+}
+@keyframes scaleDown {
+  0% { transform: scale(10,10); opacity: 0; }
+  100% { transform: scale(1,1); opacity: 1; }
+}
+/* 
+	100% Height for Opera as the max-height seems to be ignored, not optimal for large screens 
+	http://bricss.net/post/11230266445/css-hack-to-target-opera 
+*/
+x:-o-prefocus, .lb-overlay img {
+    height: 100%;
+}
+
+/* ==========================================================================
+   6. Bootstrap 5 shim — what Bootstrap 3 gave this design for free and
+   Bootstrap 5 no longer does, plus the hooks main.js and the new pages use.
+   Everything here is prefixed tv- or scoped to a component v1 named.
+   ========================================================================== */
+
+/* Carousel controls. v1: a 28x17 arrow PNG at 50% of the slide (BS3's
+   15%-wide control; 8% on the client and chef sliders), swapped for its
+   blue twin on mouseover by an inline handler. Same box, same images, the
+   swap in CSS. Two sets: left-arrow (hero) and left-arrow3 (the sliders on
+   white); both hover to left-arrow2. */
+.carousel-control-prev, .carousel-control-next {
+    top: 50%;
+    bottom: auto;
+    width: 15%;
+    opacity: 1;
+    align-items: flex-start;
+    justify-content: center;
+    transform: translateY(-50%);
+}
+.tv-arrow {
+    display: inline-block;
+    width: 28px;
+    height: 17px;
+    background: url("../images/left-arrow.png") no-repeat center / 28px 17px;
+}
+.tv-arrow-right { background-image: url("../images/right-arrow.png"); }
+.tv-arrow-left3 { background-image: url("../images/left-arrow3.png"); }
+.tv-arrow-right3 { background-image: url("../images/right-arrow3.png"); }
+.carousel-control-prev:hover .tv-arrow, .carousel-control-prev:focus-visible .tv-arrow { background-image: url("../images/left-arrow2.png"); }
+.carousel-control-next:hover .tv-arrow, .carousel-control-next:focus-visible .tv-arrow { background-image: url("../images/right-arrow2.png"); }
+
+/* The counters' icons swapped src on mouseover; two images, one shown. */
+.tv-swap-hover { display: none; }
+.counter-image:hover .tv-swap-base, .counter-details:hover .tv-swap-base { display: none; }
+.counter-image:hover .tv-swap-hover, .counter-details:hover .tv-swap-hover { display: inline; }
+
+/* Back to top — v1 hid it inline and custom.js faded it in past 100px. */
+#back-to-top {
+    display: none;
+    border: 0;
+    font: inherit;
+    cursor: pointer;
+}
+#back-to-top.is-visible { display: block; }
+
+/* Links that were <a> with no href in v1 (client names) keep their colour. */
+.tv-nolink { color: inherit; }
+
+/* The contact page's map: the iframe's size came inline in v1 (border 0). */
+.tv-map { border: 0; width: 100%; height: 400px; }
+
+/* Forms: the note main.js reveals after a valid submit, and the invalid state. */
+.tv-form-note {
+    color: #3498db;
+    margin: 15px 0 0;
+    font-size: 1em;
+}
+.form-control.is-invalid, select.is-invalid, textarea.is-invalid, input.is-invalid { border-color: #c0392b !important; }
+
+/* Menu search — the summary line above the dishes. */
+.tv-search-summary {
+    margin: 0 0 30px;
+    font-size: 1em;
+}
+.tv-search-summary a { color: #3498db; text-decoration: underline; }
+
+/* The lightbox (main.js, [data-image-popup]) — replaces the :target
+   lb-album overlays. */
+.tv-lightbox { position: fixed; inset: 0; z-index: 99999; display: none; align-items: center; justify-content: center; background: rgba(0, 0, 0, .92); }
+.tv-lightbox.is-open { display: flex; }
+.tv-lightbox img { max-width: 92vw; max-height: 84vh; box-shadow: 0 10px 40px rgba(0, 0, 0, .6); }
+.tv-lightbox button { position: absolute; border: 0; background: transparent; color: #fff; font-size: 40px; line-height: 1; cursor: pointer; opacity: .75; padding: 10px; }
+.tv-lightbox button:hover, .tv-lightbox button:focus-visible { opacity: 1; color: #3498db; }
+.tv-lb-close { top: 10px; right: 20px; font-size: 48px; }
+.tv-lb-prev { left: 10px; top: 50%; transform: translateY(-50%); }
+.tv-lb-next { right: 10px; top: 50%; transform: translateY(-50%); }
+
+/* The tab tiles are links: no underline, the overlay on focus too. */
+a.tab-image:focus-visible .overlay, a.tab-image:hover .overlay { opacity: 1; }
+
+/* The footer's opening hours reuse the contact list's shape. */
+.tv-hours li { display: flex; gap: 10px; }
+
+/* Bootstrap 3's .btn-default (the Read More buttons): the template overrides
+   its colours and padding, Bootstrap 5 has no such class — its type base. */
+.btn-default { font-size: 14px; line-height: 1.42857143; font-weight: 400; border-radius: 4px; color: #333; background-color: #fff; border: 1px solid #ccc; }
+
+/* The hero's Book Now was a <button> (inline-block, 160px wide); it is a
+   link now (buttons() in _port.mjs) and keeps the button's box. */
+.carousel-caption a.button { display: inline-block; }
+/* The service names and the chefs' names link to their pages now; v1's
+   headings were black, and stay so until hovered. */
+.service-details h4 a, .chef-details h4 a { color: inherit; }
+.service-details h4 a:hover, .chef-details h4 a:hover { color: #3498db; }
+
+/* ==========================================================================
+   7. The pages v1 never had (_new-pages.mjs): the priced menu on menu.html,
+      reservation, service-details, chef, 404. Built from v1's own
+      vocabulary — the inner banner, .service-details, .chef-image, the
+      .book-form on .bg-banner, .btn-default — with the pieces below.
+      Palette: black text, #3498db blue, #f7f7f7 panels; body copy at 14px
+      / 300 / 22px like v1's cards.
+   ========================================================================== */
+.tv-heading { margin-bottom: 50px; }
+.tv-heading h2 { font-size: 26px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; margin: 0; }
+.tv-heading hr { width: 60px; margin: 18px auto 0; border: 0; border-top: 2px solid #3498db; opacity: 1; }
+.tv-heading p, .tv-lead { max-width: 720px; margin: 22px auto 0; font-size: 14px; font-weight: 300; line-height: 22px; letter-spacing: 1px; }
+.tv-btn-blue { background-color: #3498db !important; border-color: #3498db !important; color: #fff !important; }
+.tv-btn-blue:hover, .tv-btn-blue:focus { background-color: #000 !important; border-color: #000 !important; }
+.tv-service-card .btn, .tv-chef-card .btn, .tv-404-actions .btn { background: transparent; border: 1px solid #000; border-radius: 0; color: #000; letter-spacing: 2px; padding: 10px 14px; text-transform: uppercase; font-size: 13px; font-weight: 600; }
+.tv-service-card .btn:hover, .tv-chef-card .btn:hover, .tv-404-actions .btn:hover { background-color: #3498db; border-color: #3498db; color: #fff; }
+.tv-checklist { list-style: none; padding: 0; margin: 0 0 30px; }
+.tv-checklist li { position: relative; padding-left: 24px; margin-bottom: 8px; font-size: 14px; font-weight: 300; line-height: 22px; letter-spacing: 1px; }
+.tv-checklist li::before { content: ""; position: absolute; left: 4px; top: 8px; width: 7px; height: 7px; background: #3498db; transform: rotate(45deg); }
+.tv-facts { list-style: none; padding: 0; margin: 0 0 25px; }
+.tv-facts li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid #e5e5e5; font-size: 14px; line-height: 22px; }
+.tv-facts li span { color: #777; text-transform: uppercase; font-size: 11px; letter-spacing: 2px; }
+.tv-facts li b { font-weight: 600; text-align: right; }
+.tv-facts a, .tv-service-body a, .tv-chef-body a, .tv-menu-note a { color: #3498db; text-decoration: underline; }
+.tv-fine { font-size: 12px; font-weight: 300; color: #555; margin-top: 15px; line-height: 20px; }
+
+/* the menu */
+.tv-menu-list { padding-bottom: 20px; }
+.tv-menu-group { margin-bottom: 40px; }
+.tv-menu-group h3 { font-size: 18px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin: 0 0 15px; padding-bottom: 12px; border-bottom: 2px solid #000; }
+.tv-menu-group ul { list-style: none; padding: 0; margin: 0; }
+.tv-dish { display: flex; align-items: baseline; gap: 12px; padding: 11px 0; border-bottom: 1px dotted #bbb; font-size: 14px; line-height: 22px; letter-spacing: 1px; }
+.tv-dish-name { flex: 1 1 auto; font-weight: 600; }
+.tv-dish-name small { display: block; font-size: 12px; font-weight: 300; color: #555; letter-spacing: .5px; }
+.tv-dish b { font-weight: 600; color: #3498db; white-space: nowrap; }
+.tv-menu-note { font-size: 14px; font-weight: 300; line-height: 22px; letter-spacing: 1px; margin: 10px 0 0; }
+.tv-search-summary { text-align: center; }
+
+/* reservation */
+.tv-reservation { padding-bottom: 0; }
+.tv-reservation .tv-heading { margin-bottom: 0; }
+.tv-book select.form-control { background: transparent; color: #fff; }
+.tv-book select.form-control option { color: #000; }
+.tv-book input[type="date"] { color: #fff; }
+.tv-book input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
+.tv-steps { padding-top: 80px; }
+.tv-step { padding: 0 15px; margin-bottom: 30px; }
+.tv-step-n { display: inline-block; width: 46px; height: 46px; line-height: 44px; border: 1px solid #3498db; color: #3498db; border-radius: 50%; font-weight: 600; font-size: 18px; margin-bottom: 15px; }
+.tv-step h4 { font-weight: 600; letter-spacing: 2px; text-transform: uppercase; font-size: 14px; margin-bottom: 8px; }
+.tv-step p { font-size: 14px; font-weight: 300; line-height: 22px; letter-spacing: 1px; }
+
+/* service-details, chef */
+.tv-service-body h2, .tv-chef-card h2 { font-size: 24px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin: 30px 0 15px; }
+.tv-service-body h3, .tv-chef-body h3, .tv-service-card h3 { font-size: 16px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin: 28px 0 12px; }
+.tv-service-body p, .tv-chef-body p, .tv-chef-role { font-size: 14px; font-weight: 300; line-height: 22px; letter-spacing: 1px; margin-bottom: 15px; }
+.tv-service-body h3:first-of-type, .tv-chef-body h3:first-child { margin-top: 0; }
+.tv-service-photo img { border-bottom: 10px solid #3498db; }
+.tv-service-card { background: #f7f7f7; padding: 30px; }
+.tv-service-card h3 { margin-top: 0; margin-bottom: 15px; }
+.tv-service-card .btn { display: block; text-align: center; margin: 0 0 10px; }
+.tv-other .service-details p { font-size: 13px; font-weight: 300; line-height: 22px; margin-top: 12px; }
+.tv-chef-card .chef-image { max-width: 220px; margin: 0 auto 25px; }
+.tv-chef-card h2 { margin: 0 0 4px; }
+.tv-chef-role { color: #777; margin-bottom: 20px; }
+.tv-chef-card .tv-facts li { text-align: left; }
+.tv-chef-card .btn { margin-top: 5px; }
+.tv-chef-others .tv-heading { margin-bottom: 20px; }
+@media (max-width: 767px) { .tv-service-card, .tv-chef-body { margin-top: 40px; } }
+
+/* 404 */
+.tv-404-code { font-weight: 900; font-size: 140px; line-height: 1; color: #3498db; margin-bottom: 10px; }
+.tv-404 h2 { font-size: 26px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; }
+.tv-404-actions { margin-top: 30px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+@media (max-width: 575px) { .tv-404-code { font-size: 96px; } }
+
+/* The tablet header (768 – 991px). Bootstrap 3 laid the navbar out as
+   BLOCKS and FLOATS: v1's responsive.css makes .navbar-header 100% wide
+   (the logo centred), the search box's input floats right (the icon at the
+   right edge), and the list floats right under both with its items floated
+   left. Bootstrap 5's navbar is a flex row, which put the list beside the
+   logo as a column. The blocks and floats, restored for this range. */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .tv-navbar-default > .container { display: block; }
+    .tv-navbar-default > .container::after { content: ""; display: table; clear: both; }
+    .tv-navbar-default .navbar-collapse { display: block !important; width: 100%; }
+    .tv-navbar-default .navbar-nav { display: block; float: right; margin: 0 -15px 0 0; }
+    .tv-navbar-default .navbar-nav > li { float: left; display: block; }
+    .tv-navbar-default .navbar-collapse::after { content: ""; display: table; clear: both; }
+}
+
+/* v1's `.navbar li a { padding: 20px }` (16px below 1200px) loses on the
+   sides to Bootstrap 5's `.navbar-expand-md .navbar-nav .nav-link`
+   padding-x (0,3,0), which made every item 10px narrower. */
+.tv-navbar-default .navbar-nav > li > .nav-link { padding-left: 20px; padding-right: 20px; }
+@media (max-width: 1199px) { .tv-navbar-default .navbar-nav > li > .nav-link { padding-left: 16px; padding-right: 16px; } }
+/* Bootstrap 3's .navbar-collapse carried 15px of side padding at every
+   width; the compat layer restores it below 768px only. */
+@media (min-width: 768px) { .tv-navbar-default .navbar-collapse { padding-left: 15px; padding-right: 15px; } }
+
+/* ==========================================================================
+   8. Modernised sections (owner, 2026-09-15 "all of it") — the CSS half of
+      _modern.mjs. One palette: black, white, blue #3498db — v1's own.
+   ========================================================================== */
+
+/* 8.1 hero — a line under the headline and two buttons; the caption keeps
+   v1's place (top 25%) and Lato face. On phones the slide is 170px tall, so
+   the line goes and the buttons shrink. */
+.tv-hero p { font-family: Montserrat, "Helvetica Neue", Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 26px; letter-spacing: 1px; max-width: 640px; margin: 14px auto 0; text-shadow: 1px 1px 2px rgba(0, 0, 0, .8); }
+.tv-hero-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+/* v1's hover pads the label 25px for a "»" — inside a fixed 160px box a
+   two-word label wrapped; the buttons size to their label instead */
+.tv-hero-actions .button { margin-left: 0; margin-right: 0; width: auto; min-width: 160px; padding-left: 22px; padding-right: 22px; white-space: nowrap; }
+.carousel-caption .button.tv-button-ghost { background-color: transparent; border: 1px solid #fff; }
+.carousel-caption .button.tv-button-ghost:hover { background-color: #3498db; border-color: #3498db; color: #fff; }
+@media (max-width: 1199px) { .tv-hero p { font-size: 14px; line-height: 22px; margin-top: 8px; } }
+@media (max-width: 991px) { .tv-hero p { display: none; } .tv-hero-actions { gap: 10px; } }
+@media (max-width: 767px) { .tv-hero-actions .button { margin: 6px 0; } }
+@media (max-width: 500px) { .carousel-caption.tv-hero { top: 10%; } .tv-hero-actions .button { min-width: 0; padding: 6px 12px; font-size: 11px; margin: 4px 0; } }
+
+/* 8.2 the section headings that replaced the vertical text — the same
+   .tv-heading the new pages use (section 7); 60px under, like v1's gap */
+.tabs-block .tv-heading, .menu-block .tv-heading { margin-bottom: 50px; }
+
+/* 8.3 service cards */
+.tv-service-tile { padding: 30px 18px 26px; border: 1px solid #e5e5e5; height: 100%; transition: border-color .3s ease, box-shadow .3s ease; }
+.tv-service-tile:hover { border-color: #3498db; box-shadow: 0 8px 24px rgba(0, 0, 0, .06); }
+.tv-service-tile h4 { margin-top: 25px; }
+.tv-service-tile p { font-size: 13px; font-weight: 300; line-height: 21px; letter-spacing: .5px; color: #555; margin: 12px 0 0; }
+.service-block .row { align-items: stretch !important; }
+.service-block .row > [class*="col-"] { display: flex; }
+.service-block .row > [class*="col-"] > .service-details { width: 100%; } /* the column is a flex box (equal-height cards); without this the plain tiles on about and menu shrank to their text and the icons sat off-centre */
+@media (max-width: 767px) { .tv-service-tile { padding: 24px 12px 20px; } .tv-service-tile p { display: none; } }
+
+/* 8.4 the deal band — a blue rule above the title */
+.deal-details h1 { position: relative; padding-top: 22px; }
+.deal-details h1::before { content: ""; position: absolute; top: 0; left: 50%; width: 50px; height: 2px; margin-left: -25px; background: #3498db; }
+
+/* 8.5 menu tiles — the caption under each photograph */
+.tv-tile:hover { background: transparent; }
+.tv-tile-caption { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; margin: 10px 0 0; font-size: 13px; letter-spacing: 1px; line-height: 20px; }
+.tv-tile-caption span { font-weight: 600; text-transform: uppercase; font-size: 12px; }
+.tv-tile-caption b { color: #3498db; font-weight: 600; white-space: nowrap; }
+@media (max-width: 500px) { .tv-tile-caption { flex-direction: column; gap: 0; } }
+
+/* 8.6 guests — a heading over the slider, the name and a line under each
+   photo; the hover overlay stays */
+.client-block .tv-heading { margin-bottom: 40px; }
+.tv-client-quote { margin: 8px 0 0; text-align: center; font-size: 13px; font-weight: 300; line-height: 21px; letter-spacing: .5px; color: #555; padding: 0 6px; }
+@media (max-width: 767px) { .tv-client-quote { font-size: 12px; line-height: 19px; } }
+.tv-client-name { margin: 14px 0 0; text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+/* the slider's arrows sit at 50% of the slide, which on a phone is the row of names: clear them */
+@media (max-width: 767px) { #myCarousel2 .container { padding-left: 40px; padding-right: 40px; } .tv-client-name { font-size: 11px; letter-spacing: 1px; } }
+
+/* 8.7 chefs — a heading over the slider, the role under the name */
+.chef-block .tv-heading { margin-bottom: 40px; }
+.chef-details .tv-chef-role { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #3498db; margin: -22px 0 22px; font-weight: 400; }
+
+/* 8.8 counters, form, footer */
+.counter-value h5 { color: #3498db; }
+.book-form .form-control:focus, .comment-form .form-control:focus { border-color: #3498db; box-shadow: 0 0 0 3px rgba(52, 152, 219, .2); }
+footer { border-top: 3px solid #3498db; }
+
+/* 8.9 the headings added to the headingless sections (owner, 2026-09-15):
+   the cards, the icons, the counters, the reservation form */
+.restaurant-block .tv-heading, .service-block .tv-heading { margin-bottom: 50px; }
+.counter-block .tv-heading { margin: 40px 0 30px; }
+.counter-block .tv-heading h2, .bg-banner .tv-heading h2, .bg-banner .tv-heading p { color: #fff; }
+.bg-banner .tv-heading { margin: 30px 0 40px; }

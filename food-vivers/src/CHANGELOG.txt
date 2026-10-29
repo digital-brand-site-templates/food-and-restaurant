@@ -1,0 +1,106 @@
+FoodVivers — Food and Restaurant HTML Template
+===============================================
+
+Version 2.0 — 2026
+------------------
+
+A rebuild on a modern stack, a menu page with an actual menu, four pages
+the site needed but never had, a working search, a reservation email,
+and a modernised design in the template's own colours: black, white and
+the blue — with a heading on every section.
+
+
+THE MENU, FOUR NEW PAGES AND AN EMAIL
+- menu.html — the priced menu the page never had: Starters, Mains,
+  Breakfast & lunch, Drinks & beverages, Desserts & ice cream, each
+  line with a description and a price, above version 1's photo grid.
+  The header search filters it (menu.html?q=…); the food tabs' tiles and
+  the sidebar labels link there the same way.
+- reservation.html — the booking form on its own page: date, time,
+  guests, name, phone, email, notes; validates and confirms; "What
+  happens next" in three steps.
+- service-details.html — the page behind the four service icons:
+  dinner service, the set menu, desserts, good to know, a booking card
+  with hours, seats and the chef, and the other services.
+- chef.html — a profile behind every chef's photo and name: the story,
+  signature dishes, tasting evenings, and the rest of the kitchen.
+- 404.html — a not-found page in the template's design with four ways
+  back in.
+- email-reservation.html — the confirmation a guest gets after booking:
+  the logo bar and photograph, the booking card (date, time, guests,
+  table, booked by), three "good to know" points, "Add to calendar" and
+  "Change the booking". Table based and inline styled so it renders in
+  Gmail, Outlook and Apple Mail; {{name}}, {{date}}, {{time}},
+  {{guests}}, {{table}} and {{email}} are the mailer's placeholders. A
+  how-to-use note is at the top of the file.
+
+THE DESIGN, MODERNISED
+- Hero: a different headline on each slide, a line under it and two
+  buttons (version 1 repeated one line and one button three times).
+- Every section has a heading: Welcome, What we serve, Delicious food,
+  In numbers, Our menu, What our guests say, Book a table, Meet the
+  chefs — version 1 had none on most of them, and "DELICIOUS FOOD" and
+  "OUR MENU" ran vertically down the left edge.
+- Services: the four bare icons are cards with a line under each name.
+- Hot deal of the day: the Lorem band is the Tuesday-to-Thursday set
+  menu.
+- Our menu tiles: a dish name and price under each photograph.
+- Guests: the four client photos with a hover-only name become a
+  "What our guests say" section with a line from each guest.
+- Chefs: a role under each name.
+- Counters in blue; a blue focus ring on the forms; a blue rule on top
+  of the footer; the footer's "Twitter feed" (two Lorem tweets with no
+  feed behind them) is the opening hours.
+
+WORKING WHERE IT WAS DECORATIVE
+- Search: both header boxes submit to menu.html?q=… and filter the
+  dishes.
+- 61 bare "#" links and 8 buttons that did nothing in version 1 — Read
+  More, Book Now, the service names, the chefs, the sidebar labels and
+  posts, the footer's social squares, the address — every one goes
+  somewhere.
+- Forms validate and confirm: reservation (home, about, menu and its own
+  page), the comment form, the newsletter box. Every field has a label,
+  a name, a type and autocomplete; "Select Meal" has real options; the
+  Clear buttons are gone.
+- The "Our menu" photographs open in a lightbox (version 1's CSS-only
+  overlays, with their hidden full-size copies, are gone).
+- Counters animate on scroll; the tabs, the three carousels and the
+  collapsing menu are Bootstrap 5's own; Back to top — all without
+  jQuery, counterUp or waypoints.
+
+CONTENT
+- 218 Lorem Ipsum passages are restaurant copy of the same length, so
+  every block keeps its height.
+- A title and meta description per page; alt text on every image.
+
+UNDER THE HOOD
+- Bootstrap 3.3.6 + jQuery 1.11 → Bootstrap 5.3, no jQuery, one
+  dependency-free js/main.js.
+- Font Awesome 4 (1.1 MB of eot / ttf / svg / otf) → Font Awesome 6 as
+  three woff2 files (304 KB). Montserrat and Lato self-hosted as woff2
+  (version 1 fetched both from Google — Lato ships as the exact files
+  Google served). The aileron and antonio-exotic folders (1 MB, never
+  referenced) are dropped. Nothing is loaded from a third party.
+- lightbox.min.css (linked, never shipped — a 404 on every page) dropped.
+- css/bs3-compat.css: the Bootstrap 3 behaviours this design relies on
+  (the 10px root the type was sized against, fixed heading sizes, the
+  1170 container, the navbar's block layout on tablets) restored on top
+  of Bootstrap 5. Safe to trim.
+- style.css section 8 holds the modernised look; delete it to get the
+  version 1 look back on the same markup.
+- The entry page is index.html (version 1: home.html, kept as a redirect).
+- No inline styles or inline event handlers, no duplicate ids, lang="en",
+  https links.
+
+FILES
+  index.html · about.html · menu.html · reservation.html · service.html ·
+  service-details.html · chef.html · event.html · single-event.html ·
+  contact.html · 404.html · email-reservation.html · home.html
+  (redirect) · css/ · js/ · fonts/ · webfonts/ · images/ · License.txt ·
+  CHANGELOG.txt
+
+Version 1.0
+-----------
+Initial release: seven pages, Bootstrap 3, jQuery, counterUp, waypoints,
+Font Awesome 4.

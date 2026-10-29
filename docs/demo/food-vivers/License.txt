@@ -1,0 +1,46 @@
+/*
+
+Template Name: FoodVivers
+File: Licence
+Author: ThemeVault
+Author URI: https://www.themevault.net/
+Licence URI: https://www.themevault.net/license/
+
+*/
+
+
+TERMS OF USE
+-----------------------------------------------------------------------------------------------------------------------
+
+The licence page at https://www.themevault.net/license/ is the authoritative
+version of these terms and may be updated from time to time. Your download or
+use of ThemeVault products implies that you have read and accepted them.
+
+Remember:
+	You can use and modify the template for your personal, company or client's website.
+	You may not sell our templates to third parties (original or modified).
+	You may not claim that you designed our templates.
+	You may not include or bundle our templates within products that you sell.
+
+License for Starter (free):
+	Every HTML template is free to use, as long as the ThemeVault credit link in the
+	footer stays in place. You can remove it for a single template by purchasing
+	credit removal on the template page.
+	A WordPress theme or Next.js template purchased individually may be used for one
+	project (one domain). For more projects, purchase it again or upgrade to Pro.
+	Purchases cannot be cancelled or refunded once the files have been downloaded.
+
+License for Pro membership:
+	Use any template, with the credit link removed, on an unlimited number of your
+	own or your clients' websites.
+	WordPress and Next.js versions are included and may be used on unlimited
+	projects while the membership is active (lifetime members: always).
+	Membership once purchased cannot be cancelled or refunded.
+
+Images:
+	Photographs in the downloaded package are placeholders (blurred). Use your own
+	images; the demo images are licensed for the demo only.
+
+ThemeVault reserves the right to change or modify licensing information for
+templates and memberships. See https://www.themevault.net/license/ for the
+current terms.

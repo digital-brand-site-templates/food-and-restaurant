@@ -26,6 +26,40 @@
           "TVORD30331596 Pro \u2014 Lifetime"
         ]
       }
+    },
+    {
+      "name": "Food-Vivers",
+      "folder": "food-vivers",
+      "version": "2.0.0",
+      "description": "Food-Vivers \u2013 static HTML/Bootstrap Food & Restaurant website template.",
+      "idealFor": [
+        "restaurants",
+        "cafes and bistros",
+        "food tours and culinary travel experiences",
+        "catering and event dining"
+      ],
+      "requiredClientInputs": [
+        "restaurantName",
+        "logoUrl",
+        "primaryColorHex",
+        "contactEmail",
+        "phoneNumber",
+        "address",
+        "openingHours",
+        "menuItems",
+        "chefProfiles",
+        "eventListings",
+        "reservationEmail"
+      ],
+      "preview": "food-vivers/preview.png",
+      "orderNumber": "TVORD73231624",
+      "license": {
+        "templateOrderAmount": 0.0,
+        "creditRemovalPermitted": true,
+        "accountLicense": [
+          "TVORD30331596 Pro \u2014 Lifetime"
+        ]
+      }
     }
   ]
 }
